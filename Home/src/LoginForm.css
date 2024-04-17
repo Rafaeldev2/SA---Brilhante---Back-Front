@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .background-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #FFE0FF; /* Cor de fundo para toda a tela */
+  }
+  
+  .login-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFE0FF; /* Cor de fundo */
+    z-index: -1; /* Coloca a div atrás do conteúdo */
+  }
+  
+  .login-container {
+    width: 80vh; /* Reduzido para 80vh */
+    max-width: 50vh; /* Reduzido para 50vh */
+    padding: 3vh; /* Reduzido para 3vh */
+    border: 1px solid #4CAF50; /* Cor da borda */
+    border-radius: 5vh; /* Reduzido para 5vh */
+    background-color: #FFA8D9; /* Cor de fundo */
+    box-shadow: 0 2vh 4vh rgba(0, 0, 0, 0.1); /* Reduzido para 2vh e 4vh */
+  }
+  
+  .input-group {
+    margin-bottom: 3vh; /* Reduzido para 3vh */
+    border-radius: 3vh; /* Reduzido para 3vh */
+    padding: 2vh; /* Reduzido para 2vh */
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 1vh; /* Reduzido para 1vh */
+  }
+  
+  .input-group input {
+    width: calc(100% - 2vh); /* Subtrai o espaço do padding */
+    padding: 2vh; /* Reduzido para 2vh */
+    border: 1px solid #ccc;
+    border-radius: 2vh; /* Reduzido para 2vh */
+  }
+  
+  button {
+    width: 100%;
+    padding: 2vh; /* Reduzido para 2vh */
+    background-color: #4CAF50; /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 3vh; /* Reduzido para 3vh */
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Cor do botão ao passar o mouse */
+  }
+  
