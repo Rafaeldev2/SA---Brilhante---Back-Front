@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.background-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Alterado para min-height para incluir conteúdo adicional */
+  width: 100%;
+  background-color: #FFE0FF; /* Cor de fundo para toda a tela */
+}
+
+.login-container {
+  width: 90%; /* Ajustado para 90% para ser responsivo */
+  max-width: 400px; /* Define um tamanho máximo */
+  padding: 5%; /* Ajustado para 5% de padding */
+  border: 1px solid #4CAF50; /* Cor da borda */
+  border-radius: 2%; /* Ajustado para 2% */
+  background-color: #FFA8D9; /* Cor de fundo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajustado para 4px e 8px */
+}
+
+.input-group {
+  margin-bottom: 5%; /* Ajustado para 5% */
+  padding: 5%; /* Ajustado para 5% */
+  border-radius: 2%; /* Ajustado para 2% */
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 2%; /* Ajustado para 2% */
+}
+
+.input-group input {
+  width: 90%; /* Ajustado para 90% */
+  padding: 2%; /* Ajustado para 2% */
+  border: 1px solid #ccc;
+  border-radius: 2%; /* Ajustado para 2% */
+}
+
+button {
+  width: 100%;
+  padding: 2%; /* Ajustado para 2% */
+  background-color: #4CAF50; /* Cor do botão */
+  color: white;
+  border: none;
+  border-radius: 2%; /* Ajustado para 2% */
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049; /* Cor do botão ao passar o mouse */
+}
+
+/* Media Queries para responsividade */
+@media (min-width: 768px) {
+  .login-container {
+    width: 60%; /* Ajustado para 60% para telas maiores */
+    max-width: 500px; /* Define um tamanho máximo */
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-container {
+    width: 50%; /* Ajustado para 50% para telas ainda maiores */
+    max-width: 600px; /* Define um tamanho máximo */
+  }
+}
