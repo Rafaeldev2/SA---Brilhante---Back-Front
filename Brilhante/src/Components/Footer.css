@@ -1,0 +1,18 @@
+.footer {
+    background-color: #FFA8D9;
+    color: black;
+    padding: 1% 0;
+
+}
+.footer-bottom{
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Icon {
+    width: 50px;
+}
