@@ -1,15 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .background-container {
   background-color: #FFE0FF;
   /* Cor de fundo para toda a tela */
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  flex-direction: column;
+  height: 100%;
   /* Alterado para min-height para incluir conteúdo adicional */
   width: 100%;
 }
@@ -18,6 +14,7 @@ body {
   min-width: 25%;
   background-color: #FFA8D9;
   border-radius: 10%;
+  height: 100%;
 }
 
 /* Queries para responsividade */
@@ -62,4 +59,3 @@ h2 {
   color: #89004F;
   text-align: center;
 }
-

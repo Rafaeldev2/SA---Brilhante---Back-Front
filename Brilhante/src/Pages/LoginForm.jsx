@@ -28,7 +28,7 @@ const LoginForm = () => {
             <h2>Login</h2>
           </div>
           {/* <form onSubmit={handleSubmit}> */}
-          
+          <div className='div-input'>
             <input
               className="custom-input"
               placeholder='Email:'
@@ -36,7 +36,9 @@ const LoginForm = () => {
             // value={email}
             // onChange={handleEmailChange}
             // required
-            />        
+            /> 
+            </div>
+            <div className='div-input'>       
             <input
               className="custom-input"
               placeholder='Senha:'
@@ -45,6 +47,7 @@ const LoginForm = () => {
             // onChange={handlePasswordChange} 
             // required
             />
+            </div>
           <button type="submit">Confirmar</button>
           {/* </form> */}
         </div>

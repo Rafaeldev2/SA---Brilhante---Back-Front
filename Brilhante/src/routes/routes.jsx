@@ -1,5 +1,6 @@
 import { Router, createBrowserRouter } from "react-router-dom";
 import LoginForm from "../Pages/LoginForm.jsx";
+import Cadastro from "../Pages/Cadastro.jsx"
 import App from "../App";
 
 const router = createBrowserRouter([
@@ -12,17 +13,17 @@ const router = createBrowserRouter([
             //     element: <Home />
             // },
             {
-                path: '/',
+                path: '/Login',
                 element: <LoginForm />
             },
             // {
             //     path: '/Carrinho',
             //     element: <Carrinho />
             // },
-            // {
-            //     path: '/Cadastro',
-            //     element: <Cadastro />
-            // },
+            {
+                path: '/Cadastro',
+                element: <Cadastro />
+            },
         ]
     },
 ])

@@ -1,4 +1,6 @@
-#root {
-    height: 100vh;
-    width: 100vw;
+html, body, #root {
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
