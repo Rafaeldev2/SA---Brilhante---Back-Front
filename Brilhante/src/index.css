@@ -1,6 +1,93 @@
-html, body, #root {
+html,
+body,
+#root {
     height: 100%;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+.background-container-register {
+    background-color: #FFE0FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.background-container-Login {
+    background-color: #FFE0FF; /* Cor de fundo para toda a tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 350px; /* Limite máximo de largura */
+    background-color: #FFA8D9;
+    border-radius: 20px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
+}
+
+.login-container {
+    min-width: 25%;
+    background-color: #FFA8D9;
+    border-radius: 10%;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
+}
+
+.space-input {
+    height: 16px; /* Aumenta o espaço entre os inputs */
+}
+
+.div-input {
+    display: flex;
+    justify-content: center;
+}
+
+.custom-input {
+    width: 80%;
+    padding: 5%;
+    border: none;
+    border-radius: 50px;
+    align-items: center;
+    background-color: #D9D9D9;
+
+    caret-color: #89004F;
+    outline-color: #89004F;
+}
+
+button {
+    width: 70%;
+    padding: 5%;
+    background-color: #D9D9D9;/* Cor do botão */
+    color: #89004F; /*cor das letras*/
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin: 15%;
+}
+
+button:hover {
+    background-color: #C33B80;
+    /* Cor do botão ao passar o mouse */
+}
+
+h2 {
+    font-size: 250%;
+    color: #89004F;
+    text-align: center;
+}
+
+/* Queries para responsividade que não funciona*/
+/* @media (min-width: 100px) {
+    .login-container {
+        width: 35%;
+        max-width: 300px;
+    }
+} */

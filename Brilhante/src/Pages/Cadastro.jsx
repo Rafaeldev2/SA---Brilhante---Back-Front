@@ -43,66 +43,73 @@ const SignupForm = () => {
 
     return (
         <>
-            <div className='background-container'>
+            <div className='background-container-register'>
                 <div className="signup-container">
                     <div>
                         <h2>Cadastro</h2>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <div className='div-gruop'>
-                            <div className='div-input'>
-                                <input
-                                    className="custom-input"
-                                    placeholder='Nome de usuário:'
-                                    type="text"
-                                    value={username}
-                                    onChange={handleUsernameChange}
-                                    required
-                                />
-                            </div>
-                            <div className='div-input'>
-                                <input
-                                    className="custom-input"
-                                    placeholder='Email:'
-                                    type="email"
-                                    value={email}
-                                    onChange={handleEmailChange}
-                                    required
-                                />
-                            </div>
-                            <div className='div-input'>
-                                <input
-                                    className="custom-input"
-                                    placeholder='CPF:'
-                                    type="text"
-                                    value={cpf}
-                                    onChange={handleCpfChange}
-                                    required
-                                />
-                            </div>
-                            <div className='div-input'>
-                                <input
-                                    className="custom-input"
-                                    placeholder='Senha:'
-                                    type="password"
-                                    value={password}
-                                    onChange={handlePasswordChange}
-                                    required
-                                />
-                            </div>
-                            <div className='div-input'>
-                                <input
-                                    className="custom-input"
-                                    placeholder='Confirmar senha:'
-                                    type="password"
-                                    value={confirmPassword}
-                                    onChange={handleConfirmPasswordChange}
-                                    required
-                                />
-                            </div>
-                            <button type="submit">Cadastrar</button>
+                    <div className='div-input-group'>
+                        <div className='space-input'></div>
+                        <div className='div-input'>
+                            <input
+                                className="custom-input"
+                                placeholder='Nome de usuário:'
+                                type="text"
+                                value={username}
+                                onChange={handleUsernameChange}
+                                required
+                            />
                         </div>
-                    </form>
+                        <div className='space-input'></div>
+                        <div className='div-input'>
+                            <input
+                                className="custom-input"
+                                placeholder='Email:'
+                                type="email"
+                                value={email}
+                                onChange={handleEmailChange}
+                                required
+                            />
+                        </div>
+                        <div className='space-input'></div>
+                        <div className='div-input'>
+                            <input
+                                className="custom-input"
+                                placeholder='CPF:'
+                                type="text"
+                                value={cpf}
+                                onChange={handleCpfChange}
+                                required
+                            />
+                        </div>
+                        <div className='space-input'></div>
+                        <div className='div-input'>
+                            <input
+                                className="custom-input"
+                                placeholder='Senha:'
+                                type="password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                required
+                            />
+                        </div>
+                        <div className='space-input'></div>
+                        <div className='div-input'>
+                            <input
+                                className="custom-input"
+                                placeholder='Confirmar senha:'
+                                type="password"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                required
+                            />
+                        </div>
+                        <div className='space-input'></div>
+                    </div>
+                    <div className='div-button'>
+                        <button type="submit">Cadastrar</button>
+                        <div className='space-input'></div>
+                    </div>
                 </div>
             </div>
         </>

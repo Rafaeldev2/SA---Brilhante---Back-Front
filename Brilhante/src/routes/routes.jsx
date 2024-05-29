@@ -17,8 +17,8 @@ const router = createBrowserRouter([
                 element: <LoginForm />
             },
             // {
-            //     path: '/Carrinho',
-            //     element: <Carrinho />
+            //     path: '/Brinco',
+            //     element: <Brinco />
             // },
             {
                 path: '/Cadastro',
