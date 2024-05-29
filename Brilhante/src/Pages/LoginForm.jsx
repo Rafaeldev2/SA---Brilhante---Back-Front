@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './LoginForm.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const LoginForm = () => {
   // const [email, setEmail] = useState('');
@@ -24,39 +25,20 @@ const LoginForm = () => {
     <>
       <div className='background-container-Login'>
         <div className="login-container">
-          <div>
-            <h2>Login</h2>
-          </div>
-          {/* <form onSubmit={handleSubmit}> */}
+          <h2>Login</h2>
           <div className='div-input-group'>
-          <div className='space-input'></div>
-            <div className='div-input'>
-              <input
-                className="custom-input"
-                placeholder='Email:'
-                type="email"
-              // value={email}
-              // onChange={handleEmailChange}
-              // required
-              />
-            </div>
-            <div className='space-input'></div>
-            <div className='div-input'>
-              <input
-                className="custom-input"
-                placeholder='Senha:'
-                type="password"
-              // value={password}
-              // onChange={handlePasswordChange} 
-              // required
-              />
-            </div>
+
+            <TextField id="outlined-basic" 
+            label="Email" 
+            variant="outlined" />
+
+            <TextField id="outlined-basic" 
+            label="Outlined" 
+            variant="outlined" />
           </div>
-          <div className='space-input'></div>
-          <div className='div-button'>
-            <button type="submit">Confirmar</button>
-          </div>
-          {/* </form> */}
+
+
+          <button type="submit">Confirmar</button>
         </div>
       </div>
     </>

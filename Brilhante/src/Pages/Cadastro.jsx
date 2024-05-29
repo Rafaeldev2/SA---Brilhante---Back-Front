@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Cadastro.css';
 
 const SignupForm = () => {
     const [username, setUsername] = useState('');
