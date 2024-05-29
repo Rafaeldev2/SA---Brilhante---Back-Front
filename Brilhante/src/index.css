@@ -17,7 +17,7 @@ body,
     width: 100%;
 }
 
-.signup-container {
+.signup-login-container {
     width: 100%;
     max-width: 350px; /* Limite máximo de largura */
     background-color: #FFA8D9;
@@ -25,15 +25,11 @@ body,
     box-shadow: 2px 2px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
 }
 
-.login-container {
-    min-width: 25%;
-    background-color: #FFA8D9;
-    border-radius: 10%;
-    box-shadow: 2px 2px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
-}
-
-.space-input {
-    height: 16px; /* Aumenta o espaço entre os inputs */
+.div-label-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20; /* Aumenta o espaço entre os inputs */
 }
 
 .div-input {
@@ -53,6 +49,10 @@ body,
     justify-content: center;
 }
 
+.div-space-label{
+    height: 15px; /* Aumenta o espaço entre os inputs */
+}
+
 .custom-input {
     width: 80%;
     padding: 5%;
@@ -60,9 +60,12 @@ body,
     border-radius: 50px;
     align-items: center;
     background-color: #D9D9D9;
-
     caret-color: #89004F;
     outline-color: #89004F;
+}
+
+.custom-label{
+    color: #89004F;
 }
 
 button {
@@ -73,6 +76,7 @@ button {
     border-radius: 50px;
     border: none;
     cursor: pointer;
+    margin: 10%;
 }
 
 button:hover {

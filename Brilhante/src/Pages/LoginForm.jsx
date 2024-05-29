@@ -23,28 +23,34 @@ const LoginForm = () => {
   return (
     <>
       <div className='background-container-Login-register'>
-        <div className="login-container">
+        <div className="signup-login-container">
           <div className='div-h2'>
             <h2>Login</h2>
           </div>
           {/* <form onSubmit={handleSubmit}> */}
           <div className='div-input-group'>
-            <div className='space-input'></div>
+            <div className='div-label-input'>
+              <div className='div-space-label'></div>
+            <label className='custom-label'>Email</label>
+            </div>
             <div className='div-input'>
               <input
                 className="custom-input"
-                placeholder='Email:'
+                placeholder='Email'
                 type="email"
               // value={email}
               // onChange={handleEmailChange}
               // required
               />
             </div>
-            <div className='space-input'></div>
+            <div className='div-space-label'></div>
+            <div className='div-label-input'>
+            <label className='custom-label'>Senha</label>
+            </div>
             <div className='div-input'>
               <input
                 className="custom-input"
-                placeholder='Senha:'
+                placeholder='Senha'
                 type="password"
               // value={password}
               // onChange={handlePasswordChange} 

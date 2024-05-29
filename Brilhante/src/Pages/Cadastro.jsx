@@ -44,71 +44,87 @@ const SignupForm = () => {
     return (
         <>
             <div className='background-container-Login-register'>
-                <div className="signup-container">
+                <div className="signup-login-container">
                     <div className='div-h2'>
                         <h2>Cadastro</h2>
                     </div>
                     <div className='div-input-group'>
-                        <div className='space-input'></div>
+                        <div className='div-label-input'>
+                            <label className='custom-label'>Nome de usuário</label>
+                        </div>
                         <div className='div-input'>
                             <input
                                 className="custom-input"
-                                placeholder='Nome de usuário:'
+                                placeholder='Nome de usuário'
                                 type="text"
                                 value={username}
                                 onChange={handleUsernameChange}
                                 required
                             />
                         </div>
-                        <div className='space-input'></div>
+                        <div className='div-space-label'></div>
+                        <div className='div-label-input'>
+                        <label className='custom-label'>Email</label>
+                        </div>
                         <div className='div-input'>
                             <input
                                 className="custom-input"
-                                placeholder='Email:'
+                                placeholder='Email'
                                 type="email"
                                 value={email}
                                 onChange={handleEmailChange}
                                 required
                             />
                         </div>
-                        <div className='space-input'></div>
+                        <div className='div-space-label'></div>
+                        <div className='div-label-input'>
+                        <label className='custom-label'>CPF</label>
+                        </div>
                         <div className='div-input'>
                             <input
                                 className="custom-input"
-                                placeholder='CPF:'
+                                placeholder='CPF'
                                 type="text"
                                 value={cpf}
                                 onChange={handleCpfChange}
                                 required
                             />
                         </div>
-                        <div className='space-input'></div>
+                        <div className='div-space-label'></div>
+                        <div className='div-label-input'>
+                        <label className='custom-label'>Senha</label>
+                        </div>
                         <div className='div-input'>
                             <input
                                 className="custom-input"
-                                placeholder='Senha:'
+                                placeholder='Senha'
                                 type="password"
                                 value={password}
                                 onChange={handlePasswordChange}
                                 required
                             />
                         </div>
-                        <div className='space-input'></div>
+                        <div className='div-space-label'></div>
+                        <div className='div-label-input'>
+                        <label className='custom-label'>Confirmar Senha</label>
+                        </div>
                         <div className='div-input'>
                             <input
                                 className="custom-input"
-                                placeholder='Confirmar senha:'
+                                placeholder='Confirmar senha'
                                 type="password"
                                 value={confirmPassword}
                                 onChange={handleConfirmPasswordChange}
                                 required
                             />
                         </div>
-                        <div className='space-input'></div>
+                        <div className='div-label-input'>
+
+                        </div>
                     </div>
                     <div className='div-button'>
                         <button type="submit">Cadastrar</button>
-                        <div className='space-input'></div>
+                        <div className='div-label-input'></div>
                     </div>
                 </div>
             </div>
