@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const SignupForm = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -42,9 +43,9 @@ const SignupForm = () => {
 
     return (
         <>
-            <div className='background-container-register'>
+            <div className='background-container-Login-register'>
                 <div className="signup-container">
-                    <div>
+                    <div className='div-h2'>
                         <h2>Cadastro</h2>
                     </div>
                     <div className='div-input-group'>

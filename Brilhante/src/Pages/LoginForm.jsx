@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+
 
 const LoginForm = () => {
   // const [email, setEmail] = useState('');
@@ -23,22 +22,41 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className='background-container-Login'>
+      <div className='background-container-Login-register'>
         <div className="login-container">
-          <h2>Login</h2>
-          <div className='div-input-group'>
-
-            <TextField id="outlined-basic" 
-            label="Email" 
-            variant="outlined" />
-
-            <TextField id="outlined-basic" 
-            label="Outlined" 
-            variant="outlined" />
+          <div className='div-h2'>
+            <h2>Login</h2>
           </div>
-
-
-          <button type="submit">Confirmar</button>
+          {/* <form onSubmit={handleSubmit}> */}
+          <div className='div-input-group'>
+            <div className='space-input'></div>
+            <div className='div-input'>
+              <input
+                className="custom-input"
+                placeholder='Email:'
+                type="email"
+              // value={email}
+              // onChange={handleEmailChange}
+              // required
+              />
+            </div>
+            <div className='space-input'></div>
+            <div className='div-input'>
+              <input
+                className="custom-input"
+                placeholder='Senha:'
+                type="password"
+              // value={password}
+              // onChange={handlePasswordChange} 
+              // required
+              />
+            </div>
+          </div>
+          <div className='space-input'></div>
+          <div className='div-button'>
+            <button type="submit">Confirmar</button>
+          </div>
+          {/* </form> */}
         </div>
       </div>
     </>

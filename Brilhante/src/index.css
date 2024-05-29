@@ -7,16 +7,7 @@ body,
     padding: 0;
 }
 
-.background-container-register {
-    background-color: #FFE0FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.background-container-Login {
+.background-container-Login-register {
     background-color: #FFE0FF; /* Cor de fundo para toda a tela */
     display: flex;
     justify-content: center;
@@ -50,6 +41,18 @@ body,
     justify-content: center;
 }
 
+.div-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .custom-input {
     width: 80%;
     padding: 5%;
@@ -70,7 +73,6 @@ button {
     border-radius: 50px;
     border: none;
     cursor: pointer;
-;
 }
 
 button:hover {
@@ -81,7 +83,6 @@ button:hover {
 h2 {
     font-size: 250%;
     color: #89004F;
-    text-align: center;
 }
 
 /* Queries para responsividade que não funciona*/
