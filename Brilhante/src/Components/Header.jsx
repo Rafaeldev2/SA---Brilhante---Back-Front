@@ -1,12 +1,16 @@
-import Navbar from "./Navbar";
+import React from 'react'
+import NavBar from './Navbar'
+import './Header.css'
 
 
 function Header() {
-    return (
-        <div className="Header">
-            <Navbar />
-        </div>
-    )
+
+  return (
+    <div className="Minhas-Receitas">
+        <img src="./Brilhante.png" className='ImgBrilhante'/>
+        <NavBar/>
+    </div>
+  )
 }
 
-export default Header;
+export default Header

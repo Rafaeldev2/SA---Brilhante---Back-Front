@@ -1,5 +1,5 @@
 import { Router, createBrowserRouter } from "react-router-dom";
-import HomePage from "../Pages/HomePage.jsx";
+// import HomePage from "../Pages/HomePage.jsx";
 import LoginForm from "../Pages/LoginForm.jsx";
 import Cadastro from "../Pages/Cadastro.jsx"
 import Brinco from "../Pages/Brinco.jsx";
@@ -14,10 +14,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
         children:[
-            {
-                path: '/',
-                element: <HomePage />
-            },
+            // {
+            //     path: '/',
+            //     element: <HomePage />
+            // },
             {
                 path: '/Login',
                 element: <LoginForm />
