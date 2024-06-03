@@ -64,7 +64,7 @@ const ListarProdutos = () => {
    };
    return (
     <div className='lista-de-produtos'>
-      <h1>Lista de Produtos</h1>
+      <h1>Editar Produtos</h1>
       {produtos.map((produto) => (
         <ProdutoItem
           key={produto.Idproduto}

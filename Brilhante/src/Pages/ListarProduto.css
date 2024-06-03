@@ -5,10 +5,10 @@
 }
 
 .produto-container {
-    border: 1px solid #FFE0FF;
+    border: 1px solid #000000;
     margin: 10px;
     padding: 10px;
-    background: #FFE0FF;
+    background: #FFA8D9;
 }
 
 .body {
@@ -16,7 +16,9 @@
 }
 
 .lista-de-produtos h1 {
-  
-    background-color: #ce57ce;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFE0FF;
 
 }
