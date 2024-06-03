@@ -8,7 +8,7 @@ function App() {
         <div className="product-grid">
           {/* Card do Produto 1 */}
           <div className="product-card">
-            <img src="imagem-produto1.jpg" alt="Produto 1" />
+            <img src="./img/Anel-com-firulas.png" alt="Produto 1" />
             <h2>Produto 1</h2>
             <p>Descrição do produto 1</p>
             <p className="price">R$ 25,00</p>

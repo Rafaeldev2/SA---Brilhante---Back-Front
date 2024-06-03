@@ -11,10 +11,11 @@ const HomePage = () => {
             <img src="./img/Brilhante.png" className="ImgBrilhante" alt="Logo" />
           </Link>
           <div className="header-links">
-            <Link to="/Pulseira" className="header-link">Pulseira</Link>
+          <Link to="/Aneis" className="header-link">Anéis</Link>
             <Link to="/Brinco" className="header-link">Brinco</Link>
             <Link to="/Colar" className="header-link">Colar</Link>
             <Link to="/Conjunto" className="header-link">Conjunto</Link>
+            <Link to="/Pulseira" className="header-link">Pulseira</Link>
           </div>
         </div>
         <div className="header-right">

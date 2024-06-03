@@ -3,6 +3,7 @@ import HomePage from "../Pages/HomePage.jsx";
 import LoginForm from "../Pages/LoginForm.jsx";
 import Cadastro from "../Pages/Cadastro.jsx"
 import Carrinho from "../Pages/Carrinho.jsx"
+import Aneis from "../Pages/Aneis.jsx"
 import Brinco from "../Pages/Brinco.jsx";
 import Colar from "../Pages/Colar.jsx";
 import Conjunto from "../Pages/Conjunto.jsx"
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
                 element: <Cadastro />
             },
             {
+                path: '/Carrinho',
+                element: <Carrinho />
+            },
+            {
+                path: '/Aneis',
+                element: <Aneis />
+            },
+            {
                 path: '/Brinco',
                 element: <Brinco />
             },
@@ -37,16 +46,12 @@ const router = createBrowserRouter([
                 element: <Colar />
             },            
             {
-                path: '/Pulseira',
-                element: <Pulseira />
-            },
-            {
                 path: '/Conjunto',
                 element: <Conjunto />
             },
             {
-                path: '/Carrinho',
-                element: <Carrinho />
+                path: '/Pulseira',
+                element: <Pulseira />
             },
             {
                 path: '/GerenciaProdutos',
