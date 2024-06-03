@@ -50,7 +50,7 @@ const ProdutoItem = ({produto, onChange}) => {
   );
 };
 
-const ListarProdutos = () => {
+const AtualizarProduto = () => {
    const [produtos, setProdutos] = useState(produtosIniciais);
 
    const handleProdutoChange = (id, name, value) => {
@@ -77,4 +77,4 @@ const ListarProdutos = () => {
 };
 
 
-export default AtualizarProdutos;
+export default AtualizarProduto;

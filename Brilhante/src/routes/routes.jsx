@@ -8,8 +8,9 @@ import Brinco from "../Pages/Brinco.jsx";
 import Colar from "../Pages/Colar.jsx";
 import Conjunto from "../Pages/Conjunto.jsx"
 import Pulseira from "../Pages/Pulseira.jsx";
+import AtualizarProduto from "../Pages/AtualizarProduto.jsx";
 import GerenciaProdutos from "../Pages/GerenciaProdutos.jsx";
-import ListarProdutos from "../Pages/ListarProduto.jsx";
+import ListaProdutos from "../Pages/ListaProdutos.jsx";
 import App from "../App";
 
 const router = createBrowserRouter([
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/AtualizarProduto',
-                element: <AtualizarProduto/>
+                element: <AtualizarProduto />
             },
             {
                 path: '/GerenciaProdutos',
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/ListaProdutos',
-                element: <ListarProdutos />
+                element: <ListaProdutos />
             },
         ]
     },
