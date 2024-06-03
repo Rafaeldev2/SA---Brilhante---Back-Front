@@ -81,11 +81,3 @@ button:hover {
     background-color: #C33B80;
     /* Cor do botão ao passar o mouse */
 }
-
-/* Queries para responsividade que não funciona*/
-/* @media (min-width: 100px) {
-    .login-container {
-        width: 35%;
-        max-width: 300px;
-    }
-} */
