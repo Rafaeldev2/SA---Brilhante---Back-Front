@@ -1,0 +1,13 @@
+.produto-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #FFE0FF;
+}
+.produto-list ::placeholder{
+    color: black;
+    font-family: SF-Pro-Display-Medium;
+    font-size: large;
+}
