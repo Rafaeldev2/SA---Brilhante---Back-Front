@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 
-const Brinco = () => {
+const Conjunto = () => {
   return (
     <>
-      <h2>HomePage</h2>
+      <h2>Conjunto</h2>
     </>
   );
 };
 
 
-export default Brinco;
+export default Conjunto;
