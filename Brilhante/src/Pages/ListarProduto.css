@@ -1,0 +1,16 @@
+.lista-de-produtos {
+  
+    background: #ad4444
+
+}
+
+.produto-container {
+    border: 1px solid #ad4444;
+    margin: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+.body {
+    background-color: #ad4444;
+}
