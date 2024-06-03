@@ -1,0 +1,24 @@
+.lista-de-produtos {
+  
+    background-color: #FFE0FF;
+
+}
+
+.produto-container {
+    border: 1px solid #000000;
+    margin: 10px;
+    padding: 10px;
+    background: #FFA8D9;
+}
+
+.body {
+    background-color: #FFE0FF;
+}
+
+.lista-de-produtos h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFE0FF;
+
+}

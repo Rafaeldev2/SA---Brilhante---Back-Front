@@ -9,7 +9,7 @@ import Colar from "../Pages/Colar.jsx";
 import Conjunto from "../Pages/Conjunto.jsx"
 import Pulseira from "../Pages/Pulseira.jsx";
 import GerenciaProdutos from "../Pages/GerenciaProdutos.jsx";
-import ListarProdutos from "../Pages/ListarProdutos.jsx";
+import ListarProdutos from "../Pages/ListarProduto.jsx";
 import App from "../App";
 
 const router = createBrowserRouter([
@@ -52,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: '/Pulseira',
                 element: <Pulseira />
+            },
+            {
+                path: '/AtualizarProduto',
+                element: <AtualizarProduto/>
             },
             {
                 path: '/GerenciaProdutos',

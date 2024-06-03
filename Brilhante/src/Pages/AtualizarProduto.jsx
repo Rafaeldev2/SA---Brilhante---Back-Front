@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ListarProduto.css';
+import './AtualizarProduto.css';
 
 const produtosIniciais = [
     { Idproduto: 1, nome: 'Produto A', valor: 100.00, quantidade: 10 },
@@ -77,4 +77,4 @@ const ListarProdutos = () => {
 };
 
 
-export default ListarProdutos;
+export default AtualizarProdutos;
