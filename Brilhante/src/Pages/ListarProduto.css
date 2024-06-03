@@ -1,16 +1,22 @@
 .lista-de-produtos {
   
-    background: #ad4444
+    background-color: #FFE0FF;
 
 }
 
 .produto-container {
-    border: 1px solid #ad4444;
+    border: 1px solid #FFE0FF;
     margin: 10px;
     padding: 10px;
-    background: #f9f9f9;
+    background: #FFE0FF;
 }
 
 .body {
-    background-color: #ad4444;
+    background-color: #FFE0FF;
+}
+
+.lista-de-produtos h1 {
+  
+    background-color: #ce57ce;
+
 }
