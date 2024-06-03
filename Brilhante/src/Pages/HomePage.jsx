@@ -4,11 +4,6 @@ import './HomePage.css';
 function App() {
   return (
     <div>
-      <header>
-        {/* Conteúdo do Header */}
-      </header>
-
-      <main>
         <h1>Nossas Bijuterias</h1>
         <div className="product-grid">
           {/* Card do Produto 1 */}
@@ -21,11 +16,8 @@ function App() {
               <img src="icone-carrinho.png" alt="Adicionar ao Carrinho" />
             </button>
           </div>
-
           {/* Outros Cards de Produto... */}
         </div>
-      </main>
-
       <footer>
         {/* Conteúdo do Footer */}
       </footer>
