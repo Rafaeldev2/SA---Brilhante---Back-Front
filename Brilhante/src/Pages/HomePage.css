@@ -1,13 +1,68 @@
-.produto-list{
+
+
+.container{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+    flex-wrap: wrap;
     width: 100%;
     background-color: #FFE0FF;
 }
-.produto-list ::placeholder{
-    color: black;
-    font-family: SF-Pro-Display-Medium;
-    font-size: large;
+
+.div-card-produto {
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background-color: #FFA8D9;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	margin: 20px;
+	width: 300px;
+}
+
+.div-card-produto h2 {
+    font-family: helvetica;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.div-card-produto p {
+    font-family: helvetica;
+	font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 20px;
+}
+
+.div-card-price-cart{
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+	align-items: safe;
+	justify-content: space-evenly;
+}
+
+.img-card {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card-icon{
+    background-color: #FFA8D9;
+    height: 50px;
+    width: 50px;
+}
+
+.cart-button {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: #FFA8D9;
+    height: 50px;
+    width: 50px;
 }

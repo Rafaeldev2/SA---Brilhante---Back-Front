@@ -28,11 +28,11 @@ const HomePage = () => {
           <Link to="/Carrinho" className="header-icon">
             <img src="./img/Cart.png" className="ImgIcons" alt="Cart" />
           </Link>
+          <Link to="/Perfil" className="header-icon">
+            <img src="./img/Perfil.png" className="ImgIcons" alt="Edit" />
+          </Link>
         </div>
       </header>
-      <main>
-        {/* Conteúdo principal da home page */}
-      </main>
     </div>
   );
 };
