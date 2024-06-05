@@ -21,7 +21,7 @@ setProdutos(productData);
       <h2>Lista de Produtos</h2>
       <table>
         <thead>
-          <tr>
+          <tr className='titulos'>
             <th>ID</th>
             <th>Nome</th>
             <th>Preço</th>

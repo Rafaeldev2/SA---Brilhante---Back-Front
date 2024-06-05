@@ -1,4 +1,27 @@
+body{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
-    margin: 20px;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+    background-color: #FFA8D9;
+}
+
+.titulos{
+    padding: 20px;
+	margin: 20px;
+	width: 300px;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+    background-color: #FFA8D9;
 }
 
