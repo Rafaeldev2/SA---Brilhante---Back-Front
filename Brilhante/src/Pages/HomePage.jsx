@@ -1,28 +1,80 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
 
-function App() {
+function HomePage() {
   return (
-    <div>
-      <h1>Nossas Bijuterias</h1>
-      <div className="product-grid">
-        {/* Card do Produto 1 */}
-        <div className="product-card">
-          <img src="./img/Aneis/Anel-com-firulas.png" alt="Produto" />
-          <h2>Produto 1</h2>
-          <p>Descrição do produto 1</p>
-          <p className="price">R$ 25,00</p>
-          <button className="add-to-cart">
-            <img src="icone-carrinho.png" alt="Adicionar ao Carrinho" />
-          </button>
+    <>
+      <div className='container'>
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Aneis/Anel-com-firulas.png" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
         </div>
-        {/* Outros Cards de Produto... */}
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Brincos/Brico-de-uvas.png" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
+        </div>
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Colares/Colar-de-perolas.jpg" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
+        </div>
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Conjunto/Conjunto-de-colar-e-brincos-Persa.png" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
+        </div>
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Pulseiras/Misanga-arco-iris.jpg" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
+        </div>
+        <div className='div-card-produto'>
+          <h1>Nossas Bijuterias</h1>
+          <img className='img-card' src="./img/Aneis/Anel-dourado.png" />
+          <h2>Nome do Produto</h2>
+          <p>Descrição do produto</p>
+          <div className="div-card-price-cart">
+            <p className="price">R$ 25,00</p>
+            <button className="cart-button" ><img src="./img/Cart.png" className="card-icon" />
+            </button>
+          </div>
+        </div>
       </div>
-      <footer>
-        {/* Conteúdo do Footer */}
-      </footer>
-    </div>
+    </>
   );
 }
 
-export default App;
+export default HomePage;
