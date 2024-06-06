@@ -64,6 +64,10 @@
     outline-color: #89004F;
 }
 
+#celular{
+    margin-bottom: 50px;
+}
+
 .Button-Login-Cadastro {
     width: 70%;
     padding: 5%;

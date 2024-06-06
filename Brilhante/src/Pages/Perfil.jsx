@@ -76,9 +76,7 @@ const Perfil = () => {
               placeholder='Celular'
             />
           </div>
-          <div className='div-button'>
-            <button className='Button-Login-Cadastro'>Editar Perfil</button>
-          </div>
+
         </div>
 
         {/* Informações do Endereço */}
@@ -102,7 +100,7 @@ const Perfil = () => {
             <input
               id='uf'
               className="custom-input"
-              placeholder='UF'
+              placeholder='Estado'
             />
           </div>
           <div className='div-space-label'></div>
@@ -135,7 +133,7 @@ const Perfil = () => {
             <input
               id='logradouro'
               className="custom-input"
-              placeholder='Logradouro'
+              placeholder='Rua, Av.'
             />
           </div>
           <div className='div-space-label'></div>
