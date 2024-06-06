@@ -7,9 +7,21 @@ body,
     padding: 0;
 }
 
-h1{
+h1 {
     margin: 0px;
 }
-h2{
+
+h2 {
+    font-size: 250%;
+    color: #89004F;
     margin: 0px;
+}
+
+h3 {
+    color: #89004F;
+    text-align: center;
+}
+
+.custom-label{
+    color: #89004F;
 }
