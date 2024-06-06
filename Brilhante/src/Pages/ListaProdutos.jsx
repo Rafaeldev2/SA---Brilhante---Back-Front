@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ListaProdutos.css';
 
 const ListaProdutos = () => {
 const [products, setProdutos] = useState([]);
@@ -22,21 +23,21 @@ setProdutos(productData);
       <table>
         <thead>
           <tr className='titulos'>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Codigo de barra</th>
+            <th className='ID'>ID</th>
+            <th className='Nome'>Nome</th>
+            <th className='Preço'>Preço</th>
+            <th className='Quantidade'>Quantidade</th>
+            <th className='Codigo-de-barra'>Codigo de barra</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='valores'>
           {products.map((product) => (
             <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>{product.barcode}</td>
+              <td className='id' >{product.id}</td>
+              <td className='name'>{product.name}</td>
+              <td className='price'>{product.price}</td>
+              <td className='quantity'>{product.quantity}</td>
+              <td className='barcode'>{product.barcode}</td>
               </tr>
             ))}
         </tbody>

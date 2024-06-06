@@ -1,27 +1,97 @@
-body{
-    width: auto;
-    display: flex;
-    flex-direction: column;
+.container h2{
+	display: flex;
+    align-self: flex-start;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 .container {
-    display: flex;
-	flex-direction: column;
+	display: flex;
+	flex-direction: row;
 	align-items: center;
-	justify-content: center;
-	text-align: center;
-    background-color: #FFA8D9;
+	justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #FFE0FF;
+
 }
 
 .titulos{
-    padding: 20px;
-	margin: 20px;
-	width: 300px;
     display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+	height: 100%;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-evenly;
     background-color: #FFA8D9;
+	font-size: 24px;
+	border-color: black;
+	border-style: solid;
+	border-width: 2px;
+	align-self: flex-start;
+	text-align: center;
+	align-items: center;
+
 }
 
+.valores{
+	display: flex;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	flex-flow: column wrap;
+	justify-items: auto;
+    background-color: #FFA8D9;
+	font-size: large;
+	border-color: black;
+	border-style: solid;
+	border-width: 2px;
+	align-content: center;
+	
+
+
+
+}
+	
+
+
+.ID {
+	
+	margin-right: 420px;
+}
+.Nome {
+	
+	margin-right: 200px;
+}
+.Preço {
+	
+	margin-right: 200px;
+}
+.Quantidade {
+	
+	margin-right: 300px;
+}
+.Codigo-de-barra {
+	margin-right: 0px;
+}
+
+/* .id{
+	margin-right: 10px;
+}
+.name{
+	margin-right: 20px;
+}
+.price{
+	margin-right: 20px;
+}
+.quantity{
+	margin-right: 20px;
+}
+.barcode{
+	margin-right: 12px;
+} */
+
+.td{
+	word-spacing: 100px;
+}
