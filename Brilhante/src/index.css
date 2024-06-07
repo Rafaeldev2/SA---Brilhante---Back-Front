@@ -8,11 +8,14 @@ body,
 }
 
 h1 {
+    font-size: 350%;
     margin: 0px;
+    color: #89004F;
+    text-align: center;
 }
 
 h2 {
-    font-size: 250%;
+
     color: #89004F;
     margin: 0px;
     text-align: center;
@@ -20,6 +23,13 @@ h2 {
 
 h3 {
     color: #89004F;
+    text-align: center;
+}
+
+h4 {
+    font-size: 200%;
+    color: #89004F;
+    margin: 0px;
     text-align: center;
 }
 
