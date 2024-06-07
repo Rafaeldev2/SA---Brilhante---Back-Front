@@ -1,6 +1,5 @@
 package com.brilhante.brilhante.service;
 
-
 import com.brilhante.brilhante.entity.Cliente;
 import com.brilhante.brilhante.repository.ClienteRepository;
 import java.util.List;
@@ -55,6 +54,8 @@ public class ClienteService {
                 cli.setCpf(cliente.getCpf());
                 cli.setEmail(cliente.getEmail());
                 cli.setNome(cliente.getNome());
+                cli.setSenha(cliente.getSenha());
+                cli.set
                 clienteRepository.save(cli);
                  return true;
             } else {
