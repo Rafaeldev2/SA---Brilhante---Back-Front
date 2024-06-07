@@ -1,85 +1,44 @@
-
 .container-list {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	width: 100%;
-	background-color: #FFE0FF;
-}
-
-.list-product{
-	width: 100%;
-}
-
-/* .titulos {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
 	height: 100%;
 	width: 100%;
-	background-color: #FFA8D9;
-	font-size: 24px;
-	border-color: black;
-	border-style: solid;
-	border-width: 2px;
-} */
+	background-color: #f0f0f0;
+  }
+  
+  h2{
+	margin-bottom: auto;
+  }
 
-.valores-lista {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	height: 100%;
+  .list-product {
 	width: 100%;
-	background-color: #FFA8D9;
-	font-size: large;
-	border-color: black;
-	border-style: solid;
-	border-width: 2px;
-}
-
-.div-id {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-/* .ID {
-	margin-right: 420px;
-}
-
-.Nome {
-	margin-right: 200px;
-}
-
-.Preço {
-	margin-right: 200px;
-}
-
-.Quantidade {
-	margin-right: 300px;
-}
-
-.Codigo-de-barra {
-	margin-right: 0px;
-} */
-
-/* .id{
-	margin-right: 10px;
-}
-.name{
-	margin-right: 20px;
-}
-.price{
-	margin-right: 20px;
-}
-.quantity{
-	margin-right: 20px;
-}
-.barcode{
-	margin-right: 12px;
-} */
-
-.td {
-	word-spacing: 100px;
-}
+	border-collapse: collapse;
+	margin-bottom: 540px;
+  }
+  
+  .list-product th {
+	background-color: #888;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+  }
+  
+  .list-product th:hover {
+	background-color: #666;
+  }
+  
+  .list-product td, .list-product th {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+  }
+  
+  .list-product tr:hover {
+	background-color: #f9f9f9;
+  }
+  
+  .list-product tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+  }
+  

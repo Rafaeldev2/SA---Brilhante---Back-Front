@@ -43,18 +43,9 @@
 .add-produto h4{
     font-family: "SF-Compact-Display-Bold";
 }
-.valorProduto{
-    width: 15rem;
-    margin: 5px;
-    border: solid 1px black;
-    border-radius: 6px;
-    background-color: #FFA8D9;
-    font-family: SF-Pro-Display-Medium;
-    text-align: center;
-}
 .DescricaoProduto{
     resize: none;
-    width: 25%;
+    
     border-radius: 8px;
     text-align: justify;
 }

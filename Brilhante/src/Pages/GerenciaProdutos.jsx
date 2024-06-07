@@ -52,8 +52,9 @@ function GerenciaProdutos() {
               onChange={(e) => setNewProdutoTitulo(e.target.value)}
             />
           </div>
+        </div>
           
-          <div className="quantidadeProduto">
+        <div className="quantidadeProduto">
             <label htmlFor="quantidade_Produto">Quantidade do Produto: </label>
             <input
               className='quantidade_Produto'
@@ -62,22 +63,24 @@ function GerenciaProdutos() {
               value={quantidadeProduto}
               onChange={(e) => setQuantidadeProduto(parseInt(e.target.value))}
             />
-          </div>
         </div>
-
-        <textarea
-          className='DescricaoProduto'
-          rows={5}
-          placeholder="Descrição do Produto: "
-          value={newDescriçãoProduto}
-          onChange={(e) => setNewDescriçãoProduto(e.target.value)}
-        />
         
-        <div>
+        
+        <div className=''>
           <h4>Descrição:</h4>
+          <textarea
+            className='DescricaoProduto'
+            rows={5}
+            cols={40}
+            placeholder="Descrição do Produto: "
+            value={newDescriçãoProduto}
+            onChange={(e) => setNewDescriçãoProduto(e.target.value)}
+          />
           {newUnidadeProdutos.map((produto, index) => (
             <div key={index}>
+              <label htmlFor=""></label>
               <input
+              id=''
                 type="text"
                 placeholder="Nome do Produto"
                 value={produto.nome}
