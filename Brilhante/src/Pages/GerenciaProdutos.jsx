@@ -2,32 +2,44 @@ import React, { useContext, useState } from 'react';
 import './GerenciaProdutos.css';
 import { BrilhanteContext } from '../Context/GlobalContext.jsx';
 import { NumericFormat } from 'react-number-format';
+import axios from 'axios';
 
 function GerenciaProdutos() {
   const { produtos, setProdutos } = useContext(BrilhanteContext);
-  const [newProdutoTitulo, setNewProdutoTitulo] = useState('');
+  const [newProdutoNome, setNewProdutoNome] = useState('');
   const [newProduto, setNewProduto] = useState({ tipo: '', quantidade: '', valor: '' });
   const [newDescricaoProduto, setNewDescricaoProduto] = useState('');
-  const [quantidadeProduto, setQuantidadeProduto] = useState(1);
+  const [error, setError] = useState('');
 
   const handleProductChange = (field, value) => {
     setNewProduto({ ...newProduto, [field]: value });
   };
 
-  const adicionarProduto = () => {
-    if (newProdutoTitulo.trim() !== '') {
+  const adicionarProduto = async () => {
+    if (newProdutoNome.trim() !== '' && newProduto.tipo && newProduto.valor && newDescricaoProduto.trim() !== '') {
       const novoProduto = {
-        nome: newProdutoTitulo.trim(),
+        nome: newProdutoNome.trim(),
         tipo: newProduto.tipo,
-        quantidade: quantidadeProduto,
+        quantidade: newProduto.quantidade,
         descricaoProduto: newDescricaoProduto.trim(),
         valor: newProduto.valor
       };
-      setProdutos([...produtos, novoProduto]);
-      setNewProdutoTitulo('');
-      setNewProduto({ tipo: '', quantidade: '', valor: '' });
-      setNewDescricaoProduto('');
-      setQuantidadeProduto(1);
+
+      try {
+        const response = await axios.post('/api/brilhante', novoProduto);
+        if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
+          setProdutos([...produtos, response.data]);
+          setNewProdutoNome('');
+          setNewProduto({ tipo: '', quantidade: '', valor: '' });
+          setNewDescricaoProduto('');
+          setError('');
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar produto:', error);
+        setError('Erro ao adicionar produto. Por favor, tente novamente.');
+      }
+    } else {
+      setError('Preencha todos os campos antes de adicionar o produto.');
     }
   };
 
@@ -35,14 +47,15 @@ function GerenciaProdutos() {
     <div className="gerencia-produtos">
       <div>
         <h1>Cadastro de Produtos</h1>
+        {error && <div className="error-message">{error}</div>}
         <div className="input-group">
           <label htmlFor="nomeProduto">Nome do Produto:</label>
           <input
             id="nomeProduto"
             type="text"
             placeholder="Digite o nome do Produto"
-            value={newProdutoTitulo}
-            onChange={(e) => setNewProdutoTitulo(e.target.value)}
+            value={newProdutoNome}
+            onChange={(e) => setNewProdutoNome(e.target.value)}
           />
         </div>
         <div className="input-group">
@@ -51,8 +64,8 @@ function GerenciaProdutos() {
             id="quantidadeProduto"
             type="number"
             placeholder="Quantidade do Produto"
-            value={quantidadeProduto}
-            onChange={(e) => setQuantidadeProduto(parseInt(e.target.value))}
+            value={newProduto.quantidade}
+            onChange={(e) => handleProductChange('quantidade', parseInt(e.target.value))}
           />
         </div>
         <div className="input-group">

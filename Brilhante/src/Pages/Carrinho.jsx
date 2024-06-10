@@ -6,11 +6,7 @@ function Carrinho() {
 
   const {products, setProducts} = useContext(BrilhanteContext);
 
-  const handleQuantityChange = (index, event) => {
-    const newProducts = [...products];
-    newProducts[index].quantity = parseInt(event.target.value);
-    setProducts(newProducts);
-  };
+  const{handleQuantityChange} = useContext(BrilhanteContext)
 
   return (
     <>
