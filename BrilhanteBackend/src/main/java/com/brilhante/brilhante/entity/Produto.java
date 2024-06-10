@@ -33,6 +33,17 @@ public class Produto {
         @Column(nullable = true)
         private Long codigoDeBarra;
         
+        @Column(nullable = true)
+        private Long produtoTipo;
+
+    public void setProdutoTipo(Long produtoTipo) {
+        this.produtoTipo = produtoTipo;
+    }
+
+    public Long getProdutoTipo() {
+        return produtoTipo;
+    }
+        
         @OneToMany
         private Set<VendasProduto> vendasProduto;
 

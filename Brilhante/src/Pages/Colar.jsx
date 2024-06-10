@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { BrilhanteContext } from "../Context/GlobalContext"
+import ProductCards from '../Components/CardProduto';
+import './HomePage.css';
 
 function Colar() {
-  const { renderProductCards, products, handleQuantityChange } = useContext(BrilhanteContext);
 
   return (
     <>
       <div className='home-container'>
-        <h1>Necklace Page</h1>
-        {renderProductCards(products, handleQuantityChange)}
+        <h1>Colar Page</h1>
+        <ProductCards />
       </div>
     </>
   );

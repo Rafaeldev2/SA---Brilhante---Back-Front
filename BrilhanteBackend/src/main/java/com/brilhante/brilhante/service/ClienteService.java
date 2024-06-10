@@ -55,7 +55,6 @@ public class ClienteService {
                 cli.setEmail(cliente.getEmail());
                 cli.setNome(cliente.getNome());
                 cli.setSenha(cliente.getSenha());
-                cli.set
                 clienteRepository.save(cli);
                  return true;
             } else {

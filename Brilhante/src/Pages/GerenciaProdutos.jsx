@@ -26,11 +26,13 @@ function GerenciaProdutos() {
       };
 
       try {
-        const response = await axios.post('/api/brilhante', novoProduto);
+        const response = await axios.post('http://localhost:3306/brilhante/produto', novoProduto);
         if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
           setProdutos([...produtos, response.data]);
           setNewProdutoNome('');
-          setNewProduto({ tipo: '', quantidade: '', valor: '' });
+          setNewProduto.tipo('');
+          setNewProduto.quantidade('');
+          setNewProduto.valor('');
           setNewDescricaoProduto('');
           setError('');
         }
