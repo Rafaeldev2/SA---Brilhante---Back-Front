@@ -1,0 +1,88 @@
+.background-container-Login-register {
+    background-color: #FFE0FF; /* Cor de fundo para toda a tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.background-container-perfil {
+    background-color: #FFE0FF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.signup-login-container {
+    width: 100%;
+    max-width: 350px; /* Limite máximo de largura */
+    background-color: #FFA8D9;
+    border-radius: 20px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
+}
+
+.div-label-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20; /* Aumenta o espaço entre os inputs */
+}
+
+.div-input {
+    display: flex;
+    justify-content: center;
+}
+
+.div-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-space-label{
+    height: 15px; /* Aumenta o espaço entre os inputs */
+}
+
+.custom-input {
+    width: 80%;
+    padding: 5%;
+    border: none;
+    border-radius: 50px;
+    align-items: center;
+    background-color: #D9D9D9;
+    caret-color: #89004F;
+    outline-color: #89004F;
+}
+
+#celular{
+    margin-bottom: 50px;
+}
+
+.Button-Login-Cadastro {
+    width: 70%;
+    padding: 5%;
+    background-color: #D9D9D9;
+    /* Cor do botão */
+    color: #89004F;
+    /*cor das letras*/
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin: 10%;
+
+}
+
+.Button-Login-Cadastro:hover {
+    background-color: #C33B80;
+    /* Cor do botão ao passar o mouse */
+}

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { BrilhanteContext } from "../Context/GlobalContext"
 
+function Colar() {
+  const { renderProductCards, products, handleQuantityChange } = useContext(BrilhanteContext);
 
-const Colar = () => {
   return (
     <>
-      <h2>Colar</h2>
+      <div className='home-container'>
+        <h1>Necklace Page</h1>
+        {renderProductCards(products, handleQuantityChange)}
+      </div>
     </>
   );
-};
-
+}
 
 export default Colar;

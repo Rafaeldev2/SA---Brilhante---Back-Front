@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './AtualizarProduto.css';
 
 const produtosIniciais = [
@@ -6,8 +6,6 @@ const produtosIniciais = [
     { Idproduto: 2, nome: 'Produto B', valor: 200.00, quantidade: 5 },
     { Idproduto: 3, nome: 'Produto c', valor: 300.00, quantidade: 1 },
 ];
-
-  
 
 const ProdutoItem = ({produto, onChange}) => {
   const handleChange = (e) => {
@@ -75,6 +73,5 @@ const AtualizarProduto = () => {
     </div>
    );
 };
-
 
 export default AtualizarProduto;

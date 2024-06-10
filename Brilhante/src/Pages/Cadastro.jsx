@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Login-Cadastro.css';
+import React, { useContext, useState } from 'react';
+
 
 const SignupForm = () => {
     const [username, setUsername] = useState('');

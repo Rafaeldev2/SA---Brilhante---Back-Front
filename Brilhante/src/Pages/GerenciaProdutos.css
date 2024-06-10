@@ -1,60 +1,65 @@
-.add-produto{
+.gerencia-produtos {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
     background-color: #FFE0FF;
+    padding: 2rem;
+    box-sizing: border-box;
 }
-.add-produto h1{
-    font-family: SF-Pro-Display-Light;
-    text-align: center;
+
+.input-group {
+    width: 100%;
+    max-width: 30rem;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-.add-produto input{
-    width: 15rem;
-    margin: 5px;
-    border: solid 1px black;
+
+.input-group label {
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    font-family: 'SF-Compact-Display-Bold', sans-serif;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #000;
     border-radius: 6px;
     background-color: #FFA8D9;
-    font-family: SF-Pro-Display-Medium;
-    text-align: center;
-}
-.add-produto ::placeholder{
-    color: rgb(0, 0, 0);
-}
-.add-produto button{
-    width: 12rem;
-    padding: 0.5rem 1rem;
-    font-family: SF-Pro-Rounded-Thin;
+    font-family: 'SF-Pro-Display-Medium', sans-serif;
     font-size: 1rem;
-    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.gerencia-produtos ::placeholder {
+    color: #000;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.button-group button {
+    padding: 0.75rem 1rem;
+    font-family: 'SF-Pro-Rounded-Thin', sans-serif;
+    font-size: 1rem;
+    color: #000;
     background-color: #FFA8D9;
-    border: solid 1px black;
+    border: 1px solid #000;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
 }
-.add-produto button:hover{
-    background-color: #000000;
-    border: 2px solid #fff;
-    color: white;
-    transition: all 0.3s ease;
-}
-.add-produto h4{
-    font-family: "SF-Compact-Display-Bold";
-}
-.valorProduto{
-    width: 15rem;
-    margin: 5px;
-    border: solid 1px black;
-    border-radius: 6px;
-    background-color: #FFA8D9;
-    font-family: SF-Pro-Display-Medium;
-    text-align: center;
-}
-.DescricaoProduto{
-    resize: none;
-    width: 25%;
-    border-radius: 8px;
-    text-align: justify;
+
+.button-group button:hover {
+    background-color: #000;
+    border: 2px solid #FFF;
+    color: #FFF;
 }

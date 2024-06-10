@@ -2,110 +2,115 @@ import React, { useContext, useState } from 'react';
 import './GerenciaProdutos.css';
 import { BrilhanteContext } from '../Context/GlobalContext.jsx';
 import { NumericFormat } from 'react-number-format';
+import axios from 'axios';
+
 function GerenciaProdutos() {
   const { produtos, setProdutos } = useContext(BrilhanteContext);
-  const [newProdutoTitulo, setNewProdutoTitulo] = useState('');
-  const [newUnidadeProdutos, setNewUnidadeProdutos] = useState([{ nome: '', quantidade: '', valor: '' }]);
-  const [newDescriçãoProduto, setNewDescriçãoProduto] = useState('');
-  const [quantidadeProduto, setQuantidadeProduto] = useState(1);
+  const [newProdutoNome, setNewProdutoNome] = useState('');
+  const [newProduto, setNewProduto] = useState({ tipo: '', quantidade: '', valor: '' });
+  const [newDescricaoProduto, setNewDescricaoProduto] = useState('');
+  const [error, setError] = useState('');
 
-  const handleProductChange = (index, field, value) => {
-    const atualizarProdutos = [...newUnidadeProdutos];
-    atualizarProdutos[index][field] = value;
-    setNewUnidadeProdutos(atualizarProdutos);
+  const handleProductChange = (field, value) => {
+    setNewProduto({ ...newProduto, [field]: value });
   };
 
-  const addProductField = () => {
-    setNewUnidadeProdutos([...newUnidadeProdutos, { nome: '', quantidade: '', valor: '' }]);
-  };
-
-  const adicionarProdutos = () => {
-    if (newProdutoTitulo.trim() !== '') {
-      const newProduto = {
-        nome: newProdutoTitulo.trim(),
-        quantidade: quantidadeProduto,
-        descriçãoProduto: newDescriçãoProduto.trim(),
-        unidades: newUnidadeProdutos
+  const adicionarProduto = async () => {
+    if (newProdutoNome.trim() !== '' && newProduto.tipo && newProduto.valor && newDescricaoProduto.trim() !== '') {
+      const novoProduto = {
+        nome: newProdutoNome.trim(),
+        tipo: newProduto.tipo,
+        quantidade: newProduto.quantidade,
+        descricaoProduto: newDescricaoProduto.trim(),
+        valor: newProduto.valor
       };
 
-      setProdutos([...produtos, newProduto]);
-      setNewProdutoTitulo('');
-      setNewUnidadeProdutos([{ nome: '', quantidade: '', valor: '' }]);
-      setNewDescriçãoProduto('');
-      setQuantidadeProduto(1);
+      try {
+        const response = await axios.post('/api/brilhante', novoProduto);
+        if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
+          setProdutos([...produtos, response.data]);
+          setNewProdutoNome('');
+          setNewProduto({ tipo: '', quantidade: '', valor: '' });
+          setNewDescricaoProduto('');
+          setError('');
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar produto:', error);
+        setError('Erro ao adicionar produto. Por favor, tente novamente.');
+      }
+    } else {
+      setError('Preencha todos os campos antes de adicionar o produto.');
     }
   };
 
   return (
-    <>
-      <div className="add-produto">
+    <div className="gerencia-produtos">
+      <div>
         <h1>Cadastro de Produtos</h1>
-
-        <div className="produto-nome">
-          <div className="produto_2">
-            <label htmlFor="nomeProduto">Nome do Produto: </label>
-            <input
-              className='nomeProduto'
-              type="text"
-              placeholder="Digite o nome do Produto "
-              value={newProdutoTitulo}
-              onChange={(e) => setNewProdutoTitulo(e.target.value)}
-            />
-          </div>
-          
-          <div className="quantidadeProduto">
-            <label htmlFor="quantidade_Produto">Quantidade do Produto: </label>
-            <input
-              className='quantidade_Produto'
-              type="number"
-              placeholder="Quantidade do Produto: "
-              value={quantidadeProduto}
-              onChange={(e) => setQuantidadeProduto(parseInt(e.target.value))}
-            />
-          </div>
+        {error && <div className="error-message">{error}</div>}
+        <div className="input-group">
+          <label htmlFor="nomeProduto">Nome do Produto:</label>
+          <input
+            id="nomeProduto"
+            type="text"
+            placeholder="Digite o nome do Produto"
+            value={newProdutoNome}
+            onChange={(e) => setNewProdutoNome(e.target.value)}
+          />
         </div>
-
-        <textarea
-          className='DescricaoProduto'
-          rows={5}
-          placeholder="Descrição do Produto: "
-          value={newDescriçãoProduto}
-          onChange={(e) => setNewDescriçãoProduto(e.target.value)}
-        />
-        
-        <div>
-          <h4>Descrição:</h4>
-          {newUnidadeProdutos.map((produto, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Nome do Produto"
-                value={produto.nome}
-                onChange={(e) => handleProductChange(index, 'nome', e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="Quantidade"
-                value={produto.quantidade}
-                onChange={(e) => handleProductChange(index, 'quantidade', e.target.value)}
-              />
-              <NumericFormat
-                thousandSeparator="."
-                decimalSeparator=","
-                prefix="R$ "
-                className='valorProduto'
-                placeholder="Valor"
-                value={produto.valor}
-                onValueChange={(values) => handleProductChange(index, 'valor', values.value)}
-                isNumericString
-              />
-            </div>
-          ))}
-          <button onClick={addProductField}>Adicionar Produto no Campo</button>
-          <button onClick={adicionarProdutos}>Adicionar Produto Completo</button>
+        <div className="input-group">
+          <label htmlFor="quantidadeProduto">Quantidade do Produto:</label>
+          <input
+            id="quantidadeProduto"
+            type="number"
+            placeholder="Quantidade do Produto"
+            value={newProduto.quantidade}
+            onChange={(e) => handleProductChange('quantidade', parseInt(e.target.value))}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="descricaoProduto">Descrição:</label>
+          <textarea
+            id="descricaoProduto"
+            className="descricao-produto"
+            rows={5}
+            placeholder="Descrição do Produto"
+            value={newDescricaoProduto}
+            onChange={(e) => setNewDescricaoProduto(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="valor">Valor:</label>
+          <NumericFormat
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            placeholder="Valor"
+            value={newProduto.valor}
+            onValueChange={(values) => handleProductChange('valor', values.value)}
+            isNumericString
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="tipoProduto">Tipo do Produto:</label>
+          <select
+            id="tipoProduto"
+            value={newProduto.tipo}
+            onChange={(e) => handleProductChange('tipo', e.target.value)}
+          >
+            <option value="">Selecione o tipo de produto</option>
+            <option value="Anel">Anel</option>
+            <option value="Brinco">Brinco</option>
+            <option value="Colar">Colar</option>
+            <option value="Conjunto">Conjunto</option>
+            <option value="Pulseira">Pulseira</option>
+          </select>
+        </div>
+        <div className="button-group">
+          <button onClick={adicionarProduto}>Adicionar Produto Completo</button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

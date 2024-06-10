@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { BrilhanteContext } from "../Context/GlobalContext"
 
+function Pulseira() {
+  const { renderProductCards, products, handleQuantityChange } = useContext(BrilhanteContext);
 
-const Pulseira = () => {
   return (
     <>
-      <h2>Pulseira</h2>
+      <div className='home-container'>
+      <h1>Bracelet Page</h1>
+        {renderProductCards(products, handleQuantityChange)}
+      </div>
     </>
   );
-};
-
+}
 
 export default Pulseira;

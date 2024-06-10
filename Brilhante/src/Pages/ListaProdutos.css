@@ -1,0 +1,39 @@
+.container-list {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	background-color: #FFE0FF;
+  }
+  
+  h2{
+	margin-bottom: auto;
+  }
+
+  .list-product {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 540px;
+  }
+  
+  .list-product th {
+	background-color: #888;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+  }
+  
+  .list-product th:hover {
+	background-color: #666;
+  }
+  
+  .list-product td, .list-product th {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+  }
+  
+  .list-product tr:hover {
+	background-color: #f9f9f9;
+  }

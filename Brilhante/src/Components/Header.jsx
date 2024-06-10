@@ -20,16 +20,16 @@ const HomePage = () => {
         </div>
         <div className="header-right">
           <Link to="/Cadastro" className="header-icon">
-            <img src="./img/Edit.png" className="ImgIcons" alt="Edit" />
+            <img src="./img/Edit.png" className="ImgIcons" />
           </Link>
           <Link to="/Login" className="header-icon">
-            <img src="./img/Login.png" className="ImgIcons" alt="Login" />
+            <img src="./img/Login.png" className="ImgIcons" />
           </Link>
           <Link to="/Carrinho" className="header-icon">
-            <img src="./img/Cart.png" className="ImgIcons" alt="Cart" />
+            <img src="./img/Cart.png" className="ImgIcons" />
           </Link>
           <Link to="/Perfil" className="header-icon">
-            <img src="./img/Perfil.png" className="ImgIcons" alt="Edit" />
+            <img src="./img/Perfil.png" className="ImgIcons" />
           </Link>
         </div>
       </header>
