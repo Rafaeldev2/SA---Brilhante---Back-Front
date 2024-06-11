@@ -4,7 +4,6 @@ package com.brilhante.brilhante.service;
 import com.brilhante.brilhante.entity.Produto;
 import com.brilhante.brilhante.entity.Vendas;
 import com.brilhante.brilhante.entity.VendasProduto;
-import com.brilhante.brilhante.entity.VendasProdutoWeb;
 import com.brilhante.brilhante.repository.ProdutoRepository;
 import com.brilhante.brilhante.repository.VendasProdutoRepository;
 import com.brilhante.brilhante.repository.VendasRepository;
@@ -50,12 +49,12 @@ public class VendasProdutoService {
         return vendasProdutosRepository.findAll();
     }
     @Transactional
-    public Boolean atualizarVendasProduto(VendasProdutoWeb vendasProduto) {
+    public Boolean atualizarVendasProduto(VendasProduto vendasProduto) {
         
         VendasProduto vndp = vendasProdutosRepository.getReferenceById(vendasProduto.getIDVendasProduto());
         if( vndp != null) {
             vndp.setIDVendasProduto(vendasProduto.getIDVendasProduto());
-            Produto prod = produtoRepository.getReferenceById(vendasProduto.getIDProduto());
+            Produto prod = produtoRepository.getReferenceById(vendasProduto.getIDVendasProduto());
             Vendas vend = vendasRepository.getReferenceById(vendasProduto.getIDVendas());
             vndp.setProduto(prod);
             vndp.setQtdProduto(vendasProduto.getQtdProduto());

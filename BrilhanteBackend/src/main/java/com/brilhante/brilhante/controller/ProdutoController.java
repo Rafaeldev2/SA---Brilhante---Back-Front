@@ -46,7 +46,7 @@ public class ProdutoController {
             return new ResponseEntity<>(produtos, HttpStatus.OK);}
             
             @CrossOrigin(origins = "*")
-            @PostMapping(value = "/produto")
+            @PostMapping("/produto")
             public ResponseEntity<Object> IncluirProduto(@RequestBody Produto produto){
 
             Long idPdt = produtoservice.incluirProduto(produto);

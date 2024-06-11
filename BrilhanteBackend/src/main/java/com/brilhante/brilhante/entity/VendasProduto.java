@@ -1,6 +1,7 @@
 package com.brilhante.brilhante.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -21,12 +23,11 @@ public class VendasProduto {
     
     @ManyToOne
     @JoinColumn(nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     private Vendas vendas;
         
-    @ManyToOne
+    @OneToOne
     @JoinColumn(nullable = false)
-    @JsonBackReference
     private Produto produto;
     
     @Column(nullable = false)

@@ -2,7 +2,6 @@ package com.brilhante.brilhante.controller;
 
 import com.brilhante.brilhante.entity.MsgRetorno;
 import com.brilhante.brilhante.entity.VendasProduto;
-import com.brilhante.brilhante.entity.VendasProdutoWeb;
 import com.brilhante.brilhante.service.VendasProdutoService;
 import jakarta.validation.Valid;
 import java.util.Optional;

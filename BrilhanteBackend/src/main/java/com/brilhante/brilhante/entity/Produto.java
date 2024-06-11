@@ -1,17 +1,20 @@
 package com.brilhante.brilhante.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Set;
 
 
-@Table(name = "produtos")
+
 @Entity
+@Table(name = "produtos")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,8 +39,8 @@ public class Produto {
         @Column(nullable = false)
         private Integer produtoTipo;
 
-        @OneToMany
-        private Set<VendasProduto> vendasProduto;
+        @OneToOne
+        private VendasProduto vendasProduto;
 
     public Long getIDProduto() {
         return IDProduto;
@@ -95,16 +98,12 @@ public class Produto {
         this.produtoTipo = produtoTipo;
     }
 
-    public Set<VendasProduto> getVendasProduto() {
+    public VendasProduto getVendasProduto() {
         return vendasProduto;
     }
 
-    public void setVendasProduto(Set<VendasProduto> vendasProduto) {
+    public void setVendasProduto(VendasProduto vendasProduto) {
         this.vendasProduto = vendasProduto;
     }
-      
-        
-        
-        
         
 }
