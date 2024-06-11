@@ -1,77 +1,162 @@
-import React, { useContext, useState } from 'react';
-import './AtualizarProduto.css';
+import React, { useContext, useState, useEffect } from 'react';
+import './GerenciaProdutos.css';
+import { BrilhanteContext } from '../Context/GlobalContext.jsx';
+import { NumericFormat } from 'react-number-format';
+import axios from 'axios';
 
-const produtosIniciais = [
-    { Idproduto: 1, nome: 'Produto A', valor: 100.00, quantidade: 10 },
-    { Idproduto: 2, nome: 'Produto B', valor: 200.00, quantidade: 5 },
-    { Idproduto: 3, nome: 'Produto c', valor: 300.00, quantidade: 1 },
-];
+function GerenciaProdutos() {
+  const { produtos, setProdutos } = useContext(BrilhanteContext);
+  const [currentProductId, setCurrentProductId] = useState(null);
+  const [newProduto, setNewProduto] = useState({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
+  const [newDescricaoProduto, setNewDescricaoProduto] = useState('');
+  const [error, setError] = useState('');
 
-const ProdutoItem = ({produto, onChange}) => {
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    onChange(produto.Idproduto, name, value);
+  const handleProductChange = (field, value) => {
+    setNewProduto({ ...newProduto, [field]: value });
   };
 
+  const atualizarProduto = async () => {
+    if (newProduto.nome.trim() !== '' && newProduto.tipo && newProduto.valor && newDescricaoProduto.trim() !== '' && newProduto.codigoBarras.trim() !== '') {
+      const produtoAtualizado = {
+        nome: newProduto.nome.trim(),
+        tipo: newProduto.tipo,
+        quantidade: newProduto.quantidade,
+        descricaoProduto: newDescricaoProduto.trim(),
+        valor: newProduto.valor,
+        codigoBarras: newProduto.codigoBarras.trim()
+      };
+
+      try {
+        const response = await axios.put(`http://localhost:3306/brilhante/produto/${currentProductId}`, produtoAtualizado);
+        if (response.status === 200) { // Supondo que 200 seja o código de status de sucesso para atualização de produto
+          setProdutos(produtos.map(produto => (produto.id === currentProductId ? response.data : produto)));
+          setNewProduto({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
+          setNewDescricaoProduto('');
+          setCurrentProductId(null);
+          setError('');
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar produto:', error);
+        setError('Erro ao atualizar produto. Por favor, tente novamente.');
+      }
+    } else {
+      setError('Preencha todos os campos antes de atualizar o produto.');
+    }
+  };
+
+  const excluirProduto = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:3306/brilhante/produto/${currentProductId}`);
+      if (response.status === 204) { // Supondo que 204 seja o código de status de sucesso para exclusão de produto
+        setProdutos(produtos.filter(produto => produto.id !== currentProductId));
+        setNewProduto({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
+        setNewDescricaoProduto('');
+        setCurrentProductId(null);
+        setError('');
+      }
+    } catch (error) {
+      console.error('Erro ao excluir produto:', error);
+      setError('Erro ao excluir produto. Por favor, tente novamente.');
+    }
+  };
+
+  useEffect(() => {
+    if (currentProductId) {
+      const produto = produtos.find(p => p.id === currentProductId);
+      if (produto) {
+        setNewProduto({
+          nome: produto.nome,
+          tipo: produto.tipo,
+          quantidade: produto.quantidade,
+          valor: produto.valor,
+          codigoBarras: produto.codigoBarras,
+        });
+        setNewDescricaoProduto(produto.descricaoProduto);
+      }
+    }
+  }, [currentProductId]);
+
   return (
-    <div className='produto-container'>
-      <h2>
-        <input
-         type="text"
-         name="nome"
-         value={produto.nome}
-         onChange={handleChange}
+    <div className="gerencia-produtos">
+
+      <div>
+        <h1>Gerenciamento de Produtos</h1>
+        {error && <div className="error-message">{error}</div>}
+        <div className="input-group">
+          <label htmlFor="codigoBarras">Código de Barras:</label>
+          <input
+            id="codigoBarras"
+            type="text"
+            placeholder="Digite o código de barras"
+            value={newProduto.codigoBarras}
+            onChange={(e) => handleProductChange('codigoBarras', e.target.value)}
           />
-      </h2>
-      <p>ID: {produto.Idproduto}</p>
-      <p>
-        Valor: R$
-        <input
-        type='number'
-        name='valor'
-        value={produto.valor}
-        onChange={handleChange}
-        step="0.01"
-        />
-      </p>
-      <p>
-        Quantidade
-        <input
-        type='number'
-        name='quantidade'
-        value={produto.quantidade}
-        onChange={handleChange}
-        />
-      </p>
+        </div>
+        <div className="input-group">
+          <label htmlFor="nomeProduto">Nome do Produto:</label>
+          <input
+            id="nomeProduto"
+            type="text"
+            placeholder="Digite o nome do Produto"
+            value={newProduto.nome}
+            onChange={(e) => handleProductChange('nome', e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="quantidadeProduto">Quantidade do Produto:</label>
+          <input
+            id="quantidadeProduto"
+            type="number"
+            placeholder="Quantidade do Produto"
+            value={newProduto.quantidade}
+            onChange={(e) => handleProductChange('quantidade', parseInt(e.target.value))}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="valor">Valor:</label>
+          <NumericFormat
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            placeholder="Valor"
+            value={newProduto.valor}
+            onValueChange={(values) => handleProductChange('valor', values.value)}
+            isNumericString
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="descricaoProduto">Descrição:</label>
+          <textarea
+            id="descricaoProduto"
+            className="descricao-produto"
+            rows={5}
+            placeholder="Descrição do Produto"
+            value={newDescricaoProduto}
+            onChange={(e) => setNewDescricaoProduto(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="tipoProduto">Tipo do Produto:</label>
+          <select
+            id="tipoProduto"
+            value={newProduto.tipo}
+            onChange={(e) => handleProductChange('tipo', e.target.value)}
+          >
+            <option value="">Selecione o tipo de produto</option>
+            <option value="1">Anel</option>
+            <option value="2">Brinco</option>
+            <option value="3">Colar</option>
+            <option value="4">Conjunto</option>
+            <option value="5">Pulseira</option>
+          </select>
+        </div>
+        <div className="button-group">
+          <button onClick={atualizarProduto}>Atualizar Produto</button>
+          <button onClick={excluirProduto}>Excluir Produto</button>
+        </div>
+      </div>
     </div>
-
   );
-};
+}
 
-const AtualizarProduto = () => {
-   const [produtos, setProdutos] = useState(produtosIniciais);
-
-   const handleProdutoChange = (id, name, value) => {
-    setProdutos((prevProdutos) => 
-     prevProdutos.map((produto) =>
-      produto.Idproduto === id
-        ? { ...produto, [name]: name ===  'valor' || name === 'quantidade'? parseFloat(value) : value}
-          : produto
-      )
-    );
-   };
-   return (
-    <div className='lista-de-produtos'>
-      <h1>Editar Produtos</h1>
-      {produtos.map((produto) => (
-        <ProdutoItem
-          key={produto.Idproduto}
-          produto={produto}
-          onChange={handleProdutoChange}
-        />
-      ))}
-    </div>
-   );
-};
-
-export default AtualizarProduto;
+export default GerenciaProdutos;
