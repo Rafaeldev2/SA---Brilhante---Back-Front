@@ -24,84 +24,87 @@ public class Produto {
         @Column(nullable = true)
         private String descricaoProduto;
         
-        @Column(nullable = true)
+        @Column(nullable = false)
         private Double valorProduto;
         
-        @Column(nullable = true)
-        private Long qtdEstoque;
+        @Column(nullable = false)
+        private Integer qtdEstoque;
         
         @Column(nullable = true)
         private Long codigoDeBarra;
         
-        @Column(nullable = true)
-        private Long produtoTipo;
+        @Column(nullable = false)
+        private Integer produtoTipo;
 
-    public void setProdutoTipo(Long produtoTipo) {
-        this.produtoTipo = produtoTipo;
-    }
-
-    public Long getProdutoTipo() {
-        return produtoTipo;
-    }
-        
         @OneToMany
         private Set<VendasProduto> vendasProduto;
 
-    public void setIDProduto(Long IDProduto) {
-        this.IDProduto = IDProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
-    public void setDescricaoProduto(String descricaoProduto) {
-        this.descricaoProduto = descricaoProduto;
-    }
-
-    public void setValorProduto(Double valorProduto) {
-        this.valorProduto = valorProduto;
-    }
-
-    public void setVendasProduto(Set<VendasProduto> vendasProduto) {
-        this.vendasProduto = vendasProduto;
-    }
-    
-    public void setQtdEstoque(Long qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-
-    public void setCodigoDeBarra(Long codigoDeBarra) {
-        this.codigoDeBarra = codigoDeBarra;
-    }
-
     public Long getIDProduto() {
         return IDProduto;
+    }
+
+    public void setIDProduto(Long IDProduto) {
+        this.IDProduto = IDProduto;
     }
 
     public String getNomeProduto() {
         return nomeProduto;
     }
 
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
     public String getDescricaoProduto() {
         return descricaoProduto;
+    }
+
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
     }
 
     public Double getValorProduto() {
         return valorProduto;
     }
 
-    public Set<VendasProduto> getVendasProduto() {
-        return vendasProduto;
+    public void setValorProduto(Double valorProduto) {
+        this.valorProduto = valorProduto;
     }
 
-    public Long getQtdEstoque() {
+    public Integer getQtdEstoque() {
         return qtdEstoque;
+    }
+
+    public void setQtdEstoque(Integer qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
     }
 
     public Long getCodigoDeBarra() {
         return codigoDeBarra;
     }
-    
-    
+
+    public void setCodigoDeBarra(Long codigoDeBarra) {
+        this.codigoDeBarra = codigoDeBarra;
+    }
+
+    public Integer getProdutoTipo() {
+        return produtoTipo;
+    }
+
+    public void setProdutoTipo(Integer produtoTipo) {
+        this.produtoTipo = produtoTipo;
+    }
+
+    public Set<VendasProduto> getVendasProduto() {
+        return vendasProduto;
+    }
+
+    public void setVendasProduto(Set<VendasProduto> vendasProduto) {
+        this.vendasProduto = vendasProduto;
+    }
+      
+        
+        
+        
+        
 }

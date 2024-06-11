@@ -1,5 +1,5 @@
-package com.brilhante.brilhante.service;
 
+package com.brilhante.brilhante.service;
 
 import com.brilhante.brilhante.entity.Produto;
 import com.brilhante.brilhante.repository.ProdutoRepository;
@@ -12,53 +12,64 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProdutoService {
+
     @Autowired
     ProdutoRepository produtoRepository;
+
+    public Long incluirProduto(Produto produto) {
+
+        if (produto.getNomeProduto() == null || produto.getProdutoTipo() == null
+                || produto.getQtdEstoque() == null || produto.getValorProduto() == null) {
+
+            return null;
+        }
+            return produtoRepository.save(produto).getIDProduto();
+        }
     
-    public Long incluirProduto(Produto produto){
-        return produtoRepository.save(produto).getIDProduto();
-    }
-    public Boolean excluirProduto(Long idProduto){
-    
-    try{
-        produtoRepository.deleteById(idProduto);
-        return true;
-    } catch (Exception ex){
+
+    public Boolean excluirProduto(Long idProduto) {
+
+        try {
+            produtoRepository.deleteById(idProduto);
+            return true;
+        } catch (Exception ex) {
             System.out.println("Erro ao excluir"
                     + "produto ID: " + idProduto
                     + " Erro: " + ex.getLocalizedMessage());
-         return false;
+            return false;
         }
-            
+
     }
-    public Optional<Produto> consultarProduto(Long idProduto){
-        
-            return produtoRepository.findById(idProduto); 
+
+    public Optional<Produto> consultarProduto(Long idProduto) {
+
+        return produtoRepository.findById(idProduto);
     }
-    public Produto consultarNomeProduto(String nomeProduto){
-        
-            return produtoRepository.findByNomeProduto(nomeProduto); 
+
+    public Produto consultarNomeProduto(String nomeProduto) {
+
+        return produtoRepository.findByNomeProduto(nomeProduto);
     }
-    
-    public List<Produto> listarProduto(){
-        
+
+    public List<Produto> listarProduto() {
+
         return produtoRepository.findAll();
     }
-    
+
     @Transactional
     public Boolean atualizarProduto(Produto produto) {
-        
+
         Produto pdt = produtoRepository.getReferenceById(produto.getIDProduto());
-                if(pdt != null){
-                    pdt.setDescricaoProduto(produto.getDescricaoProduto());
-                    pdt.setIDProduto(produto.getIDProduto());
-                    pdt.setNomeProduto(produto.getNomeProduto());
-                    pdt.setValorProduto(produto.getValorProduto());
-                    pdt.setVendasProduto(produto.getVendasProduto());
-                    produtoRepository.save(pdt);
-                 return true;
-            } else {
-                return false;            
+        if (pdt != null) {
+            pdt.setDescricaoProduto(produto.getDescricaoProduto());
+            pdt.setIDProduto(produto.getIDProduto());
+            pdt.setNomeProduto(produto.getNomeProduto());
+            pdt.setValorProduto(produto.getValorProduto());
+            pdt.setVendasProduto(produto.getVendasProduto());
+            produtoRepository.save(pdt);
+            return true;
+        } else {
+            return false;
         }
     }
 }
