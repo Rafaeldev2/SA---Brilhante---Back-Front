@@ -5,6 +5,8 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+
+
 }
 
 .background-container-perfil {
@@ -15,9 +17,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+
 }
 
 .signup-login-container {
+    margin: 10%;
     width: 100%;
     max-width: 350px; /* Limite máximo de largura */
     background-color: #FFA8D9;

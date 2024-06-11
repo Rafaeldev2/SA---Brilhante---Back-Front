@@ -1,11 +1,10 @@
 .footer-container {
-    width: 100%;
     background-color: #FFA8D9;
     /* margin-bottom: 0 auto; */
-    width: 100%;
     color: black;
     display: flex;
 	flex-direction: column;
+    width: 100%;
 }
 
 .footer-content{
