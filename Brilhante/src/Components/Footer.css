@@ -1,18 +1,20 @@
-
-
-.footer {
-    /* margin-bottom: 0 auto; */
-    background-color: #FFA8D9;
-    color: black;
-    padding: 1% 0;
-}
-.footer-bottom{
-    text-align: center;
-}
-
 .footer-container {
+    width: 100%;
+    background-color: #FFA8D9;
+    /* margin-bottom: 0 auto; */
+    width: 100%;
+    color: black;
     display: flex;
-    justify-content: space-around;
+	flex-direction: column;
+}
+
+.footer-content{
+    display: flex;
+	justify-content: space-evenly;
+}
+
+.footer-bottom {
+    text-align: center;
 }
 
 .Icon {
