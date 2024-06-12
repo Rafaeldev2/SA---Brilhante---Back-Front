@@ -1,6 +1,5 @@
 package com.brilhante.brilhante.service;
 
-
 import com.brilhante.brilhante.entity.Cliente;
 import com.brilhante.brilhante.entity.Vendas;
 import com.brilhante.brilhante.repository.VendasRepository;
@@ -9,7 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 public class VendasService {

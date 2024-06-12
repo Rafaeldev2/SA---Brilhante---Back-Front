@@ -1,4 +1,3 @@
-
 package com.brilhante.brilhante.service;
 
 import com.brilhante.brilhante.entity.Produto;
@@ -8,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 public class ProdutoService {
@@ -26,7 +24,6 @@ public class ProdutoService {
             return produtoRepository.save(produto).getIDProduto();
         }
     
-
     public Boolean excluirProduto(Long idProduto) {
 
         try {
@@ -38,7 +35,6 @@ public class ProdutoService {
                     + " Erro: " + ex.getLocalizedMessage());
             return false;
         }
-
     }
 
     public Optional<Produto> consultarProduto(Long idProduto) {

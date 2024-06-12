@@ -9,5 +9,4 @@ class BrilhanteApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

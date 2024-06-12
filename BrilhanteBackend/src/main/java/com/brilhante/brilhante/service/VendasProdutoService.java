@@ -48,22 +48,22 @@ public class VendasProdutoService {
         
         return vendasProdutosRepository.findAll();
     }
-    @Transactional
-    public Boolean atualizarVendasProduto(VendasProduto vendasProduto) {
-        
-        VendasProduto vndp = vendasProdutosRepository.getReferenceById(vendasProduto.getIDVendasProduto());
-        if( vndp != null) {
-            vndp.setIDVendasProduto(vendasProduto.getIDVendasProduto());
-            Produto prod = produtoRepository.getReferenceById(vendasProduto.getIDVendasProduto());
-            Vendas vend = vendasRepository.getReferenceById(vendasProduto.getIDVendas());
-            vndp.setProduto(prod);
-            vndp.setQtdProduto(vendasProduto.getQtdProduto());
-            vndp.setValorProduto(vendasProduto.getValorProduto());
-            vndp.setVendas(vend);
-           vendasProdutosRepository.save(vndp);
-            return true;
-        } else {
-            return false;            
-        }
-    }
+//    @Transactional
+//    public Boolean atualizarVendasProduto(VendasProduto vendasProduto) {
+//        
+//        VendasProduto vndp = vendasProdutosRepository.getReferenceById(vendasProduto.getIDVendasProduto());
+//        if( vndp != null) {
+//            vndp.setIDVendasProduto(vendasProduto.getIDVendasProduto());
+//            Produto prod = produtoRepository.getReferenceById(vendasProduto.getIDVendasProduto());
+//            Vendas vend = vendasRepository.getReferenceById(vendasProduto.getIDVendas());
+//            vndp.setProduto(prod);
+//            vndp.setQtdProduto(vendasProduto.getQtdProduto());
+//            vndp.setValorProduto(vendasProduto.getValorProduto());
+//            vndp.setVendas(vend);
+//           vendasProdutosRepository.save(vndp);
+//            return true;
+//        } else {
+//            return false;            
+//        }
+//    }
 }

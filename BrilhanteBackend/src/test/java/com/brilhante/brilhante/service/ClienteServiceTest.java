@@ -1,6 +1,6 @@
 //<<<<<<< HEAD
 //package com.brilhante.brilhante.service;
-//
+
 //import com.brilhante.brilhante.entity.Cliente;
 //import java.util.List;
 //import java.util.Optional;
@@ -14,9 +14,7 @@
 //import org.junit.jupiter.api.Disabled;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//
-//
-//
+
 //@SpringBootTest
 //public class ClienteServiceTest {
 //    
@@ -169,9 +167,7 @@
 //import org.junit.jupiter.api.Disabled;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//
-//
-//
+
 //@SpringBootTest
 //public class ClienteServiceTest {
 //    

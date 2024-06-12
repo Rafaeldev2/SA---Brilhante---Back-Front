@@ -4,7 +4,7 @@ import { BrilhanteContext } from '../Context/GlobalContext.jsx';
 import { NumericFormat } from 'react-number-format';
 import axios from 'axios';
 
-function GerenciaProdutos() {
+function AtualizarProdutos() {
   const { produtos, setProdutos } = useContext(BrilhanteContext);
   const [currentProductId, setCurrentProductId] = useState(null);
   const [newProduto, setNewProduto] = useState({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
@@ -80,7 +80,7 @@ function GerenciaProdutos() {
     <div className="gerencia-produtos">
 
       <div>
-        <h1>Gerenciamento de Produtos</h1>
+        <h1>Atualizar Produtos</h1>
         {error && <div className="error-message">{error}</div>}
         <div className="input-group">
           <label htmlFor="codigoBarras">Código de Barras:</label>
@@ -159,4 +159,4 @@ function GerenciaProdutos() {
   );
 }
 
-export default GerenciaProdutos;
+export default AtualizarProdutos;

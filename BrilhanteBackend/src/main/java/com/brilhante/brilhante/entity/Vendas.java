@@ -14,7 +14,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
 
-
 @Table(name = "vendas")
 @Entity
 public class Vendas {
