@@ -57,7 +57,7 @@ public class ProdutoController {
             MsgRetorno erro = new MsgRetorno();
             erro.setFuncao("Incluir Produto");
             erro.setDescrição("Erro ao incluir Produto! Chame a TI!!");
-            return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(erro, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

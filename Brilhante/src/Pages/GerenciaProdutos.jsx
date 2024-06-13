@@ -17,16 +17,16 @@ function GerenciaProdutos() {
   const adicionarProduto = async () => {
     if (newProduto.nome.trim() !== '' && newProduto.tipo && newProduto.valor && newDescricaoProduto.trim() !== '' && newProduto.codigoBarras.trim() !== '') {
       const novoProduto = {
-        nome: newProduto.nome.trim(),
-        tipo: newProduto.tipo,
-        quantidade: newProduto.quantidade,
+        nomeProduto: newProduto.nome.trim(),
+        produtoTipo: newProduto.tipo,
+        qtdEstoque: newProduto.quantidade,
         descricaoProduto: newDescricaoProduto.trim(),
-        valor: newProduto.valor,
-        codigoBarras: newProduto.codigoBarras.trim()
+        valorProduto: newProduto.valor,
+        codigoDeBarra: newProduto.codigoBarras.trim()
       };
 
       try {
-        const response = await axios.post('http://localhost:3306/brilhante/produto', novoProduto);
+        const response = await axios.post('http://localhost:8010/brilhante/produto', novoProduto);
         if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
           setProdutos([...produtos, response.data]);
           setNewProduto({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
@@ -87,7 +87,7 @@ function GerenciaProdutos() {
             placeholder="Valor"
             value={newProduto.valor}
             onValueChange={(values) => handleProductChange('valor', values.value)}
-            isNumericString
+          // isNumericString
           />
         </div>
         <div className="input-group">

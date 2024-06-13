@@ -121,7 +121,7 @@ function AtualizarProdutos() {
             placeholder="Valor"
             value={newProduto.valor}
             onValueChange={(values) => handleProductChange('valor', values.value)}
-            isNumericString
+            // isNumericString
           />
         </div>
         <div className="input-group">
