@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProdutoService {
@@ -24,22 +23,22 @@ public class ProdutoService {
             return produtoRepository.save(produto).getIDProduto();
         }
     
-    public Boolean excluirProduto(Long idProduto) {
+    public Boolean excluirProduto(Long IDProduto) {
 
         try {
-            produtoRepository.deleteById(idProduto);
+            produtoRepository.deleteById(IDProduto);
             return true;
         } catch (Exception ex) {
             System.out.println("Erro ao excluir"
-                    + "produto ID: " + idProduto
+                    + "produto ID: " + IDProduto
                     + " Erro: " + ex.getLocalizedMessage());
             return false;
         }
     }
 
-    public Optional<Produto> consultarProduto(Long idProduto) {
+    public Optional<Produto> consultarProduto(Long IDProduto) {
 
-        return produtoRepository.findById(idProduto);
+        return produtoRepository.findById(IDProduto);
     }
 
     public Produto consultarNomeProduto(String nomeProduto) {
@@ -52,16 +51,17 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    @Transactional
     public Boolean atualizarProduto(Produto produto) {
 
         Produto pdt = produtoRepository.getReferenceById(produto.getIDProduto());
         if (pdt != null) {
-            pdt.setDescricaoProduto(produto.getDescricaoProduto());
             pdt.setIDProduto(produto.getIDProduto());
             pdt.setNomeProduto(produto.getNomeProduto());
+            pdt.setQtdEstoque(produto.getQtdEstoque());
+            pdt.setDescricaoProduto(produto.getDescricaoProduto());
             pdt.setValorProduto(produto.getValorProduto());
-            pdt.setVendasProduto(produto.getVendasProduto());
+            pdt.setCodigoDeBarra(produto.getCodigoDeBarra());
+            pdt.setProdutoTipo(produto.getProdutoTipo());
             produtoRepository.save(pdt);
             return true;
         } else {

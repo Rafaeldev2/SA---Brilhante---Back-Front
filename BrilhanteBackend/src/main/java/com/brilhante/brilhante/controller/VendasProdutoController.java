@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,10 +26,12 @@ public class VendasProdutoController {
     
     
     @CrossOrigin(origins = "*")
-    @PostMapping(value = "/vendasproduto", consumes = {"application/json"})
-    public ResponseEntity<Object> incluirVendasProduto(@Valid @RequestBody VendasProduto vendasproduto){
+    @PostMapping("/vendasproduto/{IdVendas}/{IdProduto}")
+    public ResponseEntity<Object> incluirVendasProduto(@Valid @RequestBody VendasProduto vendasproduto,
+                                                       @PathVariable("IdVendas") Long IdVendas,
+                                                       @PathVariable("IdProduto") Long IdProduto){
         
-        Long idVndp = vendasProdutoService.IncluirVendasProduto(vendasproduto);
+        Long idVndp = vendasProdutoService.IncluirVendasProduto(vendasproduto,IdVendas,IdProduto);
         if(idVndp != null && idVndp > 0){
             return new ResponseEntity<>(idVndp, HttpStatus.OK);
         } else {
@@ -55,24 +58,24 @@ public class VendasProdutoController {
   
     
   
-//    @CrossOrigin(origins = "*")
-//    @PutMapping("/vendasproduto")
-//    public ResponseEntity<Object>atualizarVendasProduto( @Valid @RequestBody VendasProdutoWeb vndweb)
-//    {
-//        MsgRetorno msg = new MsgRetorno();
-//        msg.setFuncao("Atualizar VendasProduto");
-//        if(vendasProdutoService.atualizarVendasProduto(vndweb)){
-//            msg.setDescrição("VendasProduto IdVendasProduto ("+ vndweb.getIDVendasProduto() + ") atualizado com sucesso!");
-//            return new ResponseEntity<>(msg, HttpStatus.OK);
-//        }else{
-//            msg.setDescrição("VendasProduto IdVendasProduto ("+ vndweb.getIDVendasProduto() + ") Erro ao atualizar VendasProduto.");
-//            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
-//        }
-//    }    
+    @CrossOrigin(origins = "*")
+    @PutMapping("/vendasproduto")
+    public ResponseEntity<Object>atualizarVendasProduto( @Valid @RequestBody VendasProduto vnd)
+    {
+        MsgRetorno msg = new MsgRetorno();
+        msg.setFuncao("Atualizar VendasProduto");
+        if(vendasProdutoService.atualizarVendasProduto(vnd)){
+            msg.setDescrição("VendasProduto IdVendasProduto ("+ vnd.getIDVendasProduto() + ") atualizado com sucesso!");
+            return new ResponseEntity<>(msg, HttpStatus.OK);
+        }else{
+            msg.setDescrição("VendasProduto IdVendasProduto ("+ vnd.getIDVendasProduto() + ") Erro ao atualizar VendasProduto.");
+            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
+        }
+    }    
     
     
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/VendasProduto/{id}")
+    @DeleteMapping("/vendasproduto/{id}")
     public ResponseEntity<Object> excluirVendasProduto(@PathVariable(value = "id") long id){
         
         MsgRetorno msg = new MsgRetorno();

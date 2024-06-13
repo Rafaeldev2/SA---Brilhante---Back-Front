@@ -1,6 +1,7 @@
 package com.brilhante.brilhante.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,11 +30,12 @@ public class Vendas {
                fetch=FetchType.LAZY,
                orphanRemoval = true,
                cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private Set<VendasProduto> vendasProduto;     
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @JsonBackReference
     private Cliente cliente;
 
     public void setVendasProduto(Set<VendasProduto> vendasProduto) {

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,20 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProdutoController {
 
     @Autowired
-    ProdutoService produtoservice;
-    //GET  http://localhost:8010/apirest/cliente/12       
+    ProdutoService produtoservice;     
 
     @CrossOrigin(origins = "*")
     @GetMapping("/produto/{id}")
-    public ResponseEntity<Object> consultaProduto(@PathVariable(value = "id") Long idProduto) {
+    public ResponseEntity<Object> consultaProduto(@PathVariable(value = "id") Long IDProduto) {
 
-        Optional<Produto> produto = produtoservice.consultarProduto(idProduto);
+        Optional<Produto> produto = produtoservice.consultarProduto(IDProduto);
         if (produto.isPresent()) {
             return new ResponseEntity<>(produto.get(), HttpStatus.OK);
         } else {
             MsgRetorno erro = new MsgRetorno();
             erro.setFuncao("Consultar Produto");
-            erro.setDescrição("Erro ao consultar Produto ID: " + idProduto);
+            erro.setDescrição("Erro ao consultar Produto ID: " + IDProduto);
             return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
         }
     }
@@ -49,7 +47,7 @@ public class ProdutoController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping(value = "/produto", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/produto")
     public ResponseEntity<Object> IncluirProduto(@RequestBody Produto produto) {
 
         Long idPdt = produtoservice.incluirProduto(produto);
@@ -66,6 +64,7 @@ public class ProdutoController {
     @CrossOrigin(origins = "*")
     @PutMapping("/produto")
     public ResponseEntity atualizarProduto(@Valid @RequestBody Produto produto) {
+        System.out.println("idproduto: " + produto.getIDProduto());
         MsgRetorno msg = new MsgRetorno();
         msg.setFuncao("Atualizar Produto");
         if (produtoservice.atualizarProduto(produto)) {

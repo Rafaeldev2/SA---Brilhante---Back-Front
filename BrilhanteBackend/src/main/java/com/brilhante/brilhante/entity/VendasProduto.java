@@ -1,6 +1,6 @@
 package com.brilhante.brilhante.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class VendasProduto {
     
     @ManyToOne
     @JoinColumn(nullable = false)
-    @JsonManagedReference
+    @JsonBackReference
     private Vendas vendas;
         
     @OneToOne

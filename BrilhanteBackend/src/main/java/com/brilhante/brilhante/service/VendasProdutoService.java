@@ -4,9 +4,7 @@ package com.brilhante.brilhante.service;
 import com.brilhante.brilhante.entity.Produto;
 import com.brilhante.brilhante.entity.Vendas;
 import com.brilhante.brilhante.entity.VendasProduto;
-import com.brilhante.brilhante.repository.ProdutoRepository;
 import com.brilhante.brilhante.repository.VendasProdutoRepository;
-import com.brilhante.brilhante.repository.VendasRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -19,25 +17,29 @@ public class VendasProdutoService {
     @Autowired
     private VendasProdutoRepository vendasProdutosRepository;
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private VendasService vendasService;
     @Autowired
-    private VendasRepository vendasRepository;
+    private ProdutoService produtoService;
+
     
     
-     public Long IncluirVendasProduto (VendasProduto vendasProduto){
-       return vendasProdutosRepository.save(vendasProduto).getIDVendasProduto ();
+     public Long IncluirVendasProduto (VendasProduto vendasProduto, Long IdVendas,Long IdProduto){
+         Optional<Vendas> vendas = vendasService.consultarVenda(IdVendas);
+         Optional<Produto> produto = produtoService.consultarProduto(IdProduto);
+         
+         if(vendas.isPresent() && produto.isPresent()){
+             vendasProduto.setVendas(vendas.get());
+             vendasProduto.setProduto(produto.get());
+             return vendasProdutosRepository.save(vendasProduto).getIDVendasProduto();
+         }
+         return null;
    }
      public Boolean excluirVendasProduto(Long IDVendasProduto){
-        
-    try{
-     vendasProdutosRepository.deleteById(IDVendasProduto);
-   return true;
-   } catch(Exception ex){
-   System.out.println("Erro ao excluir"
-                      + "  ID: " + IDVendasProduto
-                      + " Erro: " + ex.getLocalizedMessage());
-   return false;
- }
+         if(vendasProdutosRepository.existsById(IDVendasProduto)){
+             vendasProdutosRepository.deleteById(IDVendasProduto);
+             return true;
+         }
+         return false;     
 }
      
     public Optional<VendasProduto> consultarVendasProduto(Long IDVendasProduto){
@@ -48,22 +50,22 @@ public class VendasProdutoService {
         
         return vendasProdutosRepository.findAll();
     }
-//    @Transactional
-//    public Boolean atualizarVendasProduto(VendasProduto vendasProduto) {
-//        
-//        VendasProduto vndp = vendasProdutosRepository.getReferenceById(vendasProduto.getIDVendasProduto());
-//        if( vndp != null) {
-//            vndp.setIDVendasProduto(vendasProduto.getIDVendasProduto());
-//            Produto prod = produtoRepository.getReferenceById(vendasProduto.getIDVendasProduto());
-//            Vendas vend = vendasRepository.getReferenceById(vendasProduto.getIDVendas());
-//            vndp.setProduto(prod);
-//            vndp.setQtdProduto(vendasProduto.getQtdProduto());
-//            vndp.setValorProduto(vendasProduto.getValorProduto());
-//            vndp.setVendas(vend);
-//           vendasProdutosRepository.save(vndp);
-//            return true;
-//        } else {
-//            return false;            
-//        }
-//    }
+    @Transactional
+    public Boolean atualizarVendasProduto(VendasProduto vendasProduto) {
+        
+        if(vendasProduto.getQtdProduto() == 0 ||
+           vendasProduto.getValorProduto() == null) {
+            return false;
+        }        
+        VendasProduto vndp = vendasProdutosRepository.getReferenceById(vendasProduto.getIDVendasProduto());
+        if( vndp != null) {
+            vndp.setIDVendasProduto(vendasProduto.getIDVendasProduto());
+            vndp.setQtdProduto(vendasProduto.getQtdProduto());
+            vndp.setValorProduto(vendasProduto.getValorProduto());
+           vendasProdutosRepository.save(vndp);
+            return true;
+        } else {
+            return false;            
+        }
+    }
 }

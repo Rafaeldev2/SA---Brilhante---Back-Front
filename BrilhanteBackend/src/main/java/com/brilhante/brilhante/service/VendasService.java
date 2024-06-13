@@ -18,9 +18,9 @@ public class VendasService {
     
     public Long incluirVenda(Vendas vendas, Long IdCliente){
        
-        Cliente cliente = clienteService.consultarCliente(IdCliente).get();
-        if(cliente != null){
-            vendas.setCliente(cliente);
+        Optional<Cliente> cliente = clienteService.consultarCliente(IdCliente);
+        if(cliente.isPresent()){
+            vendas.setCliente(cliente.get());
             return vendasRepository.save(vendas).getIDVendas();
         }
         return null;

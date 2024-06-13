@@ -48,7 +48,7 @@ public class ClienteController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping(value = "/cliente", consumes = {"application/json"})
+    @PostMapping("/cliente")
     public ResponseEntity<Object> incluirCliente(@Valid @RequestBody Cliente cliente) {
 
         Long idCli = clienteservice.incluirCliente(cliente);

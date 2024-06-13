@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,9 +32,6 @@ public class Produto {
         
         @Column(nullable = false)
         private Integer produtoTipo;
-
-        @OneToOne
-        private VendasProduto vendasProduto;
 
     public Long getIDProduto() {
         return IDProduto;
@@ -91,13 +87,5 @@ public class Produto {
 
     public void setProdutoTipo(Integer produtoTipo) {
         this.produtoTipo = produtoTipo;
-    }
-
-    public VendasProduto getVendasProduto() {
-        return vendasProduto;
-    }
-
-    public void setVendasProduto(VendasProduto vendasProduto) {
-        this.vendasProduto = vendasProduto;
     }
 }
