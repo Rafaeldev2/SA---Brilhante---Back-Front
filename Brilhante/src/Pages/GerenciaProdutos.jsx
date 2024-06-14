@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './GerenciaProdutos.css';
 import { BrilhanteContext } from '../Context/GlobalContext.jsx';
 import { NumericFormat } from 'react-number-format';
@@ -6,7 +6,8 @@ import axios from 'axios';
 
 function GerenciaProdutos() {
   const { produtos, setProdutos } = useContext(BrilhanteContext);
-  const [newProduto, setNewProduto] = useState({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
+  const [currentProductId, setCurrentProductId] = useState(null);
+  const [newProduto, setNewProduto] = useState({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '' });
   const [newDescricaoProduto, setNewDescricaoProduto] = useState('');
   const [error, setError] = useState('');
 
@@ -14,48 +15,134 @@ function GerenciaProdutos() {
     setNewProduto({ ...newProduto, [field]: value });
   };
 
-  const adicionarProduto = async () => {
-    if (newProduto.nome.trim() !== '' && newProduto.tipo && newProduto.valor && newDescricaoProduto.trim() !== '' && newProduto.codigoBarras.trim() !== '') {
+  const cadastrarProduto = async () => {
+    if (newProduto.nomeProduto.trim() !== '' && newProduto.produtoTipo && newProduto.valorProduto && newDescricaoProduto.trim() !== '' && newProduto.codigoDeBarra.trim() !== '') {
       const novoProduto = {
-        nomeProduto: newProduto.nome.trim(),
-        produtoTipo: newProduto.tipo,
-        qtdEstoque: newProduto.quantidade,
+        nomeProduto: newProduto.nomeProduto.trim(),
+        produtoTipo: newProduto.produtoTipo,
+        qtdEstoque: newProduto.qtdEstoque,
         descricaoProduto: newDescricaoProduto.trim(),
-        valorProduto: newProduto.valor,
-        codigoDeBarra: newProduto.codigoBarras.trim()
+        valorProduto: newProduto.valorProduto,
+        codigoDeBarra: newProduto.codigoDeBarra.trim()
       };
 
       try {
         const response = await axios.post('http://localhost:8010/brilhante/produto', novoProduto);
         if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
           setProdutos([...produtos, response.data]);
-          setNewProduto({ nome: '', tipo: '', quantidade: '', valor: '', codigoBarras: '' });
+          setNewProduto({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '' });
           setNewDescricaoProduto('');
+          setCurrentProductId(null);
           setError('');
         }
       } catch (error) {
-        console.error('Erro ao adicionar produto:', error);
-        setError('Erro ao adicionar produto. Por favor, tente novamente.');
+        console.error('Erro ao cadastrar produto:', error);
+        setError('Erro ao cadastrar produto. Por favor, tente novamente.');
       }
     } else {
-      setError('Preencha todos os campos antes de adicionar o produto.');
+      setError('Preencha todos os campos antes de cadastrar o produto.');
     }
   };
 
+  const atualizarProduto = async () => {
+    if (newProduto.nomeProduto.trim() !== '' && newProduto.produtoTipo && newProduto.valorProduto && newDescricaoProduto.trim() !== '' && newProduto.codigoDeBarra.trim() !== '') {
+      const produtoAtualizado = {
+        IDProduto: newProduto.IDProduto,
+        nomeProduto: newProduto.nomeProduto.trim(),
+        produtoTipo: newProduto.produtoTipo,
+        qtdEstoque: newProduto.qtdEstoque,
+        descricaoProduto: newDescricaoProduto.trim(),
+        valorProduto: newProduto.valorProduto,
+        codigoDeBarra: newProduto.codigoDeBarra.trim()
+      };
+
+      try {
+        const response = await axios.put('http://localhost:8010/brilhante/produto', produtoAtualizado);
+        if (response.status === 200) { // Supondo que 200 seja o código de status de sucesso para atualização de produto
+          setProdutos(produtos.map(produto => (produto.IDProduto === newProduto.IDProduto ? response.data : produto)));
+          setNewProduto({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '' });
+          setNewDescricaoProduto('');
+          setCurrentProductId(null);
+          setError('');
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar produto:', error);
+        setError('Erro ao atualizar produto. Por favor, tente novamente.');
+      }
+    } else {
+      setError('Preencha todos os campos antes de atualizar o produto.');
+    }
+  };
+
+  const excluirProduto = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:8010/brilhante/produto/{id}`);
+      if (response.status === 204) { // Supondo que 204 seja o código de status de sucesso para exclusão de produto
+        setProdutos(produtos.filter(produto => produto.IDProduto !== newProduto.IDProduto));
+        setNewProduto({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '' });
+        setNewDescricaoProduto('');
+        setCurrentProductId(null);
+        setError('');
+      }
+    } catch (error) {
+      console.error('Erro ao excluir produto:', error);
+      setError('Erro ao excluir produto. Por favor, tente novamente.');
+    }
+  };
+
+  const consultarCodigoBarras = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8010/brilhante/produto/cb/${newProduto.codigoDeBarra}`);
+      if (response.status === 200) {
+        const produto = response.data;
+        setNewProduto({
+          IDProduto: produto.IDProduto,
+          nomeProduto: produto.nomeProduto,
+          produtoTipo: produto.produtoTipo,
+          qtdEstoque: produto.qtdEstoque,
+          valorProduto: produto.valorProduto,
+          codigoDeBarra: produto.codigoDeBarra,
+        });
+        setNewDescricaoProduto(produto.descricaoProduto);
+        setCurrentProductId(produto.IDProduto);
+        setError('');
+      }
+    } catch (error) {
+      console.error('Erro ao consultar código de barras:', error);
+      setError('Erro ao consultar código de barras. Por favor, tente novamente.');
+    }
+  };
+
+  useEffect(() => {
+    if (currentProductId) {
+      const produto = produtos.find(p => p.IDProduto === currentProductId);
+      if (produto) {
+        setNewProduto({
+          IDProduto: produto.IDProduto,
+          nomeProduto: produto.nomeProduto,
+          produtoTipo: produto.produtoTipo,
+          qtdEstoque: produto.qtdEstoque,
+          valorProduto: produto.valorProduto,
+          codigoDeBarra: produto.codigoDeBarra,
+        });
+        setNewDescricaoProduto(produto.descricaoProduto);
+      }
+    }
+  }, [currentProductId]);
+
   return (
     <div className="gerencia-produtos">
-
       <div>
-        <h1>Cadastro de Produtos</h1>
+        <h1>Gerenciar Produtos</h1>
         {error && <div className="error-message">{error}</div>}
         <div className="input-group">
-          <label htmlFor="codigoBarras">Código de Barras:</label>
+          <label htmlFor="codigoDeBarra">Código de Barras:</label>
           <input
-            id="codigoBarras"
+            id="codigoDeBarra"
             type="text"
             placeholder="Digite o código de barras"
-            value={newProduto.codigoBarras}
-            onChange={(e) => handleProductChange('codigoBarras', e.target.value)}
+            value={newProduto.codigoDeBarra}
+            onChange={(e) => handleProductChange('codigoDeBarra', e.target.value)}
           />
         </div>
         <div className="input-group">
@@ -64,30 +151,29 @@ function GerenciaProdutos() {
             id="nomeProduto"
             type="text"
             placeholder="Digite o nome do Produto"
-            value={newProduto.nome}
-            onChange={(e) => handleProductChange('nome', e.target.value)}
+            value={newProduto.nomeProduto}
+            onChange={(e) => handleProductChange('nomeProduto', e.target.value)}
           />
         </div>
         <div className="input-group">
-          <label htmlFor="quantidadeProduto">Quantidade do Produto:</label>
+          <label htmlFor="qtdEstoque">Quantidade do Produto:</label>
           <input
-            id="quantidadeProduto"
+            id="qtdEstoque"
             type="number"
             placeholder="Quantidade do Produto"
-            value={newProduto.quantidade}
-            onChange={(e) => handleProductChange('quantidade', parseInt(e.target.value))}
+            value={newProduto.qtdEstoque}
+            onChange={(e) => handleProductChange('qtdEstoque', parseInt(e.target.value))}
           />
         </div>
         <div className="input-group">
-          <label htmlFor="valor">Valor:</label>
+          <label htmlFor="valorProduto">Valor:</label>
           <NumericFormat
             thousandSeparator="."
             decimalSeparator=","
             prefix="R$ "
             placeholder="Valor"
-            value={newProduto.valor}
-            onValueChange={(values) => handleProductChange('valor', values.value)}
-          // isNumericString
+            value={newProduto.valorProduto}
+            onValueChange={(values) => handleProductChange('valorProduto', values.value)}
           />
         </div>
         <div className="input-group">
@@ -102,11 +188,11 @@ function GerenciaProdutos() {
           />
         </div>
         <div className="input-group">
-          <label htmlFor="tipoProduto">Tipo do Produto:</label>
+          <label htmlFor="produtoTipo">Tipo do Produto:</label>
           <select
-            id="tipoProduto"
-            value={newProduto.tipo}
-            onChange={(e) => handleProductChange('tipo', e.target.value)}
+            id="produtoTipo"
+            value={newProduto.produtoTipo}
+            onChange={(e) => handleProductChange('produtoTipo', e.target.value)}
           >
             <option value="">Selecione o tipo de produto</option>
             <option value="1">Anel</option>
@@ -117,7 +203,10 @@ function GerenciaProdutos() {
           </select>
         </div>
         <div className="button-group">
-          <button onClick={adicionarProduto}>Adicionar Produto Completo</button>
+          <button onClick={cadastrarProduto}>Cadastrar Produto</button>
+          <button onClick={atualizarProduto}>Atualizar Produto</button>
+          <button onClick={excluirProduto}>Excluir Produto</button>
+          <button onClick={consultarCodigoBarras}>Consultar Código de Barras</button>
         </div>
       </div>
     </div>

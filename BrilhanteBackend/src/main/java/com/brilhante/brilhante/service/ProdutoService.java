@@ -20,9 +20,9 @@ public class ProdutoService {
 
             return null;
         }
-            return produtoRepository.save(produto).getIDProduto();
-        }
-    
+        return produtoRepository.save(produto).getIDProduto();
+    }
+
     public Boolean excluirProduto(Long IDProduto) {
 
         try {
@@ -68,4 +68,9 @@ public class ProdutoService {
             return false;
         }
     }
+
+    public Produto consultarProdutoPorCodigoDeBarra(Long codigoDeBarra) {
+        return produtoRepository.findByCodigoDeBarra(codigoDeBarra);
+    }
+
 }
