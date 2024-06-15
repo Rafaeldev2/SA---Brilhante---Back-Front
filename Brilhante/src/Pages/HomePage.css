@@ -36,9 +36,9 @@
 }
 
 .img-card {
-	width: 200px; /* Set a fixed width */
-	height: 200px; /* Set a fixed height */
-	object-fit: cover; /* Ensure the image covers the entire area without stretching */
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
@@ -57,6 +57,11 @@
 }
 
 /* pagina de carrinho de compras */
+
+.div-checkout-button{
+	display: flex;
+	justify-content: center;
+}
 
 .carrinho-container {
 	width: 100%;
@@ -160,7 +165,7 @@
 	padding: 15px 30px;
 	border-radius: 4px;
 	cursor: pointer;
-	margin-top: 20px;
+	margin: 20px;
 }
 
 .checkout-button:hover {

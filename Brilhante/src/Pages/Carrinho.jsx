@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {BrilhanteContext} from "../Context/GlobalContext"
+import { BrilhanteContext } from "../Context/GlobalContext"
 
 function Carrinho() {
 
-  const {products, setProducts} = useContext(BrilhanteContext);
+  const { products, setProducts } = useContext(BrilhanteContext);
 
-  const{handleQuantityChange} = useContext(BrilhanteContext)
+  const { handleQuantityChange } = useContext(BrilhanteContext)
 
   return (
     <>
@@ -41,7 +41,9 @@ function Carrinho() {
             </div>
           ))}
         </div>
-        <button className="checkout-button">Finalizar Compra</button>
+        <div className='div-checkout-button'>
+          <button className="checkout-button">Finalizar Compra</button>
+        </div>
       </div>
     </>
   );
