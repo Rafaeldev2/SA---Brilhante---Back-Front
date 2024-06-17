@@ -89,4 +89,19 @@ public class ClienteController {
             return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
         }
     }
+    
+    @CrossOrigin(origins = "*")
+    @PostMapping("/cliente/login")
+    public ResponseEntity<Object> loginCliente(@Valid @RequestBody Cliente cliente) {
+
+        Cliente cli = clienteservice.loginCliente(cliente.getEmail(), cliente.getSenha());
+         if(cli != null){
+            return new ResponseEntity<>(cli, HttpStatus.OK);
+        } else {
+            MsgRetorno erro = new MsgRetorno();
+            erro.setFuncao("Login Cliente");
+            erro.setDescrição("Erro no Login ou senha inválidos/inexistentes!");
+            return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);            
+        }
+    }
 }

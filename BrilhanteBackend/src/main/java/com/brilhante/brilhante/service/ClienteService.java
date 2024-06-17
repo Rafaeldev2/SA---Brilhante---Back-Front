@@ -2,6 +2,9 @@ package com.brilhante.brilhante.service;
 
 import com.brilhante.brilhante.entity.Cliente;
 import com.brilhante.brilhante.repository.ClienteRepository;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +57,39 @@ public class ClienteService {
                 cli.setCpf(cliente.getCpf());
                 cli.setEmail(cliente.getEmail());
                 cli.setNome(cliente.getNome());
-                cli.setSenha(cliente.getSenha());
+                cli.setSenha(this.codificarSenhaCliente(cliente.getSenha()));
                 clienteRepository.save(cli);
                  return true;
             } else {
                 return false;            
         }
+    }
+    
+    public Cliente loginCliente(String email, String senha){
+        Cliente cli = clienteRepository.findByEmail(email);
+        if(cli != null){
+            String senhaCod = codificarSenhaCliente(senha);
+            if(cli.getSenha().equals(senhaCod)){
+                return cli;
+            }            
+        }
+        return null;
+    }
+    
+    public String codificarSenhaCliente(String senha){
+        String senhaCod = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            //md. update(salt);
+            byte[] bytes = md.digest(senha.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            senhaCod = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.getLocalizedMessage();
+        }
+        return senhaCod;
     }
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProdutoController {
 
     @Autowired
-    ProdutoService produtoservice;
+    ProdutoService produtoservice;     
 
     @CrossOrigin(origins = "*")
     @GetMapping("/produto/{id}")
@@ -87,20 +87,6 @@ public class ProdutoController {
         } else {
             msg.setDescrição("Erro ao excluir produto ID " + id + ", não cadastrado/inexistente!");
             return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/produto/cb/{codigoDeBarra}")
-    public ResponseEntity<Object> consultarProdutoPorCB(@PathVariable("codigoDeBarra") Long codigoDeBarra) {
-        Produto produto = produtoservice.consultarProdutoPorCodigoDeBarra(codigoDeBarra);
-        if (produto != null) {
-            return new ResponseEntity<>(produto, HttpStatus.OK);
-        } else {
-            MsgRetorno erro = new MsgRetorno();
-            erro.setFuncao("Incluir Produto");
-            erro.setDescrição("Erro ao incluir Produto! Chame a TI!!");
-            return new ResponseEntity<>(erro, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

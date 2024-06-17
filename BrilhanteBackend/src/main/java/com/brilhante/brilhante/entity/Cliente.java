@@ -30,11 +30,14 @@ public class Cliente {
     @Column(nullable = false, unique=true)
     private String cpf;
     
-    @Column(nullable = true)
+    @Column(nullable = false, unique=true)
     private String email;   
     
     @Column(nullable = false)
     private String senha;
+    
+    @Column(nullable = true)
+    private String perfil;
     
     @Column(nullable = true)
     private Long cep;
@@ -92,6 +95,10 @@ public class Cliente {
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getPerfil() {
+        return perfil;
     }
 
     public Long getCep() {
@@ -154,6 +161,10 @@ public class Cliente {
         this.senha = senha;
     }
 
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+    
     public void setCep(Long cep) {
         this.cep = cep;
     }
