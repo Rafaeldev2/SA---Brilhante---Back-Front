@@ -1,24 +1,26 @@
 import React, { useContext, useState } from 'react';
 import './Login-Cadastro-Perfil.css';
+import { BrilhanteContext } from '../Context/GlobalContext';
 
 const LoginForm = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setsenha] = useState('');
+  const [attClient, setAttClient] = useState(BrilhanteContext);
 
-  // const handleEmailChange = (event) => {
-  //   setEmail(event.target.value);
-  // };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-  // const handlePasswordChange = (event) => {
-  //   setPassword(event.target.value);
-  // };
+  const handlesenhaChange = (event) => {
+    setsenha(event.target.value);
+  };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   //lógica para autenticar o usuário
-  //   console.log('Email:', email);
-  //   console.log('Senha:', password);
-  // };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //lógica para autenticar o usuário
+    console.log('Email:', email);
+    console.log('Senha:', senha);
+  };
 
   return (
     <>
@@ -27,7 +29,7 @@ const LoginForm = () => {
           <div className='div-h2'>
             <h2>Login</h2>
           </div>
-          {/* <form onSubmit={handleSubmit}> */}
+          <form onSubmit={handleSubmit}>
           <div className='div-input-group'>
             <div className='div-label-input'>
               <div className='div-space-label'></div>
@@ -38,9 +40,9 @@ const LoginForm = () => {
                 className="custom-input"
                 placeholder='Email'
                 type="email"
-              // value={email}
-              // onChange={handleEmailChange}
-              // required
+              value={email}
+              onChange={handleEmailChange}
+              required
               />
             </div>
             <div className='div-space-label'></div>
@@ -51,10 +53,10 @@ const LoginForm = () => {
               <input
                 className="custom-input"
                 placeholder='Senha'
-                type="password"
-              // value={password}
-              // onChange={handlePasswordChange} 
-              // required
+                type="senha"
+              value={senha}
+              onChange={handlesenhaChange} 
+              required
               />
             </div>
           </div>
@@ -62,7 +64,7 @@ const LoginForm = () => {
           <div className='div-button'>
             <button className='Button-Login-Cadastro' type="submit">Confirmar</button>
           </div>
-          {/* </form> */}
+          </form>
         </div>
       </div>
     </>

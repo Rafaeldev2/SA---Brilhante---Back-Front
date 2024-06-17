@@ -7,7 +7,7 @@ function GerenciaProdutos() {
   const [currentProductId, setCurrentProductId] = useState(null);
   const [error, setError] = useState('');
   const [newProduto, setNewProduto] = useState({
-    IDProduto: '',
+    idproduto: '',
     nomeProduto: '',
     produtoTipo: '',
     qtdEstoque: '',
@@ -21,7 +21,12 @@ function GerenciaProdutos() {
   };
 
   const cadastrarProduto = async () => {
-    if (newProduto.nomeProduto.trim() !== '' && newProduto.produtoTipo && newProduto.valorProduto && newProduto.descricaoProduto.trim() !== '' && newProduto.codigoDeBarra !== '') {
+    if (newProduto.nomeProduto.trim() !== '' &&
+      newProduto.produtoTipo &&
+      newProduto.valorProduto &&
+      newProduto.descricaoProduto.trim() !== '' &&
+      newProduto.codigoDeBarra !== '') {
+
       const novoProduto = {
         nomeProduto: newProduto.nomeProduto.trim(),
         produtoTipo: newProduto.produtoTipo,
@@ -34,9 +39,9 @@ function GerenciaProdutos() {
       try {
         const response = await axios.post('http://localhost:8010/brilhante/produto', novoProduto);
         if (response.status === 201) { // Supondo que 201 seja o código de status de sucesso para criação de produto
-          
+
           setNewProduto({
-            IDProduto: '',
+            idproduto: '',
             nomeProduto: '',
             produtoTipo: '',
             qtdEstoque: '',
@@ -57,9 +62,15 @@ function GerenciaProdutos() {
   };
 
   const atualizarProduto = async () => {
-    if (newProduto.nomeProduto.trim() !== '' && newProduto.produtoTipo && newProduto.valorProduto && newProduto.descricaoProduto.trim() !== '' && newProduto.codigoDeBarra !== '') {
+    if (
+      newProduto.nomeProduto.trim() !== '' &&
+      newProduto.produtoTipo &&
+      newProduto.valorProduto &&
+      newProduto.descricaoProduto.trim() !== '' &&
+      newProduto.codigoDeBarra !== '') {
+
       const produtoParaAtualizar = {
-        IDProduto: newProduto.IDProduto,
+        idproduto: newProduto.idproduto,
         nomeProduto: newProduto.nomeProduto.trim(),
         produtoTipo: newProduto.produtoTipo,
         qtdEstoque: newProduto.qtdEstoque,
@@ -71,8 +82,8 @@ function GerenciaProdutos() {
       try {
         const response = await axios.put('http://localhost:8010/brilhante/produto', produtoParaAtualizar);
         if (response.status === 200) {
-          setNewProduto({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '', descricaoProduto: '' });
-          setCurrentProductId(null);
+          setNewProduto({ idproduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '', descricaoProduto: '' });
+          setCurrentProductId(response.data.idproduto);
           setError('');
         }
       } catch (error) {
@@ -86,9 +97,10 @@ function GerenciaProdutos() {
 
   const excluirProduto = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8010/brilhante/produto/{id}`);
+      // console.log("id do produto: " + currentProductId);
+      const response = await axios.delete(`http://localhost:8010/brilhante/produto/${newProduto.idproduto}`);
       if (response.status === 204) { // Supondo que 204 seja o código de status de sucesso para exclusão de produto
-        setNewProduto({ IDProduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '', descricaoProduto: '' });
+        setNewProduto({ idproduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '', descricaoProduto: '' });
         setCurrentProductId(null);
         setError('');
       }
@@ -104,7 +116,7 @@ function GerenciaProdutos() {
       if (response.status === 200) {
         const produto = response.data;
         setNewProduto({
-          IDProduto: produto.IDProduto,
+          idproduto: produto.idproduto,
           nomeProduto: produto.nomeProduto,
           produtoTipo: produto.produtoTipo,
           qtdEstoque: produto.qtdEstoque,
@@ -112,7 +124,6 @@ function GerenciaProdutos() {
           codigoDeBarra: produto.codigoDeBarra,
           descricaoProduto: produto.descricaoProduto,
         });
-        setCurrentProductId(produto.IDProduto);
         setError('');
       }
     } catch (error) {
@@ -123,10 +134,10 @@ function GerenciaProdutos() {
 
   useEffect(() => {
     if (currentProductId) {
-      const produto = produto.find(p => p.IDProduto === currentProductId);
+      const produto = produto.find(p => p.idproduto === currentProductId);
       if (produto) {
         setNewProduto({
-          IDProduto: produto.IDProduto,
+          idproduto: produto.idproduto,
           nomeProduto: produto.nomeProduto,
           produtoTipo: produto.produtoTipo,
           qtdEstoque: produto.qtdEstoque,
@@ -143,6 +154,16 @@ function GerenciaProdutos() {
       <div>
         <h1>Gerenciar Produtos</h1>
         {error && <div className="error-message">{error}</div>}
+        <div className="input-group">
+          <input
+            id="idproduto"
+            type="number"
+            placeholder="idproduto"
+            value={newProduto.idproduto}
+            disabled
+            onChange={(e) => handleProductChange('idproduto', e.target.value)}
+          />
+        </div>
         <div className="input-group">
           <label htmlFor="codigoDeBarra">Código de Barras:</label>
           <input

@@ -1,6 +1,46 @@
 import React, { useContext, useState } from 'react';
+import { BrilhanteContext } from '../Context/GlobalContext';
 
 const Perfil = () => {
+
+  const [currentClientId, setCurrentClientId] = useState(null);
+  const [attClient, setAttClient] = useState(BrilhanteContext);
+
+  const atualizarPerfil = async () => {
+    if (
+      attClient.nome.trim() !== '' &&
+      attClient.cpf !== '' &&
+      attClient.email !== '' &&
+      attClient.senha !== '') {
+
+      const clientPerfil = {
+        nome: attClient.nome.trim(),
+        cpf: attClient.cpf,
+        email: attClient.email,
+        senha: attClient.senha,
+      };
+
+      try {
+        const response = await axios.put('http://localhost:8010/brilhante/cliente', clientPerfil);
+        if (response.status === 200) {
+          setAttClient({
+            nome: '',
+            cpf: '',
+            email: '',
+            senha: ''
+          });
+          setCurrentClientId(response.data.idclient);
+          setError('');
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar produto:', error);
+        setError('Erro ao atualizar produto. Por favor, tente novamente.');
+      }
+    } else {
+      setError('Preencha todos os campos antes de atualizar o produto.');
+    }
+  };
+
   return (
     <div className='background-container-Login-register'>
       <div className='div-h2'>
@@ -16,9 +56,12 @@ const Perfil = () => {
           </div>
           <div className='div-input'>
             <input
-              id='nome-completo'
+              id="name"
               className="custom-input"
-              placeholder='Nome e sobrenome'
+              placeholder='Nome de usuário'
+              type="text"
+              value={attClient.nome}
+              onChange={(e) => handleClientChange('nome', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -27,9 +70,12 @@ const Perfil = () => {
           </div>
           <div className='div-input'>
             <input
-              id='cpf'
+              id="cpf"
               className="custom-input"
               placeholder='CPF'
+              type="text"
+              value={attClient.cpf}
+              onChange={(e) => handleClientChange('cpf', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -38,9 +84,12 @@ const Perfil = () => {
           </div>
           <div className='div-input'>
             <input
-              id='email'
+              id="email"
               className="custom-input"
-              placeholder='E-mail'
+              placeholder='Email'
+              type="text"
+              value={attClient.email}
+              onChange={(e) => handleClientChange('email', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -49,20 +98,12 @@ const Perfil = () => {
           </div>
           <div className='div-input'>
             <input
-              id='data-nascimento'
+              id="data-nascimento"
               className="custom-input"
               placeholder='Data de nascimento'
-            />
-          </div>
-          <div className='div-space-label'></div>
-          <div className='div-label-input'>
-            <label className='custom-label' htmlFor='telefone'>Telefone:</label>
-          </div>
-          <div className='div-input'>
-            <input
-              id='telefone'
-              className="custom-input"
-              placeholder='Telefone'
+              type="text"
+              value={attClient.dataNasc}
+              onChange={(e) => handleClientChange('dataNasc', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -74,6 +115,9 @@ const Perfil = () => {
               id='celular'
               className="custom-input"
               placeholder='Celular'
+              type="text"
+              value={attClient.celular}
+              onChange={(e) => handleClientChange('celular', e.target.value)}
             />
           </div>
 
@@ -90,6 +134,9 @@ const Perfil = () => {
               id='cep'
               className="custom-input"
               placeholder='Cep'
+              type="text"
+              value={attClient.dataNasc}
+              onChange={(e) => handleClientChange('dataNasc', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -101,6 +148,9 @@ const Perfil = () => {
               id='uf'
               className="custom-input"
               placeholder='Estado'
+              type="text"
+              value={attClient.UF}
+              onChange={(e) => handleClientChange('UF', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -112,6 +162,9 @@ const Perfil = () => {
               id='cidade'
               className="custom-input"
               placeholder='Cidade'
+              type="text"
+              value={attClient.cidade}
+              onChange={(e) => handleClientChange('cidade', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -123,6 +176,9 @@ const Perfil = () => {
               id='bairro'
               className="custom-input"
               placeholder='Bairro'
+              type="text"
+              value={attClient.bairro}
+              onChange={(e) => handleClientChange('bairro', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -134,6 +190,9 @@ const Perfil = () => {
               id='logradouro'
               className="custom-input"
               placeholder='Rua, Av.'
+              type="text"
+              value={attClient.logradouro}
+              onChange={(e) => handleClientChange('logradouro', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -145,6 +204,9 @@ const Perfil = () => {
               id='numero'
               className="custom-input"
               placeholder='Número'
+              type="text"
+              value={attClient.numEndereco}
+              onChange={(e) => handleClientChange('numEndereco', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>
@@ -156,10 +218,13 @@ const Perfil = () => {
               id='complemento'
               className="custom-input"
               placeholder='Complemento'
+              type="text"
+              value={attClient.compEndereco}
+              onChange={(e) => handleClientChange('compEndereco', e.target.value)}
             />
           </div>
           <div className='div-button'>
-            <button className='Button-Login-Cadastro'>Editar Endereço</button>
+            <button className='Button-Login-Cadastro' onClick={atualizarPerfil}>Atualizar Perfil</button>
           </div>
         </div>
       </div>

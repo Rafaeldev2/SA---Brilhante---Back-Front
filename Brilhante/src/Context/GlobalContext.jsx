@@ -16,6 +16,14 @@ export const BrilhanteContextProvider = (({ children }) => {
     // Adicione mais produtos conforme necessário
   ]);
 
+  const [attClient, setAttClient] = useState({
+    idClient: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    senha: ''
+  });
+
   const handleQuantityChange = (index, event) => {
     const newProducts = [...products];
     newProducts[index].quantity = parseInt(event.target.value);
@@ -23,7 +31,7 @@ export const BrilhanteContextProvider = (({ children }) => {
   };
 
   return (
-    <BrilhanteContext.Provider value={{ email, setEmail, products, setProducts, handleQuantityChange }}>
+    <BrilhanteContext.Provider value={{ email, setEmail, products, setProducts, handleQuantityChange, attClient, setAttClient  }}>
       {children}
     </BrilhanteContext.Provider>
   )
