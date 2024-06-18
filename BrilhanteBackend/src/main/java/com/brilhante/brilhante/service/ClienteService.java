@@ -22,6 +22,8 @@ public class ClienteService {
         String cpf = cliente.getCpf();
         Cliente cli = clienteRepository.findByCpf(cpf);
         if(cli == null){
+            String senhaCod = codificarSenhaCliente(cliente.getSenha());
+            cliente.setSenha(senhaCod);
            return clienteRepository.save(cliente).getIDCliente();
         }
         return null;

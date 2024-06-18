@@ -1,6 +1,7 @@
 package com.brilhante.brilhante.controller;
 
 import com.brilhante.brilhante.entity.Cliente;
+import com.brilhante.brilhante.entity.Login;
 import com.brilhante.brilhante.entity.MsgRetorno;
 import com.brilhante.brilhante.service.ClienteService;
 import jakarta.validation.Valid;
@@ -92,9 +93,9 @@ public class ClienteController {
     
     @CrossOrigin(origins = "*")
     @PostMapping("/cliente/login")
-    public ResponseEntity<Object> loginCliente(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<Object> loginCliente(@Valid @RequestBody Login login) {
 
-        Cliente cli = clienteservice.loginCliente(cliente.getEmail(), cliente.getSenha());
+        Cliente cli = clienteservice.loginCliente(login.getEmail(), login.getSenha());
          if(cli != null){
             return new ResponseEntity<>(cli, HttpStatus.OK);
         } else {

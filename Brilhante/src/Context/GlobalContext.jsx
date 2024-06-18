@@ -1,5 +1,4 @@
 import React from "react";
-import axios from 'axios'
 import { createContext, useState } from "react";
 
 export const BrilhanteContext = createContext()
@@ -16,12 +15,23 @@ export const BrilhanteContextProvider = (({ children }) => {
     // Adicione mais produtos conforme necessário
   ]);
 
-  const [attClient, setAttClient] = useState({
+  const [cliente, setCliente] = useState({
     idClient: '',
     nome: '',
     cpf: '',
     email: '',
-    senha: ''
+    senha: '',
+    perfil: '',
+    cep: '',
+    logradouro: '',
+    numEndereco: '',
+    UF: '',
+    cidade: '',
+    bairro: '',
+    compEndereco: '',
+    celular: '',
+    dataNasc: '',
+    vendas: []
   });
 
   const handleQuantityChange = (index, event) => {
@@ -31,7 +41,7 @@ export const BrilhanteContextProvider = (({ children }) => {
   };
 
   return (
-    <BrilhanteContext.Provider value={{ email, setEmail, products, setProducts, handleQuantityChange, attClient, setAttClient  }}>
+    <BrilhanteContext.Provider value={{ email, setEmail, products, setProducts, handleQuantityChange, cliente, setCliente  }}>
       {children}
     </BrilhanteContext.Provider>
   )

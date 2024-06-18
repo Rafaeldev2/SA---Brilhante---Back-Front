@@ -4,26 +4,26 @@ import { BrilhanteContext } from '../Context/GlobalContext';
 const Perfil = () => {
 
   const [currentClientId, setCurrentClientId] = useState(null);
-  const [attClient, setAttClient] = useState(BrilhanteContext);
+  const {cliente, setCliente} = useContext(BrilhanteContext);
 
   const atualizarPerfil = async () => {
     if (
-      attClient.nome.trim() !== '' &&
-      attClient.cpf !== '' &&
-      attClient.email !== '' &&
-      attClient.senha !== '') {
+      cliente.nome.trim() !== '' &&
+      cliente.cpf !== '' &&
+      cliente.email !== '' &&
+      cliente.senha !== '') {
 
       const clientPerfil = {
-        nome: attClient.nome.trim(),
-        cpf: attClient.cpf,
-        email: attClient.email,
-        senha: attClient.senha,
+        nome: cliente.nome.trim(),
+        cpf: cliente.cpf,
+        email: cliente.email,
+        senha: cliente.senha,
       };
 
       try {
         const response = await axios.put('http://localhost:8010/brilhante/cliente', clientPerfil);
         if (response.status === 200) {
-          setAttClient({
+          setcliente({
             nome: '',
             cpf: '',
             email: '',
@@ -60,7 +60,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Nome de usuário'
               type="text"
-              value={attClient.nome}
+              value={cliente.nome}
               onChange={(e) => handleClientChange('nome', e.target.value)}
             />
           </div>
@@ -74,7 +74,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='CPF'
               type="text"
-              value={attClient.cpf}
+              value={cliente.cpf}
               onChange={(e) => handleClientChange('cpf', e.target.value)}
             />
           </div>
@@ -88,7 +88,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Email'
               type="text"
-              value={attClient.email}
+              value={cliente.email}
               onChange={(e) => handleClientChange('email', e.target.value)}
             />
           </div>
@@ -102,7 +102,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Data de nascimento'
               type="text"
-              value={attClient.dataNasc}
+              value={cliente.dataNasc}
               onChange={(e) => handleClientChange('dataNasc', e.target.value)}
             />
           </div>
@@ -116,7 +116,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Celular'
               type="text"
-              value={attClient.celular}
+              value={cliente.celular}
               onChange={(e) => handleClientChange('celular', e.target.value)}
             />
           </div>
@@ -135,7 +135,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Cep'
               type="text"
-              value={attClient.dataNasc}
+              value={cliente.dataNasc}
               onChange={(e) => handleClientChange('dataNasc', e.target.value)}
             />
           </div>
@@ -149,7 +149,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Estado'
               type="text"
-              value={attClient.UF}
+              value={cliente.UF}
               onChange={(e) => handleClientChange('UF', e.target.value)}
             />
           </div>
@@ -163,7 +163,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Cidade'
               type="text"
-              value={attClient.cidade}
+              value={cliente.cidade}
               onChange={(e) => handleClientChange('cidade', e.target.value)}
             />
           </div>
@@ -177,7 +177,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Bairro'
               type="text"
-              value={attClient.bairro}
+              value={cliente.bairro}
               onChange={(e) => handleClientChange('bairro', e.target.value)}
             />
           </div>
@@ -191,7 +191,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Rua, Av.'
               type="text"
-              value={attClient.logradouro}
+              value={cliente.logradouro}
               onChange={(e) => handleClientChange('logradouro', e.target.value)}
             />
           </div>
@@ -205,7 +205,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Número'
               type="text"
-              value={attClient.numEndereco}
+              value={cliente.numEndereco}
               onChange={(e) => handleClientChange('numEndereco', e.target.value)}
             />
           </div>
@@ -219,7 +219,7 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Complemento'
               type="text"
-              value={attClient.compEndereco}
+              value={cliente.compEndereco}
               onChange={(e) => handleClientChange('compEndereco', e.target.value)}
             />
           </div>
