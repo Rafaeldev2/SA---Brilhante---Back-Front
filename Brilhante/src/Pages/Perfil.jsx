@@ -29,7 +29,7 @@ const Perfil = () => {
         cep: cliente.cep,
         logradouro: cliente.logradouro,
         numEndereco: cliente.numEndereco,
-        UF: cliente.UF,
+        uf: cliente.uf,
         cidade: cliente.cidade,
         bairro: cliente.bairro,
         compEndereco: cliente.compEndereco,
@@ -179,7 +179,7 @@ const Perfil = () => {
           </div>
           <div className='div-space-label'></div>
           <div className='div-label-input'>
-            <label className='custom-label' htmlFor='uf'>UF:</label>
+            <label className='custom-label' htmlFor='uf'>uf:</label>
           </div>
           <div className='div-input'>
             <input
@@ -187,8 +187,8 @@ const Perfil = () => {
               className="custom-input"
               placeholder='Estado'
               type="text"
-              value={cliente.UF || ''}
-              onChange={(e) => handleClientChange('UF', e.target.value)}
+              value={cliente.uf || ''}
+              onChange={(e) => handleClientChange('uf', e.target.value)}
             />
           </div>
           <div className='div-space-label'></div>

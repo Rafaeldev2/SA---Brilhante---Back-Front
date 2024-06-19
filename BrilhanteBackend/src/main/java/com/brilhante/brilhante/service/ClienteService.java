@@ -51,21 +51,33 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
     
-    @Transactional
-    public Boolean atualizarCliente(Cliente cliente) {
-        
-        Cliente cli = clienteRepository.getReferenceById(cliente.getIDCliente());
-                if(cli.getIDCliente() != null){
-                cli.setCpf(cliente.getCpf());
-                cli.setEmail(cliente.getEmail());
-                cli.setNome(cliente.getNome());
-                cli.setSenha(this.codificarSenhaCliente(cliente.getSenha()));
-                clienteRepository.save(cli);
-                 return true;
-            } else {
-                return false;            
-        }
+@Transactional
+public Boolean atualizarCliente(Cliente cliente) {
+    
+    Cliente cli = clienteRepository.getReferenceById(cliente.getIDCliente());
+    
+    if (cli != null && cli.getIDCliente() != null) {
+        cli.setCpf(cliente.getCpf());
+        cli.setEmail(cliente.getEmail());
+        cli.setNome(cliente.getNome());
+        cli.setSenha(this.codificarSenhaCliente(cliente.getSenha()));
+        cli.setPerfil(cliente.getPerfil());
+        cli.setCep(cliente.getCep());
+        cli.setLogradouro(cliente.getLogradouro());
+        cli.setNumEndereco(cliente.getNumEndereco());
+        cli.setUF(cliente.getUF());
+        cli.setCidade(cliente.getCidade());
+        cli.setBairro(cliente.getBairro());
+        cli.setCompEndereco(cliente.getCompEndereco());
+        cli.setCelular(cliente.getCelular());
+        cli.setDataNasc(cliente.getDataNasc());
+
+        clienteRepository.save(cli);
+        return true;
+    } else {
+        return false;
     }
+}
     
     public Cliente loginCliente(String email, String senha){
         Cliente cli = clienteRepository.findByEmail(email);
