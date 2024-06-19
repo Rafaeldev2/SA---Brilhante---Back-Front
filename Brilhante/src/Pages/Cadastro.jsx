@@ -59,93 +59,91 @@ const Cadastro = () => {
     };
 
     return (
-        <>
-            <div className='background-container-Login-register'>
-                <div className="signup-login-container">
-                    <div className='div-h2'>
-                        <h2>Cadastro</h2>
+        <div className='background-container-Login-register'>
+            <div className="signup-login-container">
+                <div className='div-h2'>
+                    <h2>Cadastro</h2>
+                </div>
+                <div className='div-input-group'>
+                    <div className='div-label-input'>
+                        <label className='custom-label'>Nome de usuário</label>
                     </div>
-                    <div className='div-input-group'>
-                        <div className='div-label-input'>
-                            <label className='custom-label'>Nome de usuário</label>
-                        </div>
-                        <div className='div-input'>
-                            <input
-                                id="name"
-                                className="custom-input"
-                                placeholder='Nome de usuário'
-                                type="text"
-                                value={newClient.nome}
-                                onChange={(e) => handleClientChange('nome', e.target.value)}
-                            />
-                        </div>
-                        <div className='div-space-label'></div>
-                        <div className='div-label-input'>
-                            <label className='custom-label'>Email</label>
-                        </div>
-                        <div className='div-input'>
-                            <input
-                                id="email"
-                                className="custom-input"
-                                placeholder='Email'
-                                type="text"
-                                value={newClient.email}
-                                onChange={(e) => handleClientChange('email', e.target.value)}
-                            />
-                        </div>
-                        <div className='div-space-label'></div>
-                        <div className='div-label-input'>
-                            <label className='custom-label'>CPF</label>
-                        </div>
-                        <div className='div-input'>
-                            <input
-                                id="cpf"
-                                className="custom-input"
-                                placeholder='CPF'
-                                type="text"
-                                value={newClient.cpf}
-                                onChange={(e) => handleClientChange('cpf', e.target.value)}
-                            />
-                        </div>
-                        <div className='div-space-label'></div>
-                        <div className='div-label-input'>
-                            <label className='custom-label'>Senha</label>
-                        </div>
-                        <div className='div-input'>
-                            <input
-                                id="senha"
-                                className="custom-input"
-                                placeholder='Senha'
-                                type="senha"
-                                value={newClient.senha}
-                                onChange={(e) => handleClientChange('senha', e.target.value)}
-                            />
-                        </div>
-                        <div className='div-space-label'></div>
-                        <div className='div-label-input'>
-                            <label className='custom-label'>Confirmar Senha</label>
-                        </div>
-                        <div className='div-input'>
-                            <input
-                                id="confirmsenha"
-                                className="custom-input"
-                                placeholder='Confirmar senha'
-                                type="senha"
-                                value={newClient.confirmsenha}
-                                onChange={(e) => handleClientChange('confirmsenha', e.target.value)}
-                            />
-                        </div>
-                        <div className='div-label-input'>
+                    <div className='div-input'>
+                        <input
+                            id="name"
+                            className="custom-input"
+                            placeholder='Nome de usuário'
+                            type="text"
+                            value={newClient.nome}
+                            onChange={(e) => handleClientChange('nome', e.target.value)}
+                        />
+                    </div>
+                    <div className='div-space-label'></div>
+                    <div className='div-label-input'>
+                        <label className='custom-label'>Email</label>
+                    </div>
+                    <div className='div-input'>
+                        <input
+                            id="email"
+                            className="custom-input"
+                            placeholder='Email'
+                            type="text"
+                            value={newClient.email}
+                            onChange={(e) => handleClientChange('email', e.target.value)}
+                        />
+                    </div>
+                    <div className='div-space-label'></div>
+                    <div className='div-label-input'>
+                        <label className='custom-label'>CPF</label>
+                    </div>
+                    <div className='div-input'>
+                        <input
+                            id="cpf"
+                            className="custom-input"
+                            placeholder='CPF'
+                            type="text"
+                            value={newClient.cpf}
+                            onChange={(e) => handleClientChange('cpf', e.target.value)}
+                        />
+                    </div>
+                    <div className='div-space-label'></div>
+                    <div className='div-label-input'>
+                        <label className='custom-label'>Senha</label>
+                    </div>
+                    <div className='div-input'>
+                        <input
+                            id="senha"
+                            className="custom-input"
+                            placeholder='Senha'
+                            type="senha"
+                            value={newClient.senha}
+                            onChange={(e) => handleClientChange('senha', e.target.value)}
+                        />
+                    </div>
+                    <div className='div-space-label'></div>
+                    <div className='div-label-input'>
+                        <label className='custom-label'>Confirmar Senha</label>
+                    </div>
+                    <div className='div-input'>
+                        <input
+                            id="confirmsenha"
+                            className="custom-input"
+                            placeholder='Confirmar senha'
+                            type="senha"
+                            value={newClient.confirmsenha}
+                            onChange={(e) => handleClientChange('confirmsenha', e.target.value)}
+                        />
+                    </div>
+                    <div className='div-label-input'>
 
-                        </div>
-                    </div>
-                    <div className='div-button'>
-                        <button className='Button-Login-Cadastro' onClick={cadastrarCliente}>Cadastrar</button>
-                        <div className='div-label-input'></div>
                     </div>
                 </div>
+                <div className='div-button'>
+                    <button className='Button-Login-Cadastro' onClick={cadastrarCliente}>Cadastrar</button>
+                    <div className='div-label-input'></div>
+                </div>
             </div>
-        </>
+        </div>
     );
 };
 

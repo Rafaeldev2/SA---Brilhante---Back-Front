@@ -21,6 +21,7 @@ export const BrilhanteContextProvider = (({ children }) => {
     cpf: '',
     email: '',
     senha: '',
+    confirmsenha: '',
     perfil: '',
     cep: '',
     logradouro: '',
