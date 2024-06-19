@@ -38,12 +38,38 @@ public class ProdutoController {
             return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
         }
     }
+    
+    @CrossOrigin(origins = "*")
+    @GetMapping("/produto/cb/{codigoDeBarra}")
+    public ResponseEntity<Object> consultaProdutoCodigoDeBarra(@PathVariable Long codigoDeBarra) {
+
+        Produto produto = produtoservice.consultarCodigoDeBarra(codigoDeBarra);
+        if (produto != null) {
+            return new ResponseEntity<>(produto, HttpStatus.OK);
+        } else {
+            MsgRetorno erro = new MsgRetorno();
+            erro.setFuncao("Consultar Produto");
+            erro.setDescrição("Erro ao consultar Produto ID: " + codigoDeBarra);
+            return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
+        }
+    }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/produto")
     public ResponseEntity<Object> listarProduto() {
         List<Produto> produtos = produtoservice.listarProduto();
         return new ResponseEntity<>(produtos, HttpStatus.OK);
+    }
+    
+    @CrossOrigin(origins = "*")
+    @GetMapping("/produto/produtotipo/{produtotipo}")
+    public ResponseEntity<Object> listarProdutoPorTipo(@PathVariable Integer produtotipo) {
+    List <Produto> produtos = produtoservice.listarProdutoPorTipo(produtotipo);
+     if (produtos != null) {
+            return new ResponseEntity<>(produtos, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
     }
 
     @CrossOrigin(origins = "*")

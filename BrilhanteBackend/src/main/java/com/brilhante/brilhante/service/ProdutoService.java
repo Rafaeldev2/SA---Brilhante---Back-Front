@@ -45,10 +45,19 @@ public class ProdutoService {
 
         return produtoRepository.findByNomeProduto(nomeProduto);
     }
+    public Produto consultarCodigoDeBarra(Long codigoDeBarra) {
+
+        return produtoRepository.findByCodigoDeBarra(codigoDeBarra);
+    }
 
     public List<Produto> listarProduto() {
 
         return produtoRepository.findAll();
+    }
+    
+    public List<Produto> listarProdutoPorTipo(Integer produtoTipo){
+        
+    return produtoRepository.findByProdutoTipo(produtoTipo);
     }
 
     public Boolean atualizarProduto(Produto produto) {
