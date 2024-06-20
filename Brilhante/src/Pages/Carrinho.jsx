@@ -1,49 +1,50 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { BrilhanteContext } from "../Context/GlobalContext"
 
 function Carrinho() {
+  const { handleQuantityChange } = useContext(BrilhanteContext);
+  const [cart, setCart] = useState([]);
+  
+  // Supondo que products seja a lista de produtos disponíveis
+  const products = [
+    // Lista de produtos
+  ];
 
-  const { products, setProducts } = useContext(BrilhanteContext);
-
-  const { handleQuantityChange } = useContext(BrilhanteContext)
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+    // Aqui você pode adicionar qualquer lógica adicional, como atualizar o estado global do carrinho, etc.
+    // Por exemplo:
+    // addToCart(product);
+  };
 
   return (
     <>
       <div className='carrinho-container'>
-        <h1>Cart Page</h1>
-        <div className='products-container'>
-          {products.map((product, index) => (
-            <div className='product-card' key={product.id}>
-              <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} />
-              <div className='product-details'>
-                <h4>{product.name}</h4>
-                <p>{product.description}</p>
-                <div className="quantity-container">
-                  <label htmlFor={`quantity-${product.id}`}>Quantidade:</label>
-                  <input
-                    type="number"
-                    id={`quantity-${product.id}`}
-                    name={`quantity-${product.id}`}
-                    min="1"
-                    value={product.quantity}
-                    onChange={(e) => handleQuantityChange(index, e)}
-                  />
-                </div>
-                <div className="price-cart-container">
-                  <p className="product-price">R$ {product.price.toFixed(2)}</p>
-                  <button className="remove-from-cart-button">Remover do Carrinho</button>
-                </div>
-                <div className="price-cart-container">
-                  <p className="total-price">Valor Total: R$ {(product.price * product.quantity).toFixed(2)}</p>
-                </div>
-              </div>
+        {products.map((product, index) => (
+          <div className='product-card' key={index}>
+            <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} />
+            <h4>{product.nomeProduto}</h4>
+            <p>{product.descricaoProduto}</p>
+            <div className="quantity-container">
+              <p className="product-price">R$ {product.valorProduto}</p>
+              <label htmlFor={`quantity-${product.IDProduto}`}>Quantidade:</label>
+              <input
+                type="number"
+                id={`quantity-${product.IDProduto}`}
+                name={`quantity-${product.IDProduto}`}
+                min="1"
+                value={product.qtdEstoque}
+                onChange={(e) => handleQuantityChange(index, e)}
+              />
             </div>
-          ))}
-        </div>
-        <div className='div-checkout-button'>
-          <button className="checkout-button">Finalizar Compra</button>
-        </div>
+            <div className="price-cart-container">
+              <p className="total-price">Valor Total: R$ {(product.valorProduto * product.qtdEstoque)}</p>
+            </div>
+            <div className="price-cart-container">
+              <button className="add-to-cart-button" onClick={() => handleAddToCart(product)}>Adicionar ao carrinho</button>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

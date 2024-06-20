@@ -1,80 +1,65 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BrilhanteContext } from '../Context/GlobalContext';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
-function ProductCards() {
-
-  // const [listarprodutosPorTipo, setListarProdutosPorTipo] = useState([]);
+function ProductCards({ tipo }) {
   const [listarprodutos, setListarProdutos] = useState([]);
-  const {produtosHomePage} = useState ()
-  const { products, handleQuantityChange } = useContext(BrilhanteContext);
 
-  // const timeout = (duration) => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(resolve, duration)
-  //   })
-  // }
-
-  // timeout(2000)
-  // .then(function() { // executa o bloco após 2 segundos
-  //   console.log("executa o bloco após 2 segundos");
-  // });
-
-  const listarProduto = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8010/brilhante/produto`);
-      if (response.status === 200) {
-        setListarProdutos(response.data);
+  useEffect(() => {
+    const listarProduto = async () => {
+      try {
+        let url = 'http://localhost:8010/brilhante/produto';
+        if (tipo) {
+          url = `http://localhost:8010/brilhante/produto/produtotipo/${tipo}`;
+        }
+        
+        const response = await axios.get(url);
+        
+        if (response.status === 200) {
+          setListarProdutos(response.data.map(product => ({
+            ...product,
+            quantidade: 1 // Inicializa a quantidade como 1 para cada produto
+          })));
+        }
+      } catch (error) {
+        console.error('Erro ao listar produtos:', error);
       }
-    } catch (error) {
-      console.error('Erro ao listar produtos por tipo:', error);
-      setError('Erro ao listar produtos por tipo. Por favor, tente novamente.');
-    }
+    };
+
+    listarProduto();
+  }, [tipo]);
+
+  // Função para lidar com a mudança na quantidade e atualizar o estado
+  const handleQuantityChange = (index, event) => {
+    const newQuantity = parseInt(event.target.value);
+    setListarProdutos(prevProducts => {
+      const updatedProducts = [...prevProducts];
+      updatedProducts[index].quantidade = newQuantity;
+      return updatedProducts;
+    });
   };
-
-  // const listarProdutoPorTipo = async (tipo) => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:8010/brilhante/produto/produtotipo/${tipo}`);
-  //     if (response.status === 200) {
-  //       setListarProdutosPorTipo(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error('Erro ao listar produtos por tipo:', error);
-  //     setError('Erro ao listar produtos por tipo. Por favor, tente novamente.');
-  //   }
-  // };
-  
-  useEffect(() =>{
-    listarProduto()
-  },[]);
-
-  useEffect(() =>{
-    console.log(listarprodutos);
-  },[listarprodutos]);
 
   return (
     <div className='div-container'>
-      {!!listarprodutos && listarprodutos.map((product, index) => (
+      {listarprodutos.length > 0 && listarprodutos.map((product, index) => (
         <div className='div-card-produto' key={index}>
-          {/* <img className='img-card' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} /> */}
-          
-          <h4>{product.name}</h4>
-          <p>{product.description}</p>
+          <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} />
+          <h4>{product.nomeProduto}</h4>
+          <p>{product.descricaoProduto}</p>
           <div className="quantity-container">
-            <p className="price">R$ {product.price/*.toFixed(2)*/}</p>
-            <label htmlFor={`quantity-${product.id}`}>Quantidade:</label>
+            <p className="price">R$ {product.valorProduto}</p>
+            <label >Quantidade:</label>
             <input
               type="number"
-              id={`quantity-${product.id}`}
-              name={`quantity-${product.id}`}
+              id={`quantity-${index}`}
+              name={`quantity-${index}`}
               min="1"
-              value={product.quantity}
-              onChange={(e) => handleQuantityChange(index, e)}
+              max={product.qtdEstoque}
+              value={product.quantidade}
+              onChange={(e) => handleQuantityChange(index, e)} // Passa o índice do produto
             />
           </div>
           <div className="div-card-price-cart">
-            <p className="total-price">Valor Total: R$ {(product.price * product.quantity)/*.toFixed(2)*/}</p>
+            <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p> {/* Calcula o valor total do produto */}
           </div>
           <div className="div-card-price-cart">
             <button className="button-add-to-cart">Adicionar ao carrinho</button>

@@ -1,10 +1,8 @@
 import React from 'react';
-
-import './HomePage.css';
 import ProductCards from '../Components/CardProduto';
+import './HomePage.css';
 
 function HomePage() {
-
   return (
     <>
       <div className='home-container'>
