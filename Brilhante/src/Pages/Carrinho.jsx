@@ -10,19 +10,12 @@ function Carrinho() {
     // Lista de produtos
   ];
 
-  const handleAddToCart = (product) => {
-    setCart([...cart, product]);
-    // Aqui você pode adicionar qualquer lógica adicional, como atualizar o estado global do carrinho, etc.
-    // Por exemplo:
-    // addToCart(product);
-  };
-
   return (
     <>
       <div className='carrinho-container'>
         {products.map((product, index) => (
           <div className='product-card' key={index}>
-            <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} />
+            {/* <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} /> */}
             <h4>{product.nomeProduto}</h4>
             <p>{product.descricaoProduto}</p>
             <div className="quantity-container">

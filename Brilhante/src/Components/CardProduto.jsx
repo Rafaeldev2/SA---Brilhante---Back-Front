@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { BrilhanteContext } from '../Context/GlobalContext';
 
 function ProductCards({ tipo }) {
+  const { addToCart } = useContext(BrilhanteContext);
   const [listarprodutos, setListarProdutos] = useState([]);
 
   useEffect(() => {
@@ -28,7 +30,6 @@ function ProductCards({ tipo }) {
     listarProduto();
   }, [tipo]);
 
-  // Função para lidar com a mudança na quantidade e atualizar o estado
   const handleQuantityChange = (index, event) => {
     const newQuantity = parseInt(event.target.value);
     setListarProdutos(prevProducts => {
@@ -42,7 +43,7 @@ function ProductCards({ tipo }) {
     <div className='div-container'>
       {listarprodutos.length > 0 && listarprodutos.map((product, index) => (
         <div className='div-card-produto' key={index}>
-          <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} />
+          {/* <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} /> */}
           <h4>{product.nomeProduto}</h4>
           <p>{product.descricaoProduto}</p>
           <div className="quantity-container">
@@ -55,14 +56,14 @@ function ProductCards({ tipo }) {
               min="1"
               max={product.qtdEstoque}
               value={product.quantidade}
-              onChange={(e) => handleQuantityChange(index, e)} // Passa o índice do produto
+              onChange={(e) => handleQuantityChange(index, e)}
             />
           </div>
           <div className="div-card-price-cart">
-            <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p> {/* Calcula o valor total do produto */}
+            <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p>
           </div>
           <div className="div-card-price-cart">
-            <button className="button-add-to-cart">Adicionar ao carrinho</button>
+            <button className="button-add-to-cart" onClick={() => handleAddToCart(product)}>Adicionar ao carrinho</button>
           </div>
         </div>
       ))}

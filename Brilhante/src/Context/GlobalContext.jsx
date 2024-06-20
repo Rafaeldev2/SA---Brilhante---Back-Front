@@ -26,6 +26,11 @@ export const BrilhanteContextProvider = (({ children }) => {
     vendas: []
   });
 
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+    addToCart(product);
+  };
+
   return (
     <BrilhanteContext.Provider value={{ email, setEmail, cliente, setCliente  }}>
       {children}
