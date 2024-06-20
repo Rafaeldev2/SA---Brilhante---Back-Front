@@ -90,6 +90,8 @@ const Cadastro = () => {
                             type="text"
                             value={newClient.email}
                             onChange={(e) => handleClientChange('email', e.target.value)}
+                            required
+                            pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
                         />
                     </div>
                     <div className='div-space-label'></div>
