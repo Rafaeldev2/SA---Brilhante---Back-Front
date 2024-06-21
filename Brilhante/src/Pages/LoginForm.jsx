@@ -5,11 +5,9 @@ import { Navigate } from 'react-router-dom';
 import { BrilhanteContext } from '../Context/GlobalContext';
 
 const LoginForm = () => {
-
-
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const {cliente, setCliente} = useContext(BrilhanteContext);
+  const { cliente, setCliente } = useContext(BrilhanteContext);
   const [loginClient, setloginClient] = useState({
     email: '',
     senha: '',
@@ -17,17 +15,20 @@ const LoginForm = () => {
 
   useEffect(() => {
     console.log(cliente)
-  }, [cliente])
+  }, [cliente]);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      localStorage.setItem('cliente', JSON.stringify(cliente));
+    }
+  }, [loginSuccess, cliente]);
 
   const handleClientChange = (field, value) => {
     setloginClient({ ...loginClient, [field]: value });
   };
 
   const loginCliente = async () => {
-    if (
-      loginClient.email &&
-      loginClient.senha
-    ) {
+    if (loginClient.email && loginClient.senha) {
       const logonClient = {
         email: loginClient.email,
         senha: loginClient.senha
@@ -35,10 +36,10 @@ const LoginForm = () => {
 
       try {
         const response = await axios.post('http://localhost:8010/brilhante/cliente/login', logonClient);
-        if (response.status === 200) { // Supondo que 200 seja o código de status de sucesso para criação de Client
+        if (response.status === 200) {
           setError('');
-          setLoginSuccess(true)
-          setCliente(response.data)
+          setLoginSuccess(true);
+          setCliente(response.data);
         }
       } catch (error) {
         console.error('Erro de login:', error);
@@ -80,7 +81,7 @@ const LoginForm = () => {
                 id="senha"
                 className="custom-input"
                 placeholder='Senha'
-                type="senha"
+                type="password"
                 value={loginClient.senha}
                 onChange={(e) => handleClientChange('senha', e.target.value)}
               />
@@ -88,11 +89,8 @@ const LoginForm = () => {
           </div>
           <div className='space-input'></div>
           <div className='div-button'>
-
             <button className='Button-Login-Cadastro' type="submit" onClick={loginCliente}>Confirmar</button>
-            
             {loginSuccess && (<Navigate to="/" replace={true} />)}
-
           </div>
         </div>
       </div>

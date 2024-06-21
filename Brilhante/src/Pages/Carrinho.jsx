@@ -1,19 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { BrilhanteContext } from "../Context/GlobalContext"
+import React, { useContext } from 'react';
+import { BrilhanteContext } from "../Context/GlobalContext";
 
 function Carrinho() {
-  const { handleQuantityChange } = useContext(BrilhanteContext);
-  const [cart, setCart] = useState([]);
-  
-  // Supondo que products seja a lista de produtos disponíveis
-  const products = [
-    // Lista de produtos
-  ];
+  const { cart, setCart } = useContext(BrilhanteContext);
+
+  const handleQuantityChange = (index, event) => {
+    const newQuantity = parseInt(event.target.value);
+    setCart(prevCart => {
+      const updatedCart = [...prevCart];
+      updatedCart[index].quantidade = newQuantity;
+      return updatedCart;
+    });
+  };
 
   return (
-    <>
-      <div className='carrinho-container'>
-        {products.map((product, index) => (
+    <div className='carrinho-container'>
+      <h1>Cart Page</h1>
+      <div className='products-container'>
+        {cart.map((product, index) => (
           <div className='product-card' key={index}>
             {/* <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} /> */}
             <h4>{product.nomeProduto}</h4>
@@ -26,20 +30,20 @@ function Carrinho() {
                 id={`quantity-${product.IDProduto}`}
                 name={`quantity-${product.IDProduto}`}
                 min="1"
-                value={product.qtdEstoque}
+                value={product.quantidade}
                 onChange={(e) => handleQuantityChange(index, e)}
               />
             </div>
             <div className="price-cart-container">
-              <p className="total-price">Valor Total: R$ {(product.valorProduto * product.qtdEstoque)}</p>
-            </div>
-            <div className="price-cart-container">
-              <button className="add-to-cart-button" onClick={() => handleAddToCart(product)}>Adicionar ao carrinho</button>
+              <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p>
             </div>
           </div>
         ))}
       </div>
-    </>
+      <div className='div-checkout-button'>
+        <button className="checkout-button">Finalizar Compra</button>
+      </div>
+    </div>
   );
 }
 

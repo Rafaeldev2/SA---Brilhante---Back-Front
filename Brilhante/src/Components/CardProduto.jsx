@@ -13,9 +13,9 @@ function ProductCards({ tipo }) {
         if (tipo) {
           url = `http://localhost:8010/brilhante/produto/produtotipo/${tipo}`;
         }
-        
+
         const response = await axios.get(url);
-        
+
         if (response.status === 200) {
           setListarProdutos(response.data.map(product => ({
             ...product,
@@ -39,16 +39,20 @@ function ProductCards({ tipo }) {
     });
   };
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+  };
+
   return (
     <div className='div-container'>
       {listarprodutos.length > 0 && listarprodutos.map((product, index) => (
         <div className='div-card-produto' key={index}>
-          {/* <img className='product-image' src={`./img/${product.tipo}/${product.name}.png`} alt={product.name} /> */}
+          {/* <img className='product-image' src={./img/${product.tipo}/${product.name}.png} alt={product.name} /> */}
           <h4>{product.nomeProduto}</h4>
           <p>{product.descricaoProduto}</p>
           <div className="quantity-container">
             <p className="price">R$ {product.valorProduto}</p>
-            <label >Quantidade:</label>
+            <label>Quantidade:</label>
             <input
               type="number"
               id={`quantity-${index}`}
