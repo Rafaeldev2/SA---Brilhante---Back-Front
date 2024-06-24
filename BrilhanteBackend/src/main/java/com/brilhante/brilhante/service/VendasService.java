@@ -1,9 +1,7 @@
 package com.brilhante.brilhante.service;
 
-import com.brilhante.brilhante.entity.Carrinho;
 import com.brilhante.brilhante.entity.Cliente;
 import com.brilhante.brilhante.entity.Vendas;
-import com.brilhante.brilhante.entity.VendasProduto;
 import com.brilhante.brilhante.repository.VendasRepository;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +16,8 @@ public class VendasService {
     @Autowired
     private ClienteService clienteService;
     
-//    @Autowired
-//    private VendasProdutoService vendasProdutoService;
-    
-
     public Long incluirVenda(Vendas vendas, Long IdCliente){
+       
         Optional<Cliente> cliente = clienteService.consultarCliente(IdCliente);
         if(cliente.isPresent()){
             vendas.setCliente(cliente.get());
@@ -30,18 +25,6 @@ public class VendasService {
         }
         return null;
     }
-//     public Long incluirVenda(List<Carrinho> carrinho, Long IdCliente){
-//        Optional<Cliente> cliente = clienteService.consultarCliente(IdCliente);
-//        if(cliente.isPresent()){
-//            Vendas vendas = new Vendas();
-//            vendas.setCliente(cliente.get());
-//            vendas.setStatus(1);
-//            Long idVendas = vendasRepository.save(vendas).getIDVendas();
-//            vendasProdutoService.IncluirVendasProdutoCarrinho(carrinho,idVendas);
-//         return idVendas;
-//        }
-//        return null;
-//    }
     
     public Boolean excluirVenda(Long idVenda){
         

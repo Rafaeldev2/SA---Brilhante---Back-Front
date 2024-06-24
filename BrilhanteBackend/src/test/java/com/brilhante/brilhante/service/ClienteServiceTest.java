@@ -1,8 +1,12 @@
 package com.brilhante.brilhante.service;
 
 import com.brilhante.brilhante.entity.Cliente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 import org.junit.jupiter.api.AfterEach;
@@ -110,12 +114,13 @@ public class ClienteServiceTest {
     public void testIncluirCliente() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("90188851291");
-        cliente.setNome("José da Silva");
-        cliente.setEmail("zezinho@gmail.com");
+        cliente.setCpf("75188851291");
+        cliente.setNome("João da Silva");
+        cliente.setEmail("zezi@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
-        assertNotNull(id);
+        Long idExpect = null;
+        assertNotEquals(id, idExpect);
     }
     
     @Test
@@ -252,17 +257,34 @@ public class ClienteServiceTest {
      */
     @Test
     @Order(13)
-    public void testAtualizarCliente() {
+    public void testAtualizarCliente() throws ParseException {
         System.out.println("atualizarCliente");
         Cliente cliente = new Cliente();
-        Long idCliente = 202L;
+        Long idCliente = 252L;
         cliente.setIDCliente(idCliente);
-        cliente.setCpf("90188851291");
-        cliente.setEmail("zezinho@gmail.com");
-        cliente.setNome("José da Silva");
+        cliente.setCpf("75188851291");
+        cliente.setEmail("zezi@gmail.com");
+        cliente.setNome("João da Silva");
+        cliente.setSenha("353");
+        cliente.setPerfil("User");
+        cliente.setCep(88020348L);
+        cliente.setLogradouro("Rua da quinze");
+        cliente.setNumEndereco("348");
+        cliente.setUF("SC");
+        cliente.setCidade("Florianópolis");
+        cliente.setBairro("coqueiros");
+        cliente.setCompEndereco("Apto 303");
+        cliente.setCelular(45999355368L);
+        cliente.setDataNasc(convertStringToDate("1976-12-19"));
         Boolean expResult = true;
         Boolean result = srv.atualizarCliente(cliente);
         assertEquals(expResult, result);
     }
     
+    
+    public Date convertStringToDate(String data) throws ParseException{
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.of("PT", "BR")); //Objeto Formatador de Data
+    return sdf.parse(data); // Campo do tipo Date recebendo String...
+
+    }
 }
