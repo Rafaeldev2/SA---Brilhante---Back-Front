@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import Login from './Login';
@@ -6,9 +6,16 @@ import Logoff from './Logoff';
 import { BrilhanteContext } from '../Context/GlobalContext';
 
 const HomePage = () => {
-  // Verifica se o objeto cliente existe no localStorage
+  const { clienteExistente, setClienteExistente } = useContext(BrilhanteContext);
 
-  const [clienteExistente, setClienteExistente] = useState(localStorage.getItem('cliente'));
+  useEffect(() => {
+    const storedCliente = localStorage.getItem('cliente');
+    if (storedCliente) {
+      setClienteExistente(true);
+    } else {
+      setClienteExistente(false);
+    }
+  }, []);
 
   return (
     <div>

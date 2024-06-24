@@ -1,6 +1,7 @@
 package com.brilhante.brilhante.controller;
 
 
+import com.brilhante.brilhante.entity.Carrinho;
 import com.brilhante.brilhante.entity.MsgRetorno;
 import com.brilhante.brilhante.entity.Vendas;
 import com.brilhante.brilhante.service.VendasService;
@@ -40,11 +41,11 @@ public class VendasController {
       }
    }
             @CrossOrigin(origins = "*")
-            @GetMapping("/venda")
-            
+            @GetMapping("/venda")            
             public ResponseEntity<Object> listarVenda() {
             List<Vendas> produtos = vendaservice.listarVenda();
-            return new ResponseEntity<>(produtos, HttpStatus.OK);}
+            return new ResponseEntity<>(produtos, HttpStatus.OK);
+            }
             
             @CrossOrigin(origins = "*")
             @PostMapping(value = "/venda/{idCliente}", consumes = {"application/json"})
@@ -61,6 +62,21 @@ public class VendasController {
                 return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);            
             }
         }
+//            @CrossOrigin(origins = "*")
+//            @PostMapping("/venda/{idCliente}")
+//            public ResponseEntity<Object> incluirVendaEProdutos(
+//                    @RequestBody List<Carrinho> carrinho,@PathVariable(value = "idCliente") Long idCliente){
+//                System.out.println("IDCliente: " + idCliente);
+//            Long idVnd = vendaservice.incluirVenda(carrinho,idCliente);
+//            if(idVnd != null && idVnd > 0){
+//                return new ResponseEntity<>(idVnd, HttpStatus.OK);
+//            } else {
+//                MsgRetorno erro = new MsgRetorno();
+//                erro.setFuncao("Incluir Venda");
+//                erro.setDescrição("Erro ao incluir Venda! Chame a TI!!");
+//                return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);            
+//            }
+//        }
             
         @CrossOrigin(origins = "*")
         @PutMapping("/venda")

@@ -7,14 +7,14 @@ import { BrilhanteContext } from '../Context/GlobalContext';
 const LoginForm = () => {
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const { cliente, setCliente } = useContext(BrilhanteContext);
+  const { cliente, setCliente, setClienteExistente } = useContext(BrilhanteContext);
   const [loginClient, setloginClient] = useState({
     email: '',
     senha: '',
   });
 
   useEffect(() => {
-    console.log(cliente)
+    console.log(cliente);
   }, [cliente]);
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const LoginForm = () => {
           setError('');
           setLoginSuccess(true);
           setCliente(response.data);
+          setClienteExistente(true);  // Atualiza clienteExistente no contexto
         }
       } catch (error) {
         console.error('Erro de login:', error);

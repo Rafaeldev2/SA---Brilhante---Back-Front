@@ -3,9 +3,12 @@ import axios from 'axios';
 import { BrilhanteContext } from '../Context/GlobalContext';
 
 function ProductCards({ tipo }) {
+  // Extrair função addToCart do contexto
   const { addToCart } = useContext(BrilhanteContext);
+  // Estado local para armazenar produtos
   const [listarprodutos, setListarProdutos] = useState([]);
 
+  // Buscar produtos do servidor ao montar o componente
   useEffect(() => {
     const listarProduto = async () => {
       try {
@@ -30,6 +33,7 @@ function ProductCards({ tipo }) {
     listarProduto();
   }, [tipo]);
 
+  // Atualizar a quantidade de um produto
   const handleQuantityChange = (index, event) => {
     const newQuantity = parseInt(event.target.value);
     setListarProdutos(prevProducts => {
@@ -39,10 +43,12 @@ function ProductCards({ tipo }) {
     });
   };
 
+  // Adicionar produto ao carrinho
   const handleAddToCart = (product) => {
     addToCart(product);
   };
 
+  // Renderizar o componente
   return (
     <div className='div-container'>
       {listarprodutos.length > 0 && listarprodutos.map((product, index) => (

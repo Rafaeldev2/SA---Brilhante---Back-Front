@@ -1,6 +1,7 @@
 package com.brilhante.brilhante.service;
 
 
+import com.brilhante.brilhante.entity.Carrinho;
 import com.brilhante.brilhante.entity.Produto;
 import com.brilhante.brilhante.entity.Vendas;
 import com.brilhante.brilhante.entity.VendasProduto;
@@ -34,6 +35,18 @@ public class VendasProdutoService {
          }
          return null;
    }
+//      public boolean IncluirVendasProdutoCarrinho (List<Carrinho> carrinho, Long IdVendas){
+//          
+//           for(Carrinho car : carrinho){
+//                VendasProduto vendasprd = new VendasProduto();
+//                vendasprd.setProduto(produtoService.consultarProduto(car.getIdproduto()).get());
+//                vendasprd.setQtdProduto(car.getQtdproduto());
+//                vendasprd.setValorProduto(car.getValorProduto());
+//                vendasprd.setVendas(vendasService.consultarVenda(IdVendas).get());
+//                vendasProdutosRepository.save(vendasprd);
+//            }           
+//         return true;
+//   }
      public Boolean excluirVendasProduto(Long IDVendasProduto){
          if(vendasProdutosRepository.existsById(IDVendasProduto)){
              vendasProdutosRepository.deleteById(IDVendasProduto);

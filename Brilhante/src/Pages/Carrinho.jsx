@@ -3,17 +3,20 @@ import { BrilhanteContext } from "../Context/GlobalContext";
 import axios from 'axios';
 
 function Carrinho() {
-  const { cart, setCart, clienteExistente } = useContext(BrilhanteContext);
+  // Extrair dados do contexto
+  const { cart, setCart, clienteExistente, cliente } = useContext(BrilhanteContext);
+  // Estado local para armazenar produtos comprados
   const [produtosComprados, setProdutosComprados] = useState([]);
 
+  // Carregar produtos comprados do armazenamento local ao montar o componente
   useEffect(() => {
-    // Carregar os produtos comprados do localStorage quando a página for carregada
     const produtosCompradosFromStorage = JSON.parse(localStorage.getItem('produtosComprados'));
     if (produtosCompradosFromStorage) {
       setProdutosComprados(produtosCompradosFromStorage);
     }
   }, []);
 
+  // Atualizar a quantidade de um produto no carrinho
   const handleQuantityChange = (index, event) => {
     const newQuantity = parseInt(event.target.value);
     setCart(prevCart => {
@@ -23,31 +26,43 @@ function Carrinho() {
     });
   };
 
+  // Finalizar a compra
   const handleCheckout = async () => {
     try {
-      await Promise.all(cart.map(async (product) => {
-        const updatedProduct = {
-          ...product,
-          qtdEstoque: product.qtdEstoque - product.quantidade // Supondo que qtdEstoque seja o estoque inicial
-        };
-        await axios.put('http://localhost:8010/brilhante/produto', updatedProduct);
-      }));
+      // Construir objeto de venda
+      const venda = {
+        //status: 1, // Defina um status apropriado para novas vendas
+        vendasProduto: cart.map(product => ({
+          idproduto: product.idproduto,
+          qtdproduto: product.quantidade,
+          valorProduto: product.valorProduto,
+          status: 1
+        })),
+        cliente: cliente // Supondo que cliente é o objeto cliente autenticado
+      };
 
-      setProdutosComprados(cart); // Move os produtos comprados para o estado de produtos comprados
-      localStorage.setItem('produtosComprados', JSON.stringify(cart)); // Salva os produtos comprados no localStorage
-
-      setCart([]); // Limpar o carrinho após finalizar a compra
-      localStorage.removeItem('cart'); // Remover o carrinho do localStorage
+      // Enviar requisição para finalizar a compra
+      const response = await axios.post(`http://localhost:8010/brilhante/venda/${cliente.idClient}`, venda);
+      
+      // Atualizar produtos comprados no estado local e armazenamento local
+      setProdutosComprados(cart);
+      localStorage.setItem('produtosComprados', JSON.stringify(cart));
+      
+      // Limpar carrinho
+      setCart([]);
+      localStorage.removeItem('cart');
     } catch (error) {
       console.error('Erro ao finalizar a compra:', error);
       alert('Erro ao finalizar a compra. Tente novamente.');
     }
   };
 
+  // Verificar se o cliente está autenticado
   if (!clienteExistente) {
     return <div>Por favor, faça login para acessar o carrinho.</div>;
   }
 
+  // Renderizar o componente
   return (
     <div className='carrinho-container'>
       <h1>Cart Page</h1>
