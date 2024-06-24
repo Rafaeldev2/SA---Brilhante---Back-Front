@@ -47,7 +47,7 @@ function ProductCards({ tipo }) {
     <div className='div-container'>
       {listarprodutos.length > 0 && listarprodutos.map((product, index) => (
         <div className='div-card-produto' key={index}>
-          {/* <img className='product-image' src={./img/${product.tipo}/${product.name}.png} alt={product.name} /> */}
+          <img className='product-image' src="https://i.imgur.com/hgt1w0P.png" alt={product.name} />
           <h4>{product.nomeProduto}</h4>
           <p>{product.descricaoProduto}</p>
           <div className="quantity-container">

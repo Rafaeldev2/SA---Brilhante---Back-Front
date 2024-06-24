@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import Login from './Login';
+import Logoff from './Logoff';
+import { BrilhanteContext } from '../Context/GlobalContext';
 
 const HomePage = () => {
+  // Verifica se o objeto cliente existe no localStorage
+
+  const [clienteExistente, setClienteExistente] = useState(localStorage.getItem('cliente'));
+
   return (
     <div>
       <header className="header">
@@ -11,7 +18,7 @@ const HomePage = () => {
             <img src="./img/Brilhante.png" className="ImgBrilhante" alt="Logo" />
           </Link>
           <div className="header-links">
-          <Link to="/Aneis" className="header-link">Anéis</Link>
+            <Link to="/Aneis" className="header-link">Anéis</Link>
             <Link to="/Brinco" className="header-link">Brinco</Link>
             <Link to="/Colar" className="header-link">Colar</Link>
             <Link to="/Conjunto" className="header-link">Conjunto</Link>
@@ -19,17 +26,10 @@ const HomePage = () => {
           </div>
         </div>
         <div className="header-right">
-          <Link to="/Cadastro" className="header-icon">
-            <img src="./img/Edit.png" className="ImgIcons" />
-          </Link>
-          <Link to="/Login" className="header-icon">
-            <img src="./img/Login.png" className="ImgIcons" />
-          </Link>
-          <Link to="/Carrinho" className="header-icon">
-            <img src="./img/Cart.png" className="ImgIcons" />
-          </Link>
+          {/* Verifica se o cliente existe no localStorage e condiciona o link */}
+          {clienteExistente ? <Logoff/> : <Login/>}
           <Link to="/Perfil" className="header-icon">
-            <img src="./img/Perfil.png" className="ImgIcons" />
+            <img src="./img/Perfil.png" className="ImgIcons" alt="Perfil" />
           </Link>
         </div>
       </header>

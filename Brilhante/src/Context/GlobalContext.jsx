@@ -4,49 +4,49 @@ export const BrilhanteContext = createContext();
 
 export const BrilhanteContextProvider = ({ children }) => {
   const [email, setEmail] = useState([]);
-  
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+  const [cart, setCart] = useState([]);
+  const [clienteExistente, setClienteExistente] = useState(localStorage.getItem('cliente'));
+
+  const [cliente, setCliente] = useState({
+    idClient: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    senha: '',
+    confirmsenha: '',
+    perfil: '',
+    cep: '',
+    logradouro: '',
+    numEndereco: '',
+    UF: '',
+    cidade: '',
+    bairro: '',
+    compEndereco: '',
+    celular: '',
+    dataNasc: '',
+    vendas: []
   });
 
-  const [cliente, setCliente] = useState(() => {
-    const savedClient = localStorage.getItem('cliente');
-    return savedClient ? JSON.parse(savedClient) : {
-      idClient: '',
-      nome: '',
-      cpf: '',
-      email: '',
-      senha: '',
-      confirmsenha: '',
-      perfil: '',
-      cep: '',
-      logradouro: '',
-      numEndereco: '',
-      UF: '',
-      cidade: '',
-      bairro: '',
-      compEndereco: '',
-      celular: '',
-      dataNasc: '',
-      vendas: []
-    };
-  });
+  // Load cart from localStorage if clienteExistente is true
+  useEffect(() => {
+    if (clienteExistente) {
+      const savedCart = localStorage.getItem('cart');
+      setCart(savedCart ? JSON.parse(savedCart) : []);
+    }
+  }, [clienteExistente]);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem('cliente', JSON.stringify(cliente));
-  }, [cliente]);
+    if (clienteExistente) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, clienteExistente]);
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
 
   return (
-    <BrilhanteContext.Provider value={{ email, setEmail, cliente, setCliente, cart, addToCart }}>
+    <BrilhanteContext.Provider value={{ email, setEmail, cliente, setCliente, cart, setCart, addToCart, clienteExistente, setClienteExistente }}>
       {children}
     </BrilhanteContext.Provider>
   );
