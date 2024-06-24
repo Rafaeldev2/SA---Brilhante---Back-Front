@@ -19,7 +19,9 @@ public class ClienteService {
     
     public Long incluirCliente(Cliente cliente){
         
-        if(cliente.getCpf() == null || 
+        if(cliente.getCpf() == null ||
+           cliente.getCpf().length() > 11 ||
+           cliente.getCpf().length() < 11 ||
            cliente.getNome() == null || 
            cliente.getEmail() == null || 
            cliente.getSenha() == null){        
