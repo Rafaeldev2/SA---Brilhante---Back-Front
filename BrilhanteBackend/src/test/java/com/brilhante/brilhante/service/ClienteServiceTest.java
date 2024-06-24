@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Disabled
+//@Disabled
 public class ClienteServiceTest {
     
     @Autowired
@@ -110,13 +110,12 @@ public class ClienteServiceTest {
     public void testIncluirCliente() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512-91");
+        cliente.setCpf("90188851291");
         cliente.setNome("José da Silva");
         cliente.setEmail("zezinho@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
-        Long expResult = null;
-        assertEquals(expResult, id);
+        assertNotNull(id);
     }
     
     @Test
@@ -137,7 +136,7 @@ public class ClienteServiceTest {
     public void testIncluirClienteCPF12Num() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512-913");
+        cliente.setCpf("901888512845");
         cliente.setNome("José da Silva");
         cliente.setEmail("zarinho@gmail.com");
         cliente.setSenha("321654");
@@ -151,7 +150,7 @@ public class ClienteServiceTest {
     public void testIncluirClienteCPF10NumouMenos() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512");
+        cliente.setCpf("901888512");
         cliente.setNome("José da Silva");
         cliente.setEmail("zero@gmail.com");
         cliente.setSenha("321654");
@@ -165,7 +164,7 @@ public class ClienteServiceTest {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
         cliente.setCpf("901.888.512-01");
-        cliente.setEmail("zezinho@gmail.com");
+        cliente.setEmail("zinho@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
         Long expResult = null;
@@ -256,11 +255,11 @@ public class ClienteServiceTest {
     public void testAtualizarCliente() {
         System.out.println("atualizarCliente");
         Cliente cliente = new Cliente();
-        Long idCliente = Long.valueOf("4");
+        Long idCliente = 202L;
         cliente.setIDCliente(idCliente);
-        cliente.setCpf("901.888.512-88");
-        cliente.setEmail("clerison@gmail.com");
-        cliente.setNome("clerison da Silva");
+        cliente.setCpf("90188851291");
+        cliente.setEmail("zezinho@gmail.com");
+        cliente.setNome("José da Silva");
         Boolean expResult = true;
         Boolean result = srv.atualizarCliente(cliente);
         assertEquals(expResult, result);
