@@ -22,12 +22,11 @@ public class ClienteService {
         if(cliente.getCpf() == null || 
            cliente.getNome() == null || 
            cliente.getEmail() == null || 
-           cliente.getSenha() == null || 
-           ! cliente.getEmail().matches("@")){
-        
+           cliente.getSenha() == null){        
             return null;
         }
-        
+        Integer idx = cliente.getEmail().indexOf('@');
+        if (idx <= 0) { return null; }
         
         String cpf = cliente.getCpf();
         Cliente cli = clienteRepository.findByCpf(cpf);

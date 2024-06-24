@@ -50,7 +50,7 @@ public class ClienteController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/cliente")
-    public ResponseEntity<Object> incluirCliente(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<Object> incluirCliente(@RequestBody Cliente cliente) {
 
         Long idCli = clienteservice.incluirCliente(cliente);
         if (idCli != null && idCli > 0) {
