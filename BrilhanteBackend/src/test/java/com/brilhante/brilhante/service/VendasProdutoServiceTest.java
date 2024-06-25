@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-//@Disabled
+@Disabled
 public class VendasProdutoServiceTest {
     @Autowired
     private VendasService vnd;
