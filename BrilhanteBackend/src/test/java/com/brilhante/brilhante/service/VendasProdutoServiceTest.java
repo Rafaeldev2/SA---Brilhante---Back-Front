@@ -17,13 +17,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@Disabled
+@SpringBootTest
+//@Disabled
 public class VendasProdutoServiceTest {
     @Autowired
     private VendasService vnd;
+    
+    @Autowired
     private ProdutoService pdt;
+    
+    @Autowired
     private VendasProdutoService VnPdt;
+    
     public VendasProdutoServiceTest() {
     }
     
@@ -49,9 +56,11 @@ public class VendasProdutoServiceTest {
         System.out.println("incluir VendasProduto");
         VendasProduto vendasproduto = new VendasProduto();
         List <Produto> produtos = pdt.listarProduto();
-        Long primeiroPdt = produtos.getFirst().getIDProduto();
+        Long primeiroPdt = produtos.get(0).getIDProduto();
         List <Vendas> vendas = vnd.listarVenda();
-        Long primeiraVnd = vendas.getFirst().getIDVendas();
+        Long primeiraVnd = vendas.get(0).getIDVendas();
+        vendasproduto.setQtdProduto(4);
+        vendasproduto.setValorProduto(5.99);
         Long id = VnPdt.IncluirVendasProduto(vendasproduto, primeiraVnd, primeiroPdt);
         Long expResult = null;
         assertNotEquals(expResult, id);

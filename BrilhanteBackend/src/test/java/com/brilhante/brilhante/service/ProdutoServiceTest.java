@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-@Disabled
+//@Disabled
 public class ProdutoServiceTest {
     
     
@@ -116,7 +116,7 @@ public class ProdutoServiceTest {
     @Order(7)
     public void testConsultarProduto() {
         System.out.println("consultar Produto");
-        Long idProduto = 2L;
+        Long idProduto = 1L;
         Optional<Produto> expResult = null;
         Optional<Produto> result = pdt.consultarProduto(idProduto);
         System.out.println("Nome do Produto 1: " + result.get().getNomeProduto());
@@ -126,11 +126,11 @@ public class ProdutoServiceTest {
     @Order(8)
     public void testConsultarProdutoComIDErrado() {
         System.out.println("consultar Produto");
-        Long idProduto = null;
+        Long idProduto = 5L;
         Optional<Produto> expResult = null;
         Optional<Produto> result = pdt.consultarProduto(idProduto);
         System.out.println("Nome do Produto 1: " + result.get().getNomeProduto());
-        assertNotEquals(expResult, result);
+        assertEquals(expResult, result);
     }
     @Test
     @Order(9)
