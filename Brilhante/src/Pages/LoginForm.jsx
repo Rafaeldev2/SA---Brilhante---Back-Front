@@ -11,10 +11,6 @@ const LoginForm = () => {
   const [loginClient, setLoginClient] = useState({ email: '', senha: '' });
 
   useEffect(() => {
-    console.log(cliente);
-  }, [cliente]);
-
-  useEffect(() => {
     if (loginSuccess) {
       localStorage.setItem('cliente', JSON.stringify(cliente));
     }

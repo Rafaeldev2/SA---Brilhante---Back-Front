@@ -7,7 +7,7 @@ export const BrilhanteContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [clienteExistente, setClienteExistente] = useState(!!localStorage.getItem('cliente'));
   const [cliente, setCliente] = useState({
-    IDCliente: '',  // Alterado de idClient para IDCliente
+    idcliente: '',
     nome: '',
     cpf: '',
     email: '',
@@ -22,7 +22,7 @@ export const BrilhanteContextProvider = ({ children }) => {
     compEndereco: '',
     celular: '',
     dataNasc: '',
-    vendas: []
+    vendas: [] // Aqui armazenaremos as vendas do cliente, cada uma contendo seus produtos comprados
   });
 
   useEffect(() => {

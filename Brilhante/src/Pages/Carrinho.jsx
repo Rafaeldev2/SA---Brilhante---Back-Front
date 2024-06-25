@@ -4,9 +4,11 @@ import axios from 'axios';
 
 function Carrinho() {
   // Extrair dados do contexto
-  const { cart, setCart, clienteExistente, cliente } = useContext(BrilhanteContext);
+  const { cart, setCart, clienteExistente, cliente, setCliente } = useContext(BrilhanteContext);
   // Estado local para armazenar produtos comprados
   const [produtosComprados, setProdutosComprados] = useState([]);
+  // Estado local para controlar se a venda já foi criada
+  const [vendaCriada, setVendaCriada] = useState(false);
 
   // Carregar produtos comprados do armazenamento local ao montar o componente
   useEffect(() => {
@@ -26,30 +28,15 @@ function Carrinho() {
     });
   };
 
-  // Finalizar a compra
-  const handleCheckout = async () => {
-  try {
-    const venda = {
-      vendasProduto: cart.map(product => ({
-        idProduto: product.idproduto, // Verifique se o nome da propriedade está correto
-        qtdProduto: product.quantidade,
-        valorProduto: product.valorProduto,
-        status: 1
-      })),
-    };
+  // Remover um produto do carrinho e do localStorage
+  const handleRemoveFromCart = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1); // Remove o produto do carrinho
+    setCart(updatedCart); // Atualiza o estado do carrinho
 
-    const response = await axios.post(`http://localhost:8010/brilhante/venda/${52}`, venda); // Certifique-se de usar ` (backticks) para interpolação de string
-
-    setProdutosComprados(cart);
-    localStorage.setItem('produtosComprados', JSON.stringify(cart));
-
-    setCart([]);
-    localStorage.removeItem('cart');
-  } catch (error) {
-    console.error('Erro ao finalizar a compra:', error);
-    alert('Erro ao finalizar a compra. Tente novamente.');
-  }
-};
+    // Atualiza o localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   // Verificar se o cliente está autenticado
   if (!clienteExistente) {
@@ -67,11 +54,11 @@ function Carrinho() {
             <p>{product.descricaoProduto}</p>
             <div className="quantity-container">
               <p className="product-price">R$ {product.valorProduto}</p>
-              <label htmlFor={`quantity-${product.idproduto}`}>Quantidade:</label>
+              <label htmlFor={`quantity-${product.idProduto}`}>Quantidade:</label>
               <input
                 type="number"
-                id={`quantity-${product.idproduto}`}
-                name={`quantity-${product.idproduto}`}
+                id={`quantity-${product.idProduto}`}
+                name={`quantity-${product.idProduto}`}
                 min="1"
                 value={product.quantidade}
                 onChange={(e) => handleQuantityChange(index, e)}
@@ -80,12 +67,12 @@ function Carrinho() {
             <div className="price-cart-container">
               <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p>
             </div>
-            <button className='remove-from-cart-button'>Remover do Carrinho</button>
+            <button className='remove-from-cart-button' onClick={() => handleRemoveFromCart(index)}>Remover do Carrinho</button>
           </div>
         ))}
       </div>
       <div className='div-checkout-button'>
-        <button className="checkout-button" onClick={handleCheckout}>Finalizar Compra</button>
+        <button className="checkout-button" >Finalizar Compra</button>
       </div>
       {produtosComprados.length > 0 && (
         <div>

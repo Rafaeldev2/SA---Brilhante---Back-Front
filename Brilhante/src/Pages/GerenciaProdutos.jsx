@@ -97,7 +97,6 @@ function GerenciaProdutos() {
 
   const excluirProduto = async () => {
     try {
-      // console.log("id do produto: " + currentProductId);
       const response = await axios.delete(`http://localhost:8010/brilhante/produto/${newProduto.idproduto}`);
       if (response.status === 204) { // Supondo que 204 seja o código de status de sucesso para exclusão de produto
         setNewProduto({ idproduto: '', nomeProduto: '', produtoTipo: '', qtdEstoque: '', valorProduto: '', codigoDeBarra: '', descricaoProduto: '' });
