@@ -28,33 +28,28 @@ function Carrinho() {
 
   // Finalizar a compra
   const handleCheckout = async () => {
-    try {
-      // Construir objeto de venda
-      const venda = {
-        vendasProduto: cart.map(product => ({
-          idproduto: product.idproduto,
-          qtdproduto: product.quantidade,
-          valorProduto: product.valorProduto,
-          status: 1
-        })),
-        cliente: cliente
-      };
+  try {
+    const venda = {
+      vendasProduto: cart.map(product => ({
+        idProduto: product.idproduto, // Verifique se o nome da propriedade está correto
+        qtdProduto: product.quantidade,
+        valorProduto: product.valorProduto,
+        status: 1
+      })),
+    };
 
-      // Enviar requisição para finalizar a compra
-      const response = await axios.post(`http://localhost:8010/brilhante/venda/${cliente.IDCliente}`, venda);
+    const response = await axios.post(`http://localhost:8010/brilhante/venda/${52}`, venda); // Certifique-se de usar ` (backticks) para interpolação de string
 
-      // Atualizar produtos comprados no estado local e armazenamento local
-      setProdutosComprados(cart);
-      localStorage.setItem('produtosComprados', JSON.stringify(cart));
+    setProdutosComprados(cart);
+    localStorage.setItem('produtosComprados', JSON.stringify(cart));
 
-      // Limpar carrinho
-      setCart([]);
-      localStorage.removeItem('cart');
-    } catch (error) {
-      console.error('Erro ao finalizar a compra:', error);
-      alert('Erro ao finalizar a compra. Tente novamente.');
-    }
-  };
+    setCart([]);
+    localStorage.removeItem('cart');
+  } catch (error) {
+    console.error('Erro ao finalizar a compra:', error);
+    alert('Erro ao finalizar a compra. Tente novamente.');
+  }
+};
 
   // Verificar se o cliente está autenticado
   if (!clienteExistente) {
