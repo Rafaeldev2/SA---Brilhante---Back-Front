@@ -47,9 +47,9 @@ public class VendasController {
             return new ResponseEntity<>(produtos, HttpStatus.OK);}
             
             @CrossOrigin(origins = "*")
-            @PostMapping("/venda/{idCliente}")
-            public ResponseEntity<Object> incluirVenda(@RequestBody Vendas venda,
-                                                       @PathVariable(value = "idCliente") Long idCliente){
+            @PostMapping(value = "/venda/{idCliente}", consumes = {"application/json"})
+            public ResponseEntity<Object> incluirVenda(
+                    @Valid @RequestBody Vendas venda,@PathVariable(value = "idCliente") Long idCliente){
                 System.out.println("IDCliente: " + idCliente);
             Long idVnd = vendaservice.incluirVenda(venda,idCliente);
             if(idVnd != null && idVnd > 0){
