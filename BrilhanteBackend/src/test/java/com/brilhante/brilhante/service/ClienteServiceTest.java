@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Disabled
+//@Disabled
 public class ClienteServiceTest {
     
     @Autowired
@@ -114,9 +114,9 @@ public class ClienteServiceTest {
     public void testIncluirCliente() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("75188851291");
+        cliente.setCpf("65188851291");
         cliente.setNome("João da Silva");
-        cliente.setEmail("zezi@gmail.com");
+        cliente.setEmail("jão@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
         Long idExpect = null;
@@ -233,7 +233,7 @@ public class ClienteServiceTest {
     @Order(11)
     public void testConsultarCliente() {
         System.out.println("consultarCliente");
-        Long idCliente = 2L;
+        Long idCliente = 1L;
         Optional<Cliente> expResult = null;
         Optional<Cliente> result = srv.consultarCliente(idCliente);
         System.out.println("Nome do cliente 1: " + result.get().getNome());
@@ -260,7 +260,7 @@ public class ClienteServiceTest {
     public void testAtualizarCliente() throws ParseException {
         System.out.println("atualizarCliente");
         Cliente cliente = new Cliente();
-        Long idCliente = 252L;
+        Long idCliente = 1L;
         cliente.setIDCliente(idCliente);
         cliente.setCpf("75188851291");
         cliente.setEmail("zezi@gmail.com");
