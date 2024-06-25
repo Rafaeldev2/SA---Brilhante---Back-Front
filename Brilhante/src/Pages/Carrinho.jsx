@@ -31,23 +31,22 @@ function Carrinho() {
     try {
       // Construir objeto de venda
       const venda = {
-        //status: 1, // Defina um status apropriado para novas vendas
         vendasProduto: cart.map(product => ({
           idproduto: product.idproduto,
           qtdproduto: product.quantidade,
           valorProduto: product.valorProduto,
           status: 1
         })),
-        cliente: cliente // Supondo que cliente é o objeto cliente autenticado
+        cliente: cliente
       };
 
       // Enviar requisição para finalizar a compra
-      const response = await axios.post(`http://localhost:8010/brilhante/venda/${cliente.idClient}`, venda);
-      
+      const response = await axios.post(`http://localhost:8010/brilhante/venda/${cliente.IDCliente}`, venda);
+
       // Atualizar produtos comprados no estado local e armazenamento local
       setProdutosComprados(cart);
       localStorage.setItem('produtosComprados', JSON.stringify(cart));
-      
+
       // Limpar carrinho
       setCart([]);
       localStorage.removeItem('cart');
@@ -73,11 +72,11 @@ function Carrinho() {
             <p>{product.descricaoProduto}</p>
             <div className="quantity-container">
               <p className="product-price">R$ {product.valorProduto}</p>
-              <label htmlFor={`quantity-${product.IDProduto}`}>Quantidade:</label>
+              <label htmlFor={`quantity-${product.idproduto}`}>Quantidade:</label>
               <input
                 type="number"
-                id={`quantity-${product.IDProduto}`}
-                name={`quantity-${product.IDProduto}`}
+                id={`quantity-${product.idproduto}`}
+                name={`quantity-${product.idproduto}`}
                 min="1"
                 value={product.quantidade}
                 onChange={(e) => handleQuantityChange(index, e)}
