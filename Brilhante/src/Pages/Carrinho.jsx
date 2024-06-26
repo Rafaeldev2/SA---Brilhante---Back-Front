@@ -3,17 +3,22 @@ import { BrilhanteContext } from "../Context/GlobalContext";
 import axios from 'axios';
 
 function Carrinho() {
-  const { cart, setCart, clienteExistente } = useContext(BrilhanteContext);
+  // Extrair dados do contexto
+  const { cart, setCart, clienteExistente, cliente, setCliente } = useContext(BrilhanteContext);
+  // Estado local para armazenar produtos comprados
   const [produtosComprados, setProdutosComprados] = useState([]);
+  // Estado local para controlar se a venda já foi criada
+  const [vendaCriada, setVendaCriada] = useState(false);
 
+  // Carregar produtos comprados do armazenamento local ao montar o componente
   useEffect(() => {
-    // Carregar os produtos comprados do localStorage quando a página for carregada
     const produtosCompradosFromStorage = JSON.parse(localStorage.getItem('produtosComprados'));
     if (produtosCompradosFromStorage) {
       setProdutosComprados(produtosCompradosFromStorage);
     }
   }, []);
 
+  // Atualizar a quantidade de um produto no carrinho
   const handleQuantityChange = (index, event) => {
     const newQuantity = parseInt(event.target.value);
     setCart(prevCart => {
@@ -23,31 +28,22 @@ function Carrinho() {
     });
   };
 
-  const handleCheckout = async () => {
-    try {
-      await Promise.all(cart.map(async (product) => {
-        const updatedProduct = {
-          ...product,
-          qtdEstoque: product.qtdEstoque - product.quantidade // Supondo que qtdEstoque seja o estoque inicial
-        };
-        await axios.put('http://localhost:8010/brilhante/produto', updatedProduct);
-      }));
+  // Remover um produto do carrinho e do localStorage
+  const handleRemoveFromCart = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1); // Remove o produto do carrinho
+    setCart(updatedCart); // Atualiza o estado do carrinho
 
-      setProdutosComprados(cart); // Move os produtos comprados para o estado de produtos comprados
-      localStorage.setItem('produtosComprados', JSON.stringify(cart)); // Salva os produtos comprados no localStorage
-
-      setCart([]); // Limpar o carrinho após finalizar a compra
-      localStorage.removeItem('cart'); // Remover o carrinho do localStorage
-    } catch (error) {
-      console.error('Erro ao finalizar a compra:', error);
-      alert('Erro ao finalizar a compra. Tente novamente.');
-    }
+    // Atualiza o localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  // Verificar se o cliente está autenticado
   if (!clienteExistente) {
     return <div>Por favor, faça login para acessar o carrinho.</div>;
   }
 
+  // Renderizar o componente
   return (
     <div className='carrinho-container'>
       <h1>Cart Page</h1>
@@ -58,11 +54,11 @@ function Carrinho() {
             <p>{product.descricaoProduto}</p>
             <div className="quantity-container">
               <p className="product-price">R$ {product.valorProduto}</p>
-              <label htmlFor={`quantity-${product.IDProduto}`}>Quantidade:</label>
+              <label htmlFor={`quantity-${product.idProduto}`}>Quantidade:</label>
               <input
                 type="number"
-                id={`quantity-${product.IDProduto}`}
-                name={`quantity-${product.IDProduto}`}
+                id={`quantity-${product.idProduto}`}
+                name={`quantity-${product.idProduto}`}
                 min="1"
                 value={product.quantidade}
                 onChange={(e) => handleQuantityChange(index, e)}
@@ -71,12 +67,12 @@ function Carrinho() {
             <div className="price-cart-container">
               <p className="total-price">Valor Total: R$ {product.valorProduto * (product.quantidade || 1)}</p>
             </div>
-            <button className='remove-from-cart-button'>Remover do Carrinho</button>
+            <button className='remove-from-cart-button' onClick={() => handleRemoveFromCart(index)}>Remover do Carrinho</button>
           </div>
         ))}
       </div>
       <div className='div-checkout-button'>
-        <button className="checkout-button" onClick={handleCheckout}>Finalizar Compra</button>
+        <button className="checkout-button" >Finalizar Compra</button>
       </div>
       {produtosComprados.length > 0 && (
         <div>

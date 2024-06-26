@@ -17,7 +17,9 @@ public class VendasService {
     private ClienteService clienteService;
     
     public Long incluirVenda(Vendas vendas, Long IdCliente){
-       
+       if(vendas.getStatus() > 2 || vendas.getStatus() == 0){
+           return null;
+       }
         Optional<Cliente> cliente = clienteService.consultarCliente(IdCliente);
         if(cliente.isPresent()){
             vendas.setCliente(cliente.get());

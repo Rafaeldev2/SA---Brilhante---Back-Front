@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Login-Cadastro-Perfil.css';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
@@ -7,15 +7,8 @@ import { BrilhanteContext } from '../Context/GlobalContext';
 const LoginForm = () => {
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const { cliente, setCliente } = useContext(BrilhanteContext);
-  const [loginClient, setloginClient] = useState({
-    email: '',
-    senha: '',
-  });
-
-  useEffect(() => {
-    console.log(cliente)
-  }, [cliente]);
+  const { cliente, setCliente, setClienteExistente } = useContext(BrilhanteContext);
+  const [loginClient, setLoginClient] = useState({ email: '', senha: '' });
 
   useEffect(() => {
     if (loginSuccess) {
@@ -24,22 +17,18 @@ const LoginForm = () => {
   }, [loginSuccess, cliente]);
 
   const handleClientChange = (field, value) => {
-    setloginClient({ ...loginClient, [field]: value });
+    setLoginClient((prev) => ({ ...prev, [field]: value }));
   };
 
   const loginCliente = async () => {
     if (loginClient.email && loginClient.senha) {
-      const logonClient = {
-        email: loginClient.email,
-        senha: loginClient.senha
-      };
-
       try {
-        const response = await axios.post('http://localhost:8010/brilhante/cliente/login', logonClient);
+        const response = await axios.post('http://localhost:8010/brilhante/cliente/login', loginClient);
         if (response.status === 200) {
           setError('');
           setLoginSuccess(true);
           setCliente(response.data);
+          setClienteExistente(true);
         }
       } catch (error) {
         console.error('Erro de login:', error);

@@ -5,15 +5,13 @@ export const BrilhanteContext = createContext();
 export const BrilhanteContextProvider = ({ children }) => {
   const [email, setEmail] = useState([]);
   const [cart, setCart] = useState([]);
-  const [clienteExistente, setClienteExistente] = useState(localStorage.getItem('cliente'));
-
+  const [clienteExistente, setClienteExistente] = useState(!!localStorage.getItem('cliente'));
   const [cliente, setCliente] = useState({
-    idClient: '',
+    idcliente: '',
     nome: '',
     cpf: '',
     email: '',
     senha: '',
-    confirmsenha: '',
     perfil: '',
     cep: '',
     logradouro: '',
@@ -24,10 +22,9 @@ export const BrilhanteContextProvider = ({ children }) => {
     compEndereco: '',
     celular: '',
     dataNasc: '',
-    vendas: []
+    vendas: [] // Aqui armazenaremos as vendas do cliente, cada uma contendo seus produtos comprados
   });
 
-  // Load cart from localStorage if clienteExistente is true
   useEffect(() => {
     if (clienteExistente) {
       const savedCart = localStorage.getItem('cart');
@@ -40,6 +37,10 @@ export const BrilhanteContextProvider = ({ children }) => {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
   }, [cart, clienteExistente]);
+
+  useEffect(() => {
+    setClienteExistente(!!cliente.email);
+  }, [cliente]);
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);

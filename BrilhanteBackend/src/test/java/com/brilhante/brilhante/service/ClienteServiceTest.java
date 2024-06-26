@@ -1,8 +1,12 @@
 package com.brilhante.brilhante.service;
 
 import com.brilhante.brilhante.entity.Cliente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 import org.junit.jupiter.api.AfterEach;
@@ -110,13 +114,13 @@ public class ClienteServiceTest {
     public void testIncluirCliente() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512-91");
-        cliente.setNome("José da Silva");
-        cliente.setEmail("zezinho@gmail.com");
+        cliente.setCpf("65188851291");
+        cliente.setNome("João da Silva");
+        cliente.setEmail("jão@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
-        Long expResult = null;
-        assertEquals(expResult, id);
+        Long idExpect = null;
+        assertNotEquals(id, idExpect);
     }
     
     @Test
@@ -137,7 +141,7 @@ public class ClienteServiceTest {
     public void testIncluirClienteCPF12Num() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512-913");
+        cliente.setCpf("901888512845");
         cliente.setNome("José da Silva");
         cliente.setEmail("zarinho@gmail.com");
         cliente.setSenha("321654");
@@ -151,7 +155,7 @@ public class ClienteServiceTest {
     public void testIncluirClienteCPF10NumouMenos() {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
-        cliente.setCpf("901.888.512");
+        cliente.setCpf("901888512");
         cliente.setNome("José da Silva");
         cliente.setEmail("zero@gmail.com");
         cliente.setSenha("321654");
@@ -165,7 +169,7 @@ public class ClienteServiceTest {
         System.out.println("incluirCliente");
         Cliente cliente = new Cliente();
         cliente.setCpf("901.888.512-01");
-        cliente.setEmail("zezinho@gmail.com");
+        cliente.setEmail("zinho@gmail.com");
         cliente.setSenha("321654");
         Long id = srv.incluirCliente(cliente);
         Long expResult = null;
@@ -229,7 +233,7 @@ public class ClienteServiceTest {
     @Order(11)
     public void testConsultarCliente() {
         System.out.println("consultarCliente");
-        Long idCliente = 2L;
+        Long idCliente = 1L;
         Optional<Cliente> expResult = null;
         Optional<Cliente> result = srv.consultarCliente(idCliente);
         System.out.println("Nome do cliente 1: " + result.get().getNome());
@@ -253,17 +257,34 @@ public class ClienteServiceTest {
      */
     @Test
     @Order(13)
-    public void testAtualizarCliente() {
+    public void testAtualizarCliente() throws ParseException {
         System.out.println("atualizarCliente");
         Cliente cliente = new Cliente();
-        Long idCliente = Long.valueOf("4");
+        Long idCliente = 1L;
         cliente.setIDCliente(idCliente);
-        cliente.setCpf("901.888.512-88");
-        cliente.setEmail("clerison@gmail.com");
-        cliente.setNome("clerison da Silva");
+        cliente.setCpf("75188851291");
+        cliente.setEmail("zezi@gmail.com");
+        cliente.setNome("João da Silva");
+        cliente.setSenha("353");
+        cliente.setPerfil("User");
+        cliente.setCep(88020348L);
+        cliente.setLogradouro("Rua da quinze");
+        cliente.setNumEndereco("348");
+        cliente.setUF("SC");
+        cliente.setCidade("Florianópolis");
+        cliente.setBairro("coqueiros");
+        cliente.setCompEndereco("Apto 303");
+        cliente.setCelular(45999355368L);
+        cliente.setDataNasc(convertStringToDate("1976-12-19"));
         Boolean expResult = true;
         Boolean result = srv.atualizarCliente(cliente);
         assertEquals(expResult, result);
     }
     
+    
+    public Date convertStringToDate(String data) throws ParseException{
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.of("PT", "BR")); //Objeto Formatador de Data
+    return sdf.parse(data); // Campo do tipo Date recebendo String...
+
+    }
 }
